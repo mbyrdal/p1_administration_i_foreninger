@@ -28,8 +28,8 @@ int main(void) {
         system(mk_dir);
         }
     do {
-      /* Prompt brugeren for, om programmet skal åbne eller oprette en fil. */
-      option = prompt_bruger_for_muligheder("Hvad vil du nu? \n\n"
+        /* Prompt brugeren for, om programmet skal åbne eller oprette en fil. */
+        option = prompt_bruger_for_muligheder("Hvad vil du nu? \n\n"
                                             " 1) åbne en fil\n"
                                             " 2) Oprette en ny fil\n"
                                             "-1) Afslut program \n\n> ");
@@ -68,7 +68,7 @@ int main(void) {
  * hvorefter brugerens input gemmes i en pointer (%s).
  */
 void bruger_input(char *print, char *input){
-    printf(print);
+    printf("%s", print);
     scanf("%s", input);
 }
 /* Funktion, som gør brug af bools logik til at afgøre,
