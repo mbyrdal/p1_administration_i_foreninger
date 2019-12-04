@@ -6,32 +6,20 @@
 #define MAX_TASKS 100
 
 struct task{
-    char admins[250],
+    char category[100],
+         admins[250],
          title[100],
          description[1000],
          volunteers[250],
          status_str[1000];
     int priority,
-        status_int,
         number;
     struct tm deadline;
 };
 typedef struct task task;
 
-/* Prototypes */
-void create_task(task tasks[], int *new_task);
-
-int main(void){
-    task tasks[MAX_TASKS];
-    int numer_of_tasks = 0;
-
-    create_task(tasks, &numer_of_tasks);
-
-    return 0;
-}
-
 /* En funktion til at oprettet en opgave i systemet */
-void create_task(task tasks[], int *new_task){
+task create_task(task tasks[], int *new_task){
     int month, year;
     char answer[10];
 
@@ -55,14 +43,6 @@ void create_task(task tasks[], int *new_task){
             printf("Tallet var ikke mellem 1 og 10, indtast prioritering igen:\n");
         }
     } while (tasks[*new_task].priority < 1 || tasks[*new_task].priority > 10);
-    printf("Intast den nuværende status på opgaven - afslut med enter [fra 1 - 10]:\n");
-    do {
-        scanf(" %d", &tasks[*new_task].status_int);
-        if (tasks[*new_task].status_int < 1 || tasks[*new_task].status_int > 10){
-            printf("Tallet var ikke mellem 1 og 10, indtast status igen:\n");
-        }
-    } while (tasks[*new_task].status_int < 1 || tasks[*new_task].status_int > 10);
-
     printf("Indtast deadline på formen timer.minutter dato.måned.år - afslut med enter [fx 17.00 09.12.2019]:\n");
     do {
         scanf(" %d.%d %d.%d.%d",
@@ -82,7 +62,7 @@ void create_task(task tasks[], int *new_task){
 
     /* Print den givne information, så brugeren kan se om der skal ændres noget */
     printf("\nOpgave %d vil blive oprettet med følgende information:\n"
-           "%-26s%s \n%-26s%s \n%-26s%s \n%-26s%s \n%-26s%s \n%-26s%d \n%-26s%d "
+           "%-26s%s \n%-26s%s \n%-26s%s \n%-26s%s \n%-26s%s \n%-26s%d "
            "\n%-26s%02d.%02d %02d.%02d.%d\n",
            *new_task,
            "Titel: ", tasks[*new_task].title,
@@ -91,7 +71,6 @@ void create_task(task tasks[], int *new_task){
            "Beskrivelse: ", tasks[*new_task].description,
            "Status: ", tasks[*new_task].status_str,
            "Prioritering: ", tasks[*new_task].priority,
-           "Status: ", tasks[*new_task].status_int,
            "Deadline: ",
            tasks[*new_task].deadline.tm_hour, tasks[*new_task].deadline.tm_min,
            tasks[*new_task].deadline.tm_mday, tasks[*new_task].deadline.tm_mon + 1,
@@ -108,4 +87,5 @@ void create_task(task tasks[], int *new_task){
     if (strcmp(answer, "ja") && strcmp(answer, "Ja") && strcmp(answer, "JA")){
         /* Edit task */ 
     }
+    return tasks[*new_task - 1];
 }
