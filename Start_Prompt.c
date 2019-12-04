@@ -14,10 +14,6 @@ int main(void) {
     char mk_dir[15]; /* Make-directory kommando. Maksimum længde = 15 tegn. */
     FILE *file; /* Typecast file som FILE. */
     int option; /* Bruger-input omformuleret til talværdi. */
-    char a[] = "Hvad vil du nu? \n\n"
-                " 1) åbne en fil\n"
-                " 2) Oprette en ny fil\n"
-                "-1) Afslut program \n\n> ";
 
     /* Prompt en bruger for input navn (PATH) til en mappe */
     bruger_input("Skriv navn paa mappen: ", dir_name);
@@ -33,7 +29,10 @@ int main(void) {
         }
     do {
       /* Prompt brugeren for, om programmet skal åbne eller oprette en fil. */
-      option = prompt_bruger_for_muligheder(a);
+      option = prompt_bruger_for_muligheder("Hvad vil du nu? \n\n"
+                                            " 1) åbne en fil\n"
+                                            " 2) Oprette en ny fil\n"
+                                            "-1) Afslut program \n\n> ");
 
       if (option == 1){
           /* Hvis brugeren vælger at åbne en eksisterende fil. */
