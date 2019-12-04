@@ -18,7 +18,7 @@ void main_menu(void){
                "2.  Ændre opgave\n"
                "3.  Ændre sortering\n"
                "4.  Afslut programmet.\n"
-               "Vælg mellem en af ovenstående mulighed [indtast valgmulighedens nummer uden punktum \".\"]: ");
+               "Vælg mellem en af ovenstående muligheder [indtast valgmulighedens nummer uden punktum \".\"]: ");
         selected_option = scan_user_input();
 
         /*Der tjekkes om input er en korrekt valgmulighed*/
