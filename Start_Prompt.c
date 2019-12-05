@@ -150,6 +150,12 @@ void file_write_task(FILE *fil, task task1){
 void file_read_task(FILE *fil, task task1){
     int month, year;
 
+
+    /*
+     * ALLE FELTER SKAL SKRIVES TIL HVER FIL / TASK FØR DENNE VIRKER
+     * (hvis et int felt står tom bliver deadline underlig)
+     * KATEGORI MANGLER
+     */
     fscanf(fil,"%*[^:]%*c %[^\n]", task1.category);
     fscanf(fil," %*[^:]%*c %[^\n]", task1.admins);
     fscanf(fil," %*[^:]%*c %[^\n]", task1.title);
