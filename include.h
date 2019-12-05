@@ -11,14 +11,15 @@
 /* Structs */
 
 struct task{
+    int number;
     char category[100],
-         admins[250],
          title[100],
-         description[1000],
+         admins[250],
          volunteers[250],
+         description[1000],
          status_str[1000];
-    int priority,
-        number;
+    int priority;
+
     struct tm deadline;
 };
 typedef struct task task;

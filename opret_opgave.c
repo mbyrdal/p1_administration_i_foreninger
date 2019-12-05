@@ -42,6 +42,8 @@ void create_task(task tasks[], int *new_task){
     tasks[i].deadline.tm_mon  = month - 1;
     tasks[i].deadline.tm_year = year  - 1900;
 
+    /* Print den givne information, så brugeren kan se om der skal ændres noget */
+    printf("\nOpgave %d vil blive oprettet med følgende information:\n", i);
     print_task(tasks[i]);
 
     /* Spørg om der skal ændres noget */
@@ -58,11 +60,10 @@ void create_task(task tasks[], int *new_task){
 }
 
 void print_task(task task1){
-    /* Print den givne information, så brugeren kan se om der skal ændres noget */
-    printf("\nOpgave %d vil blive oprettet med følgende information:\n"
-           "%-26s%s \n%-26s%s \n%-26s%s \n%-26s%s \n%-26s%s \n%-26s%d "
+
+    printf("%-26s%d \n%-26s%s \n%-26s%s \n%-26s%s \n%-26s%s \n%-26s%s \n%-26s%d "
            "\n%-26s%02d.%02d %02d.%02d.%d\n",
-           task1.number,
+           "Nummer:", task1.number,
            "Titel: ", task1.title,
            "Administrerende personer: ", task1.admins,
            "Frivillige personer: ", task1.volunteers,

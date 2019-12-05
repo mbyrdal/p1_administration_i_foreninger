@@ -10,7 +10,7 @@ int main(void) {
     char mk_dir[15]; /* Make-directory kommando. Maksimum længde = 15 tegn. */
     FILE *file; /* Typecast file som FILE. */
     int option; /* Bruger-input omformuleret til talværdi. */
-    task tasks[1];
+    task tasks[MAX_TASKS];
     int amount_of_tasks = 0;
 
     /* Prompt en bruger for input navn (PATH) til en mappe */
@@ -37,17 +37,15 @@ int main(void) {
             bruger_input("Skriv navn paa filen: ", temp_file_name);
             sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
 
-            file = fopen(file_name, "w");
+            file = fopen(file_name, "r");
 
             if(file != NULL){
-
-                printf("amount_of_tasks = %d\n", amount_of_tasks);
-                create_task(tasks, &amount_of_tasks);
-                printf("amount_of_tasks = %d\n", amount_of_tasks);
-                file_write_task(file, tasks[amount_of_tasks - 1]);
+                /*create_task(tasks, &amount_of_tasks);*/
+/*                file_write_task(file, tasks[amount_of_tasks - 1]);*/
+                file_read_task(file, tasks[amount_of_tasks]);
             }
 
-            fclose(file); /* Lukker filen. */
+            fclose(file);
         }else if (option == 2){
             /* Hvis brugeren vælger at oprette en ny fil. */
             bruger_input("Skriv det nye filnavn: ", temp_file_name);
@@ -71,8 +69,9 @@ int main(void) {
  */
 void bruger_input(char *print, char *input){
     printf("%s", print);
-    scanf("%s", input);
+    scanf("%s%*[^\n]", input);
 }
+
 /* Funktion, som gør brug af bools logik til at afgøre,
  * om et directory (mappe) eksisterer ud fra argumentet
  * dir_name (mappens navn). Hvis det eksisterer returneres 1, ellers 0.
@@ -105,15 +104,14 @@ int prompt_bruger_for_muligheder(char *print){
 
 void file_write_task(FILE *fil, task task1){
 
-    /* MANGLER
     fprintf(fil,"Kategori: %s\n", task1.category);
-    */
     fprintf(fil,"Admins: %s\n", task1.admins);
     fprintf(fil,"Titel: %s\n", task1.title);
-    fprintf(fil,"Beskrivelse: { %s}\n", task1.description);
+    fprintf(fil,"Beskrivelse: {%s}\n", task1.description);
     fprintf(fil,"Frivillige: %s\n", task1.volunteers);
     fprintf(fil,"Status: %s\n", task1.status_str);
     fprintf(fil,"Prioritet: %d\n", task1.priority);
+    fprintf(fil,"Number: %d\n", task1.number);
     fprintf(fil,"Deadline: %d.%d %d.%d.%d\n",
          task1.deadline.tm_hour,
          task1.deadline.tm_min,
@@ -126,15 +124,14 @@ void file_write_task(FILE *fil, task task1){
 void file_read_task(FILE *fil, task task1){
     int month, year;
 
-    /* MANGLER
     fscanf(fil,"%*[^:]%*c %[^\n]", task1.category);
-    */
     fscanf(fil," %*[^:]%*c %[^\n]", task1.admins);
     fscanf(fil," %*[^:]%*c %[^\n]", task1.title);
     fscanf(fil," %*[^:]%*c { %[^}]", task1.description);
     fscanf(fil," %*[^:]%*c %[^\n]", task1.volunteers);
     fscanf(fil," %*[^:]%*c %[^\n]", task1.status_str);
     fscanf(fil," %*[^:]%*c %d", &task1.priority);
+    fscanf(fil," %*[^:]%*c %d", &task1.number);
     fscanf(fil," %*[^:]%*c %d.%d %d.%d.%d",
          &task1.deadline.tm_hour,
          &task1.deadline.tm_min,
@@ -145,4 +142,6 @@ void file_read_task(FILE *fil, task task1){
     task1.deadline.tm_year = year - 1900;
     task1.deadline.tm_mon = month - 1;
 
+
+    print_task(task1);
 }
