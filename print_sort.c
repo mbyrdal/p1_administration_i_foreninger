@@ -2,11 +2,13 @@
 
 /*Prototypes*/
 int prompt_user_for_sort(void);
-void sort_tasks(task x[], int option);
+void sort_tasks(task x[], int option, int number_of_tasks);
 int sort_deadline(const void *ip1, const void *ip2);
 int sort_priority(const void *ip1, const void *ip2);
 int sort_admins(const void *ip1, const void *ip2);
-void print_tasks(task x[], int option);
+int sort_title(const void *ip1, const void *ip2);
+int sort_category(const void *ip1, const void *ip2);
+void print_tasks(task x[], int option, int number_of_tasks);
 
 int main(void){
     task tasks[MAX_TASKS];
@@ -17,8 +19,8 @@ int main(void){
     
     while (exit_info != 1){
     option = prompt_user_for_sort();
-    sort_tasks(tasks, option);
-    print_tasks(tasks, option);
+    sort_tasks(tasks, option, number_of_tasks);
+    print_tasks(tasks, option, number_of_tasks);
     printf("Vil du gå tilbage ? 0 for tilbage 1 for exit");
     scanf(" %d", &exit_info);
     }
@@ -37,75 +39,71 @@ int prompt_user_for_sort(void){
     return option;
 }
 
-void print_tasks(task x[], int option){
+void print_tasks(task x[], int option, int number_of_tasks){
     int i;
     enum sort{category = 1, title, admins, priority, deadline};
     
     switch (option){
         case category:
             printf("Sorteret for Kategori:\n");
-            printf("%-10s %-10s", "Nummer:", "Titel\n");
-            /*for (i=0; i < NUM_OF_TASK; i++){
-                printf("%-10d %-10s %-10s", x[i].number, x[i].category, x[i].title);
-            }*/
+            for (i=0; i < number_of_tasks; i++){
+                printf("%s: %d\n%s: %s\n%s: %s\n\n", "Nummer", x[i].number, "Kategori", x[i].category, "Titel", x[i].title);
+            }
             break;
         case title:
             printf("Sorteret for Titel:\n");
-            printf("%-10s %-10s", "Nummer:", "Titel\n");
-            for (i=0; i < NUM_OF_TASK; i++){
-                printf("%-10d %-10s\n", x[i].number, x[i].title);
+            printf("%-10s %-10s\n", "Nummer:", "Titel");
+            for (i=0; i < number_of_tasks; i++){
+                printf("%-10d %-s\n", x[i].number, x[i].title);
             }
             break;
         case admins:
             printf("Sorteret for Ansvarlig:\n");
-            printf("%-10s %-10s %-10s\n", "Nummer:", "Ansvarlig:", "Titel:");
-            for (i=0; i < NUM_OF_TASK; i++){
-                printf("%-10d %-10s %-10s\n", x[i].number, x[i].admins, x[i].title);
+            for (i=0; i < number_of_tasks; i++){
+               printf("%s: %d\n%s: %s\n%s: %s\n\n", "Nummer", x[i].number, "Ansvarlig", x[i].admins, "Titel", x[i].title);
             }
             break;
         case priority:
-            printf("Sorteret for Prioriteringsgrad:\n");
-            printf("%-10s %-19s %-10s\n", "Nummer:", "Prioriteringsgrad:", "Titel:");
-            for (i=0; i < NUM_OF_TASK; i++){
-                printf("%-10d %-10s %-10d\n", x[i].number, x[i].priority, x[i].title);
+            printf("Sorteret for Prioritering:\n");
+            printf("%-10s %-14s %-10s\n", "Nummer:", "Prioritering:", "Titel:");
+            for (i=0; i < number_of_tasks; i++){
+                printf("%-10d %-14d %-s\n", x[i].number, x[i].priority, x[i].title);
             }
             break;
         case deadline:
             printf("Sorteret for Deadline:\n");
-            printf("%-10s %-16s %-10s\n", "Nummer:","Deadline:" ,"Titel:");
-            for (i=0; i < NUM_OF_TASK; i++){
-                printf("%-10d %02d.%02d %02d.%02d.%4d %-s\n", x[i].number, x[i].deadline.tm_hour,
+            printf("%-10s %-17s %-10s\n", "Nummer:","Deadline:" ,"Titel:");
+            for (i=0; i < number_of_tasks; i++){
+                printf("%-10d %02d.%02d %02d.%02d.%5d %-s\n", x[i].number, x[i].deadline.tm_hour,
                 x[i].deadline.tm_min, x[i].deadline.tm_mday, x[i].deadline.tm_mon + 1, x[i].deadline.tm_year + 1900, x[i].title);
             }
             break;
         default:
             printf("Something went wrong");
-            break;
     }
 }
 
-void sort_tasks(task x[], int option){
+void sort_tasks(task x[], int option, int number_of_tasks){
     enum sort{category = 1, title, admins, priority, deadline};
     
     switch (option){
         case category:
-            
+            qsort(x, number_of_tasks, sizeof(task), sort_category);
             break;
         case title:
-
+            qsort(x, number_of_tasks, sizeof(task), sort_title);
             break;
         case admins:
-            qsort(x, NUM_OF_TASK, sizeof(task), sort_admins);
+            qsort(x, number_of_tasks, sizeof(task), sort_admins);
             break;
         case priority:
-            qsort(x, NUM_OF_TASK, sizeof(task), sort_priority);
+            qsort(x, number_of_tasks, sizeof(task), sort_priority);
             break;
         case deadline:
-            qsort(x, NUM_OF_TASK, sizeof(task), sort_deadline);
+            qsort(x, number_of_tasks, sizeof(task), sort_deadline);
             break;
         default:
             printf("Something went wrong");
-            break;
     }
 }
 
@@ -135,16 +133,12 @@ int sort_deadline(const void *ip1, const void *ip2){
         return 1;
     } else{
         return 0;
-    }
-            
-            
-        
-     
+    }    
 }
 
 int sort_priority(const void *ip1, const void *ip2){
-    task *prio1= (task *)ip1,
-         *prio2= (task *)ip2;
+    task *prio1= (task*)ip1,
+         *prio2= (task*)ip2;
 
     if (prio1->priority < prio2->priority){ 
         return -1;
@@ -171,8 +165,49 @@ int sort_admins(const void *ip1, const void *ip2){
         return -1;
     } else if (strcmp(name1->admins, name2->admins) > 0){
         return 1;
-    } else {
+    } else{
         return 0;
     } 
 }
 
+int sort_title(const void *ip1, const void *ip2){
+    int i;
+    task *name1 = (task *)ip1,
+         *name2 = (task *)ip2;
+    
+    for (i = 0; (name1->title[i] =! '\n'); i++){
+        name1->title[i] = tolower(name1->title[i]);
+    }
+    for (i = 0; (name2->title[i] =! '\n'); i++){
+        name2->title[i] = tolower(name2->title[i]);
+    }
+
+    if (strcmp(name1->title, name2->title) < 0){
+        return -1;
+    } else if (strcmp(name1->title, name2->title) > 0){
+        return 1;
+    } else{
+        return 0;
+    } 
+}
+
+int sort_category(const void *ip1, const void *ip2){
+    int i;
+    task *name1 = (task *)ip1,
+         *name2 = (task *)ip2;
+    
+    for (i = 0; (name1->category[i] =! '\n'); i++){
+        name1->category[i] = tolower(name1->category[i]);
+    }
+    for (i = 0; (name2->category[i] =! '\n'); i++){
+        name2->category[i] = tolower(name2->category[i]);
+    }
+
+    if (strcmp(name1->category, name2->category) < 0){
+        return -1;
+    } else if (strcmp(name1->category, name2->category) > 0){
+        return 1;
+    } else{
+        return 0;
+    } 
+}
