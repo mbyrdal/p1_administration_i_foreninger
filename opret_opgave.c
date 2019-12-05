@@ -1,29 +1,10 @@
-#include <time.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#define MAX_TASKS 100
-
-struct task{
-    char category[100],
-         admins[250],
-         title[100],
-         description[1000],
-         volunteers[250],
-         status_str[1000];
-    int priority,
-        number;
-    struct tm deadline;
-};
-typedef struct task task;
+#include "include.h"
 
 /* En funktion til at oprettet en opgave i systemet */
 task create_task(task tasks[], int *new_task){
     int month, year;
     char answer[10];
-
-    *new_task += 1;
+    (*new_task) += 1;
 
     /* Spørg om alt det nødvendige information til at oprette en opgave */
     printf("Intast de administrerende personer til opgaven - afslut med enter [Max 250 tegn]:\n");
