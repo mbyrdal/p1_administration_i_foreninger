@@ -5,6 +5,10 @@
 #include <string.h>
 #include <time.h>
 #include <ctype.h>
+#include <dirent.h>
+
+#include "opret_opgave.h"
+#include "Start_Prompt.h"
 
 /* Structs */
 
@@ -21,12 +25,6 @@ struct task{
 };
 typedef struct task task;
 
-#include "opret_opgave.h"
-#include "Start_Prompt.h"
 
 #define NUM_OF_TASK 10
 #define MAX_TASKS 100
-
-
-
-

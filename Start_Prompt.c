@@ -1,9 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <dirent.h>
-
-#include "opret_opgave.h"
-#include "Start_Prompt.h"
+#include "include.h"
 
 #define SENTINEL 3
 
