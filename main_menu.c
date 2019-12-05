@@ -1,9 +1,4 @@
-#include <stdio.h>
-
-void main_menu(void);
-int scan_user_input(void);
-void clear_input(void);
-void execute_user_input(int selected_option);
+#include "include.h"
 
 int main(void){
     main_menu();
@@ -22,10 +17,10 @@ void main_menu(void){
         selected_option = scan_user_input();
 
         /*Der tjekkes om input er en korrekt valgmulighed*/
-        if (selected_option != 4 && selected_option != 0){
+        if (selected_option != MAIN_MENU && selected_option != 0){
             execute_user_input(selected_option);
         }
-    } while(selected_option != 4);
+    } while(selected_option != MAIN_MENU);
 }
 
 /*Funktion brug af funktionen main_menu. Bruges til at verificere brugerens input, da bruger input skal være et heltal mellem 1 og 4, hvor begger er inklusiv*/
@@ -34,7 +29,7 @@ int scan_user_input(void){
     result_scanf = scanf(" %d", &user_input);
 
     /*Hivs input er korrekt returneres den valgte mulighed*/
-    if (result_scanf == 1 && user_input >= 1 && user_input <= 4){
+    if (result_scanf == 1 && user_input >= 1 && user_input <= MAIN_MENU){
         selected_option = user_input;
         clear_input();
 
