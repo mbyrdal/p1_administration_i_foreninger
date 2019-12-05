@@ -1,10 +1,4 @@
-#include <stdio.h>
-#define MAIN_MENU 4
-
-void main_menu(void);
-int scan_user_input(void);
-void clear_input(void);
-void execute_user_input(int selected_option);
+#include "include.h"
 
 int main(void){
     main_menu();
