@@ -54,12 +54,16 @@ int dir_exists(char *dir_name){
     }
 }
 
+/* Loop der spørger om brugeren vil åbne / oprette ny fil
+ * Ved åbning af fil, læses der task fra angivne file
+ * ved oprettelse af ny fil oprettes en opgave (task) i den angivne fil
+ * Loop afsluttes ved indtastning af SENTINEL, som er 3
+ */
 void file_managing(task *tasks, int amount_of_tasks, char *dir_name){
     int option; /* Bruger-input omformuleret til talværdi. */
     char temp_file_name[100]; /* Buffer/midlertidig filnavn. Maksimum længde = 100 tegn. */
     char file_name[100]; /* Filnavn. Maksimum længde = 100 tegn. */
     FILE *file; /* Typecast file som FILE. */
-
 
     do {
         /* Prompt brugeren for, om programmet skal åbne eller oprette en fil. */
@@ -115,6 +119,11 @@ int prompt_bruger_for_muligheder(char *print){
     return option;
 }
 
+
+/* printer en task (struc task) til en fil
+ * hvilken fil der skrives til bestemmes i fil argumentet
+ * og hvilken task angives i task1 argumentet
+ */
 void file_write_task(FILE *fil, task task1){
 
     fprintf(fil,"Kategori: %s\n", task1.category);
@@ -134,6 +143,10 @@ void file_write_task(FILE *fil, task task1){
 
 }
 
+/* Scanner en fil for en task (struc task)
+ * hvilken fil der læses fra bestemmes i fil argumentet
+ * og bliver gemt i task1 argumentet
+ */
 void file_read_task(FILE *fil, task task1){
     int month, year;
 
@@ -155,6 +168,6 @@ void file_read_task(FILE *fil, task task1){
     task1.deadline.tm_year = year - 1900;
     task1.deadline.tm_mon = month - 1;
 
-
+    /* Task1 printes (til debug)*/
     print_task(task1);
 }
