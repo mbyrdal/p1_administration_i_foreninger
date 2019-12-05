@@ -6,17 +6,17 @@ task create_task(task tasks[], int *new_task){
     char answer[10];
 
     /* Spørg om alt det nødvendige information til at oprette en opgave */
-    printf("Intast de administrerende personer til opgaven - afslut med enter [Max 250 tegn]:\n");
+    printf("Indtast de administrerende personer til opgaven - afslut med enter [Max 250 tegn]:\n");
     scanf(" %[^\n]", tasks[*new_task].admins);
-    printf("Intast titlen til opgaven - afslut med enter [Max 100 tegn]:\n");
+    printf("Indtast titlen til opgaven - afslut med enter [Max 100 tegn]:\n");
     scanf(" %[^\n]", tasks[*new_task].title);
     printf("Beskriv opgaven - afslut med } og enter [Max 1000 tegn]:\n");
     scanf(" %[^}]%*c", tasks[*new_task].description);
-    printf("Intast de frivillige personer til opgaven - afslut med enter [Max 250 tegn]:\n");
+    printf("Indtast de frivillige personer til opgaven - afslut med enter [Max 250 tegn]:\n");
     scanf(" %[^\n]", tasks[*new_task].volunteers);
-    printf("Intast den nuværende status på opgaven - afslut med enter [Max 1000 tegn]:\n");
+    printf("Indtast den nuværende status på opgaven - afslut med enter [Max 1000 tegn]:\n");
     scanf(" %[^\n]", tasks[*new_task].status_str);
-    printf("Intast prioriteringen af opgaven - afslut med enter [fra 1 - 10]:\n");
+    printf("Indtast prioriteringen af opgaven - afslut med enter [fra 1 - 10]:\n");
     do {
         scanf(" %d", &tasks[*new_task].priority);
         if (tasks[*new_task].priority < 1 || tasks[*new_task].priority > 10){
