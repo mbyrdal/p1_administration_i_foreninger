@@ -15,8 +15,8 @@ int main(void) {
     char mk_dir[15]; /* Make-directory kommando. Maksimum længde = 15 tegn. */
     FILE *file; /* Typecast file som FILE. */
     int option; /* Bruger-input omformuleret til talværdi. */
-    task tasks[MAX_TASKS];
-    int amount_of_tasks = 0;
+    task tasks[1];
+    int amount_of_tasks = -1;
 
     /* Prompt en bruger for input navn (PATH) til en mappe */
     bruger_input("Skriv navn paa mappen: ", dir_name);
@@ -33,7 +33,7 @@ int main(void) {
     do {
         /* Prompt brugeren for, om programmet skal åbne eller oprette en fil. */
         option = prompt_bruger_for_muligheder("Hvad vil du nu? \n\n"
-                                              " 1) åbne en fil\n"
+                                              " 1) aabne en fil\n"
                                               " 2) Oprette en ny fil\n"
                                               " 3) Afslut program \n\n> ");
 
@@ -45,8 +45,11 @@ int main(void) {
             file = fopen(file_name, "w");
 
             if(file != NULL){
-                tasks[amount_of_tasks - 1] = create_task(tasks, &amount_of_tasks);
-                file_write_task(file, tasks[amount_of_tasks - 1]);
+                printf("amount_of_tasks = %d\n", amount_of_tasks);
+
+                tasks[0] = create_task(tasks, &amount_of_tasks);
+                printf("amount_of_tasks = %d\n", amount_of_tasks);
+                file_write_task(file, tasks[amount_of_tasks]);
             }
 
             fclose(file); /* Lukker filen. */
