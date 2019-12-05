@@ -5,6 +5,7 @@ task create_task(task tasks[], int *new_task){
     int month, year;
     char answer[10];
 
+    tasks[*new_task].number = (*new_task) + 1;
     /* Spørg om alt det nødvendige information til at oprette en opgave */
     printf("Intast de administrerende personer til opgaven - afslut med enter [Max 250 tegn]:\n");
     scanf(" %[^\n]", tasks[*new_task].admins);
