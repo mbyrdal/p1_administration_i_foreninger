@@ -14,4 +14,4 @@ struct task{
 };
 typedef struct task task;
 
-void create_task(task tasks[], int *new_task);
+task create_task(task tasks[], int *new_task);

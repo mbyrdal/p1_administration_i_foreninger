@@ -31,34 +31,38 @@ int main(void) {
         system(mk_dir);
         }
     do {
-      /* Prompt brugeren for, om programmet skal åbne eller oprette en fil. */
-      option = prompt_bruger_for_muligheder("Hvad vil du nu? \n\n"
-                                            " 1) åbne en fil\n"
-                                            " 2) Oprette en ny fil\n"
-                                            " 3) Afslut program \n\n> ");
+        /* Prompt brugeren for, om programmet skal åbne eller oprette en fil. */
+        option = prompt_bruger_for_muligheder("Hvad vil du nu? \n\n"
+                                              " 1) åbne en fil\n"
+                                              " 2) Oprette en ny fil\n"
+                                              " 3) Afslut program \n\n> ");
 
-      if (option == 1){
-          /* Hvis brugeren vælger at åbne en eksisterende fil. */
-          bruger_input("Skriv navn paa filen: ", temp_file_name);
-          sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
+        if (option == 1){
+            /* Hvis brugeren vælger at åbne en eksisterende fil. */
+            bruger_input("Skriv navn paa filen: ", temp_file_name);
+            sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
 
-          file = fopen(file_name, "w");
-          if(file != NULL){
-              create_task(tasks, &amount_of_tasks);
-              file_write_task(file, tasks[amount_of_tasks - 1]);
-          }
-          fclose(file); /* Lukker filen. */
-      }else if (option == 2){
-          /* Hvis brugeren vælger at oprette en ny fil. */
-          bruger_input("Skriv det nye filnavn: ", temp_file_name);
-          sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
+            file = fopen(file_name, "w");
 
-          file = fopen(file_name, "w"); /* Producerer en tom fil, som kan skrives i. */
-          fclose(file);
-      }else if (option != SENTINEL){
-          /* Hvis programmet aflæser et ugyldigt input. */
-          printf("Ikke en mulighed!\n");
-      }
+            if(file != NULL){
+                tasks[amount_of_tasks - 1] = create_task(tasks, &amount_of_tasks);
+                file_write_task(file, tasks[amount_of_tasks - 1]);
+            }
+
+            fclose(file); /* Lukker filen. */
+        }else if (option == 2){
+            /* Hvis brugeren vælger at oprette en ny fil. */
+            bruger_input("Skriv det nye filnavn: ", temp_file_name);
+            sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
+
+            file = fopen(file_name, "w");
+                tasks[0] = create_task(tasks, &amount_of_tasks);
+                file_write_task(file, tasks[0]);
+                fclose(file);
+        }else if (option != SENTINEL){
+            /* Hvis programmet aflæser et ugyldigt input. */
+            printf("Ikke en mulighed!\n");
+        }
     } while(option != SENTINEL);
     return 0;
 }
@@ -91,12 +95,12 @@ int dir_exists(char *dir_name){
 int prompt_bruger_for_muligheder(char *print){
     int option, scanres;
     do {
-      printf(print);
-      scanres = scanf(" %d", &option);
-      if(scanres == 0 && option != SENTINEL) {
-        printf("Fejl: Ulaeseligt input. Skriv venligst input igen> \n");
-        scanres = scanf(" %*s");
-      }
+        printf(print);
+        scanres = scanf(" %d", &option);
+        if(scanres == 0 && option != SENTINEL) {
+            printf("Fejl: Ulaeseligt input. Skriv venligst input igen> \n");
+            scanres = scanf(" %*s");
+        }
     } while(scanres == 0);
     return option;
 }
