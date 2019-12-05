@@ -15,8 +15,8 @@ int main(void) {
     char mk_dir[15]; /* Make-directory kommando. Maksimum længde = 15 tegn. */
     FILE *file; /* Typecast file som FILE. */
     int option; /* Bruger-input omformuleret til talværdi. */
-    task tasks[MAX_TASKS];
-    int amount_of_tasks = 0;
+    task tasks[1];
+    int amount_of_tasks = -1;
 
     /* Prompt en bruger for input navn (PATH) til en mappe */
     bruger_input("Skriv navn paa mappen: ", dir_name);
@@ -33,7 +33,7 @@ int main(void) {
     do {
         /* Prompt brugeren for, om programmet skal åbne eller oprette en fil. */
         option = prompt_bruger_for_muligheder("Hvad vil du nu? \n\n"
-                                              " 1) åbne en fil\n"
+                                              " 1) aabne en fil\n"
                                               " 2) Oprette en ny fil\n"
                                               " 3) Afslut program \n\n> ");
 
@@ -45,8 +45,11 @@ int main(void) {
             file = fopen(file_name, "w");
 
             if(file != NULL){
-                tasks[amount_of_tasks - 1] = create_task(tasks, &amount_of_tasks);
-                file_write_task(file, tasks[amount_of_tasks - 1]);
+
+                printf("amount_of_tasks = %d\n", amount_of_tasks);
+                tasks[0] = create_task(tasks, &amount_of_tasks);
+                printf("amount_of_tasks = %d\n", amount_of_tasks);
+                file_write_task(file, tasks[amount_of_tasks]);
             }
 
             fclose(file); /* Lukker filen. */
@@ -72,7 +75,7 @@ int main(void) {
  * hvorefter brugerens input gemmes i en pointer (%s).
  */
 void bruger_input(char *print, char *input){
-    printf(print);
+    printf("%s", print);
     scanf("%s", input);
 }
 /* Funktion, som gør brug af bools logik til at afgøre,
@@ -95,7 +98,7 @@ int dir_exists(char *dir_name){
 int prompt_bruger_for_muligheder(char *print){
     int option, scanres;
     do {
-        printf(print);
+        printf("%s", print);
         scanres = scanf(" %d", &option);
         if(scanres == 0 && option != SENTINEL) {
             printf("Fejl: Ulaeseligt input. Skriv venligst input igen> \n");
@@ -112,8 +115,8 @@ void file_write_task(FILE *fil, task task1){
     fprintf(fil,"Beskrivelse: { %s}\n", task1.description);
     fprintf(fil,"Frivillige: %s\n", task1.volunteers);
     fprintf(fil,"Status: %s\n", task1.status_str);
-    fprintf(fil,"Prioritet: %s\n", task1.priority);
-    fprintf(fil,"Status: %s\n", task1.status_int);
+    fprintf(fil,"Prioritet: %d\n", task1.priority);
+    fprintf(fil,"Status: %d\n", task1.status_int);
     fprintf(fil,"Deadline: %d.%d %d.%d.%d\n",
          task1.deadline.tm_hour,
          task1.deadline.tm_min,
