@@ -45,8 +45,8 @@ int main(void) {
             file = fopen(file_name, "w");
 
             if(file != NULL){
-                printf("amount_of_tasks = %d\n", amount_of_tasks);
 
+                printf("amount_of_tasks = %d\n", amount_of_tasks);
                 tasks[0] = create_task(tasks, &amount_of_tasks);
                 printf("amount_of_tasks = %d\n", amount_of_tasks);
                 file_write_task(file, tasks[amount_of_tasks]);
