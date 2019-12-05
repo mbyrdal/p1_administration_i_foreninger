@@ -5,6 +5,8 @@
 #include <string.h>
 #include <time.h>
 #include <ctype.h>
+#include <dirent.h>
+
 
 /* Structs */
 
@@ -26,7 +28,3 @@ typedef struct task task;
 
 #define NUM_OF_TASK 10
 #define MAX_TASKS 100
-
-
-
-
