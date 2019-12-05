@@ -4,7 +4,7 @@
 task create_task(task tasks[], int *new_task){
     int month, year;
     char answer[10];
-    *new_task += 1;
+    (*new_task) += 1;
 
     /* Spørg om alt det nødvendige information til at oprette en opgave */
     printf("Intast de administrerende personer til opgaven - afslut med enter [Max 250 tegn]:\n");
