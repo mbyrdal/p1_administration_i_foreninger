@@ -4,17 +4,30 @@
 
 
 int main(void) {
-    char dir_name[200]; /* PATH til en mappe. Maksimum længde = 200 tegn. */
-    char temp_file_name[50]; /* Buffer/midlertidig filnavn. Maksimum længde = 50 tegn. */
-    char file_name[50]; /* Filnavn. Maksimum længde = 50 tegn. */
-    char mk_dir[15]; /* Make-directory kommando. Maksimum længde = 15 tegn. */
-    FILE *file; /* Typecast file som FILE. */
-    int option; /* Bruger-input omformuleret til talværdi. */
+    char dir_name[100]; /* PATH til en mappe. Maksimum længde = 100 tegn. */
     task tasks[MAX_TASKS];
     int amount_of_tasks = 0;
 
     /* Prompt en bruger for input navn (PATH) til en mappe */
     bruger_input("Skriv navn paa mappen: ", dir_name);
+
+    create_dir(dir_name);
+    file_managing(tasks, amount_of_tasks, dir_name);
+
+    return 0;
+}
+
+/* Funktion, som udskriver en besked til og gemmer input fra brugeren.
+ * Først printes en besked til brugeren (%s), som prompter for input,
+ * hvorefter brugerens input gemmes i en pointer (%s).
+ */
+void bruger_input(char *print, char *input){
+    printf("%s", print);
+    scanf("%s%*[^\n]", input);
+}
+
+void create_dir(char *dir_name){
+    char mk_dir[125]; /* Make-directory kommando. Maksimum længde = 125 tegn. */
 
     /* Hvis mappen findes, så print "Mappe fundet". */
     /* Hvis mappen ikke findes, så oprettes en mappe efter det indtastede input. */
@@ -25,11 +38,34 @@ int main(void) {
         printf("Mappe oprettet!\n");
         system(mk_dir);
         }
+}
+
+/* Funktion, som gør brug af bools logik til at afgøre,
+ * om et directory (mappe) eksisterer ud fra argumentet
+ * dir_name (mappens navn). Hvis det eksisterer returneres 1, ellers 0.
+ */
+int dir_exists(char *dir_name){
+    DIR* dir;
+    dir = opendir(dir_name);
+    if (dir) {
+        return 1;
+    } else{
+        return 0;
+    }
+}
+
+void file_managing(task *tasks, int amount_of_tasks, char *dir_name){
+    int option; /* Bruger-input omformuleret til talværdi. */
+    char temp_file_name[100]; /* Buffer/midlertidig filnavn. Maksimum længde = 100 tegn. */
+    char file_name[100]; /* Filnavn. Maksimum længde = 100 tegn. */
+    FILE *file; /* Typecast file som FILE. */
+
+
     do {
         /* Prompt brugeren for, om programmet skal åbne eller oprette en fil. */
         option = prompt_bruger_for_muligheder("Hvad vil du nu? \n\n"
-                                              " 1) aabne en fil\n"
-                                              " 2) Oprette en ny fil\n"
+                                              " 1) aabne en fil (Læse fra fil)\n"
+                                              " 2) Oprette en ny fil (Skrive til fil)\n"
                                               " 3) Afslut program \n\n> ");
 
         if (option == 1){
@@ -60,31 +96,8 @@ int main(void) {
             printf("Ikke en mulighed!\n");
         }
     } while(option != SENTINEL);
-    return 0;
 }
 
-/* Funktion, som udskriver en besked til og gemmer input fra brugeren.
- * Først printes en besked til brugeren (%s), som prompter for input,
- * hvorefter brugerens input gemmes i en pointer (%s).
- */
-void bruger_input(char *print, char *input){
-    printf("%s", print);
-    scanf("%s%*[^\n]", input);
-}
-
-/* Funktion, som gør brug af bools logik til at afgøre,
- * om et directory (mappe) eksisterer ud fra argumentet
- * dir_name (mappens navn). Hvis det eksisterer returneres 1, ellers 0.
- */
-int dir_exists(char *dir_name){
-    DIR* dir;
-    dir = opendir(dir_name);
-    if (dir) {
-        return 1;
-    } else{
-        return 0;
-    }
-}
 /* Funktion, som prompter brugeren for svar til muligheder,
  * der efterfølgende returneres (som tal).
  * Funktionen tager højde for ugyldigt input (NaN).
