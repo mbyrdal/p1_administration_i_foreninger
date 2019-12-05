@@ -105,6 +105,9 @@ int prompt_bruger_for_muligheder(char *print){
 
 void file_write_task(FILE *fil, task task1){
 
+    /* MANGLER
+    fprintf(fil,"Kategori: %s\n", task1.category);
+    */
     fprintf(fil,"Admins: %s\n", task1.admins);
     fprintf(fil,"Titel: %s\n", task1.title);
     fprintf(fil,"Beskrivelse: { %s}\n", task1.description);
@@ -123,6 +126,9 @@ void file_write_task(FILE *fil, task task1){
 void file_read_task(FILE *fil, task task1){
     int month, year;
 
+    /* MANGLER
+    fscanf(fil,"%*[^:]%*c %[^\n]", task1.category);
+    */
     fscanf(fil," %*[^:]%*c %[^\n]", task1.admins);
     fscanf(fil," %*[^:]%*c %[^\n]", task1.title);
     fscanf(fil," %*[^:]%*c { %[^}]", task1.description);
