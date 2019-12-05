@@ -41,6 +41,7 @@
 *.su
 *.idb
 *.pdb
+
 # Text file for debug
 *.txt
 
