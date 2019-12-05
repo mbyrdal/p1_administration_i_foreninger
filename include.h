@@ -4,12 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-
-#include "opret_opgave.h"
-#include "Start_Prompt.h"
-
-#define MAX_TASKS 100
-
+#include <ctype.h>
 
 /* Structs */
 
@@ -25,4 +20,13 @@ struct task{
     struct tm deadline;
 };
 typedef struct task task;
+
+#include "opret_opgave.h"
+#include "Start_Prompt.h"
+
+#define NUM_OF_TASK 10
+#define MAX_TASKS 100
+
+
+
 

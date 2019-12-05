@@ -1,24 +1,4 @@
-#include <stdio.h>
-#include <time.h>
-#include <ctype.h>
-#include <string.h>
-#include <stdlib.h>
-
-#define NUM_OF_TASK 10
-#define MAX_TASKS 100
-
-struct task{
-    char category[100],
-         admins[250],
-         title[100],
-         description[1000],
-         volunteers[250],
-         status_str[1000];
-    int priority,
-        number;
-    struct tm deadline;
-};
-typedef struct task task;
+#include "include.h"
 
 /*Prototypes*/
 int prompt_user_for_sort(void);
@@ -27,14 +7,13 @@ int sort_deadline(const void *ip1, const void *ip2);
 int sort_priority(const void *ip1, const void *ip2);
 int sort_admins(const void *ip1, const void *ip2);
 void print_tasks(task x[], int option);
-#include "opret_opgave.h"
 
 int main(void){
     task tasks[MAX_TASKS];
-    int numer_of_tasks = 0, option = 0;
+    int number_of_tasks = 0, option = 0;
     int exit_info=0;
 
-    create_task(tasks, &numer_of_tasks);
+    create_task(tasks, &number_of_tasks);
     
     while (exit_info != 1){
     option = prompt_user_for_sort();
@@ -180,11 +159,12 @@ int sort_admins(const void *ip1, const void *ip2){
     int i;
     task *name1 = (task *)ip1,
          *name2 = (task *)ip2;
-
-    char *str1 = name1->admins;
     
-    for (i = 0; (str1[i] =! '\n'); i++){
-        tolower(name1->admins);
+    for (i = 0; (name1->admins[i] =! '\n'); i++){
+        name1->admins[i] = tolower(name1->admins[i]);
+    }
+    for (i = 0; (name2->admins[i] =! '\n'); i++){
+        name2->admins[i] = tolower(name2->admins[i]);
     }
 
     if (strcmp(name1->admins, name2->admins) < 0){
