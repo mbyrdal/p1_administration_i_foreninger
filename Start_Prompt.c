@@ -75,7 +75,7 @@ int main(void) {
  * hvorefter brugerens input gemmes i en pointer (%s).
  */
 void bruger_input(char *print, char *input){
-    printf(print);
+    printf("%s", print);
     scanf("%s", input);
 }
 /* Funktion, som gør brug af bools logik til at afgøre,
@@ -98,7 +98,7 @@ int dir_exists(char *dir_name){
 int prompt_bruger_for_muligheder(char *print){
     int option, scanres;
     do {
-        printf(print);
+        printf("%s", print);
         scanres = scanf(" %d", &option);
         if(scanres == 0 && option != SENTINEL) {
             printf("Fejl: Ulaeseligt input. Skriv venligst input igen> \n");
