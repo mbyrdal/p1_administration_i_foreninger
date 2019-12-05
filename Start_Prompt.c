@@ -11,7 +11,7 @@ int main(void) {
     FILE *file; /* Typecast file som FILE. */
     int option; /* Bruger-input omformuleret til talværdi. */
     task tasks[1];
-    int amount_of_tasks = -1;
+    int amount_of_tasks = 0;
 
     /* Prompt en bruger for input navn (PATH) til en mappe */
     bruger_input("Skriv navn paa mappen: ", dir_name);
@@ -42,9 +42,9 @@ int main(void) {
             if(file != NULL){
 
                 printf("amount_of_tasks = %d\n", amount_of_tasks);
-                tasks[0] = create_task(tasks, &amount_of_tasks);
+                create_task(tasks, &amount_of_tasks);
                 printf("amount_of_tasks = %d\n", amount_of_tasks);
-                file_write_task(file, tasks[amount_of_tasks]);
+                file_write_task(file, tasks[amount_of_tasks - 1]);
             }
 
             fclose(file); /* Lukker filen. */
@@ -54,8 +54,8 @@ int main(void) {
             sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
 
             file = fopen(file_name, "w");
-                tasks[0] = create_task(tasks, &amount_of_tasks);
-                file_write_task(file, tasks[0]);
+                create_task(tasks, &amount_of_tasks);
+                file_write_task(file, tasks[amount_of_tasks - 1]);
                 fclose(file);
         }else if (option != SENTINEL){
             /* Hvis programmet aflæser et ugyldigt input. */

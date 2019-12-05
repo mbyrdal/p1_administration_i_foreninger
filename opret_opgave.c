@@ -42,7 +42,7 @@ void create_task(task tasks[], int *new_task){
     tasks[i].deadline.tm_mon  = month - 1;
     tasks[i].deadline.tm_year = year  - 1900;
 
-    print_task(tasks[task]);
+    print_task(tasks[i]);
 
     /* Spørg om der skal ændres noget */
     printf("Vil du ændre noget i opgaven? [Ja/Nej]:\n");
@@ -63,14 +63,14 @@ void print_task(task task1){
            "%-26s%s \n%-26s%s \n%-26s%s \n%-26s%s \n%-26s%s \n%-26s%d "
            "\n%-26s%02d.%02d %02d.%02d.%d\n",
            task1.number,
-           "Titel: ", tasks1.title,
-           "Administrerende personer: ", tasks1.admins,
-           "Frivillige personer: ", tasks1.volunteers,
-           "Beskrivelse: ", tasks1.description,
-           "Status: ", tasks1.status_str,
-           "Prioritering: ", tasks1.priority,
+           "Titel: ", task1.title,
+           "Administrerende personer: ", task1.admins,
+           "Frivillige personer: ", task1.volunteers,
+           "Beskrivelse: ", task1.description,
+           "Status: ", task1.status_str,
+           "Prioritering: ", task1.priority,
            "Deadline: ",
-           tasks1.deadline.tm_hour, tasks1.deadline.tm_min,
-           tasks1.deadline.tm_mday, tasks1.deadline.tm_mon + 1,
-           tasks1.deadline.tm_year + 1900);
+           task1.deadline.tm_hour, task1.deadline.tm_min,
+           task1.deadline.tm_mday, task1.deadline.tm_mon + 1,
+           task1.deadline.tm_year + 1900);
 }
