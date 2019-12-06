@@ -1,3 +1,3 @@
 void clear_input(void);
 void print_task(task task1);
-int prompt_bruger_for_muligheder(char *print);
+int prompt_prompt_user_options(char *print, int amount_of_options);
