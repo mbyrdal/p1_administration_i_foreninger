@@ -16,7 +16,7 @@ void create_task(task tasks[], int *new_task){
     printf("Indtast de frivillige personer til opgaven - afslut med enter [Max 250 tegn]:\n");
     scanf(" %[^\n]", tasks[i].volunteers);
     printf("Indtast den nuværende status på opgaven - afslut med } og enter [Max 1000 tegn]:\n");
-    scanf(" %[^}]", tasks[i].status_str);
+    scanf(" %[^}]%*c", tasks[i].status_str);
     printf("Indtast prioriteringen af opgaven - afslut med enter [fra 1 - 10]:\n");
     do {
         scanf(" %d", &tasks[i].priority);
