@@ -55,15 +55,15 @@ int dir_exists(char *dir_name){
  * Ved åbning af fil, læses der tasks fra angivne fil
  * Ellers oprettes den nye fil
  */
-void file_managing(task *tasks, int amount_of_tasks, char *dir_name, char *file_name){
-    int option, i;
+void file_managing(task tasks[], int amount_of_tasks, char *dir_name, char *file_name){
+    int option;
     char temp_file_name[100];
     FILE *file;
 
     option = prompt_user_options("Hvad vil du nu? \n\n"
-                                          " 1) aabne en fil (Læse fra fil)\n"
-                                          " 2) Oprette en ny fil (Skrive til fil)\n\n> ",
-                                            2);
+                                 "1. aabne en fil (Læse fra fil)\n"
+                                 "2. Oprette en ny fil (Skrive til fil)\n\n> ",
+                                 2);
 
     switch (option) {
         case 1:
@@ -73,9 +73,11 @@ void file_managing(task *tasks, int amount_of_tasks, char *dir_name, char *file_
             file = fopen(file_name, "r");
 
             if (file != NULL){
-                for (i = 0; i < amount_of_tasks; i++){
-                    file_read_task(file, tasks[i]);
+                while (!feof(file)){
+                    file_read_task(file, &tasks[amount_of_tasks]);
                 }
+            } else{
+                printf("Fil ikke fundet\n");
             }
             fclose(file);
             break;
@@ -84,9 +86,8 @@ void file_managing(task *tasks, int amount_of_tasks, char *dir_name, char *file_
             sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
             break;
         default:
-            printf("Noget er galt!!!!\n", );
+            printf("Noget er galt!!!!\n");
     }
-
 }
 
 /* printer en task (struc task) til en fil
@@ -95,14 +96,14 @@ void file_managing(task *tasks, int amount_of_tasks, char *dir_name, char *file_
  */
 void file_write_task(FILE *fil, task task1){
 
-    fprintf(fil,"Kategori: %s\n", task1.category);
+    /* fprintf(fil,"Kategori: %s\n", task1.category); */
     fprintf(fil,"Admins: %s\n", task1.admins);
     fprintf(fil,"Titel: %s\n", task1.title);
     fprintf(fil,"Beskrivelse: {%s}\n", task1.description);
     fprintf(fil,"Frivillige: %s\n", task1.volunteers);
     fprintf(fil,"Status: %s\n", task1.status_str);
     fprintf(fil,"Prioritet: %d\n", task1.priority);
-    fprintf(fil,"Deadline: %d.%d %d.%d.%d\n",
+    fprintf(fil,"Deadline: %d.%d %d.%d.%d\n\n",
          task1.deadline.tm_hour,
          task1.deadline.tm_min,
          task1.deadline.tm_mday,
@@ -115,7 +116,7 @@ void file_write_task(FILE *fil, task task1){
  * hvilken fil der læses fra bestemmes i fil argumentet
  * og bliver gemt i task1 argumentet
  */
-void file_read_task(FILE *fil, task task1){
+void file_read_task(FILE *fil, task *task1){
     int month, year;
 
     /*
@@ -123,22 +124,22 @@ void file_read_task(FILE *fil, task task1){
      * (hvis et int felt står tom bliver deadline underlig)
      * KATEGORI MANGLER
      */
-    fscanf(fil,"%*[^:]%*c %[^\n]", task1.category);
-    fscanf(fil," %*[^:]%*c %[^\n]", task1.admins);
-    fscanf(fil," %*[^:]%*c %[^\n]", task1.title);
-    fscanf(fil," %*[^:]%*c { %[^}]", task1.description);
-    fscanf(fil," %*[^:]%*c %[^\n]", task1.volunteers);
-    fscanf(fil," %*[^:]%*c %[^\n]", task1.status_str);
-    fscanf(fil," %*[^:]%*c %d", &task1.priority);
-    fscanf(fil," %*[^:]%*c %d.%d %d.%d.%d",
-         &task1.deadline.tm_hour,
-         &task1.deadline.tm_min,
-         &task1.deadline.tm_mday,
+    /* fscanf(fil," %*[^:]%*c %[^\n]", task1.category); */
+    fscanf(fil," %*[^:]%*c %[^\n]", task1->admins);
+    fscanf(fil," %*[^:]%*c %[^\n]", task1->title);
+    fscanf(fil," %*[^:]%*c { %[^}]", task1->description);
+    fscanf(fil," %*[^:]%*c %[^\n]", task1->volunteers);
+    fscanf(fil," %*[^:]%*c %[^\n]", task1->status_str);
+    fscanf(fil," %*[^:]%*c %d", &task1->priority);
+    fscanf(fil," %*[^:]%*c %d.%d %d.%d.%d %*c",
+         &task1->deadline.tm_hour,
+         &task1->deadline.tm_min,
+         &task1->deadline.tm_mday,
          &month,
          &year);
 
-    task1.deadline.tm_year = year - 1900;
-    task1.deadline.tm_mon = month - 1;
+    task1->deadline.tm_year = year - 1900;
+    task1->deadline.tm_mon = month - 1;
 }
 
 /* Opretter en fil og skriver alle tasks ind i filen

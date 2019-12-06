@@ -39,7 +39,7 @@ void file_write_task(FILE *fil, task task1);
  * hvilken fil der læses fra bestemmes i fil argumentet
  * og bliver gemt i task1 argumentet
  */
-void file_read_task(FILE *fil, task task);
+void file_read_task(FILE *fil, task *task1);
 
 /* Opretter en fil og skriver alle tasks ind i filen
  * Tager file_name for at oprette/skrive i filen med det ønskede navn
