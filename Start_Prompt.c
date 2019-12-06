@@ -133,7 +133,6 @@ void file_write_task(FILE *fil, task task1){
     fprintf(fil,"Frivillige: %s\n", task1.volunteers);
     fprintf(fil,"Status: %s\n", task1.status_str);
     fprintf(fil,"Prioritet: %d\n", task1.priority);
-    fprintf(fil,"Number: %d\n", task1.number);
     fprintf(fil,"Deadline: %d.%d %d.%d.%d\n",
          task1.deadline.tm_hour,
          task1.deadline.tm_min,
@@ -163,7 +162,6 @@ void file_read_task(FILE *fil, task task1){
     fscanf(fil," %*[^:]%*c %[^\n]", task1.volunteers);
     fscanf(fil," %*[^:]%*c %[^\n]", task1.status_str);
     fscanf(fil," %*[^:]%*c %d", &task1.priority);
-    fscanf(fil," %*[^:]%*c %d", &task1.number);
     fscanf(fil," %*[^:]%*c %d.%d %d.%d.%d",
          &task1.deadline.tm_hour,
          &task1.deadline.tm_min,

@@ -3,11 +3,6 @@
 /*Prototypes*/
 int prompt_user_for_sort(void);
 void sort_tasks(task tasks[], int option, int number_of_tasks);
-int compare_deadline(const void *ip1, const void *ip2);
-int compare_priority(const void *ip1, const void *ip2);
-int compare_admins(const void *ip1, const void *ip2);
-int compare_title(const void *ip1, const void *ip2);
-int compare_category(const void *ip1, const void *ip2);
 void print_sort(task tasks[], int option, int number_of_tasks);
 
 /*Mangler input_clear
@@ -96,6 +91,7 @@ void sort_tasks(task tasks[], int option, int number_of_tasks){
             printf("Something went wrong");
     }
 }
+<<<<<<< HEAD
 
 int compare_deadline(const void *ip1, const void *ip2){
     task *tm1= (task *)ip1,
@@ -201,3 +197,5 @@ int compare_category(const void *ip1, const void *ip2){
         return 0;
     } 
 }
+=======
+>>>>>>> 1ec4e6db4a7838c1698e5a9399746f8b9df46282
