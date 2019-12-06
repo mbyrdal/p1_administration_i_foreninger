@@ -54,20 +54,19 @@ int dir_exists(char *dir_name){
 /* Loop der spørger om brugeren vil åbne / oprette ny fil
  * Ved åbning af fil, læses der tasks fra angivne fil
  * Ellers oprettes den nye fil
- * Loop afsluttes ved indtastning af SENTINEL, som er 3
  */
 void file_managing(task *tasks, int amount_of_tasks, char *dir_name, char *file_name){
     int option, i;
     char temp_file_name[100];
     FILE *file;
 
-    do {
-        option = prompt_user_options("Hvad vil du nu? \n\n"
-                                              " 1) aabne en fil (Læse fra fil)\n"
-                                              " 2) Oprette en ny fil (Skrive til fil)\n"
-                                              " 3) Afslut program \n\n> ", 3);
+    option = prompt_user_options("Hvad vil du nu? \n\n"
+                                          " 1) aabne en fil (Læse fra fil)\n"
+                                          " 2) Oprette en ny fil (Skrive til fil)\n\n> ",
+                                            2);
 
-        if (option == 1){
+    switch (option) {
+        case 1:
             file_input("Skriv navn paa filen: ", temp_file_name);
             sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
 
@@ -79,11 +78,15 @@ void file_managing(task *tasks, int amount_of_tasks, char *dir_name, char *file_
                 }
             }
             fclose(file);
-        } else if (option == 2){
+            break;
+        case 2:
             file_input("Skriv det nye filnavn: ", temp_file_name);
             sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
-        }
-    } while (option != SENTINEL);
+            break;
+        default:
+            printf("Noget er galt!!!!\n", );
+    }
+
 }
 
 /* printer en task (struc task) til en fil
