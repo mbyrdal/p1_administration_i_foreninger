@@ -44,7 +44,7 @@ void create_dir(char *dir_name){
 int dir_exists(char *dir_name){
     DIR* dir;
     dir = opendir(dir_name);
-    if (dir) {
+    if (dir){
         return 1;
     } else{
         return 0;
@@ -72,7 +72,7 @@ void file_managing(task *tasks, int amount_of_tasks, char *dir_name, char *file_
 
             file = fopen(file_name, "r");
 
-            if(file != NULL){
+            if (file != NULL){
                 for (i = 0; i < amount_of_tasks; i++){
                     file_read_task(file, tasks[i]);
                 }
