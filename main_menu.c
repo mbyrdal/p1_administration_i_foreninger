@@ -23,8 +23,8 @@ void main_menu(void){
                "4.  Afslut programmet.\n"
                "Vælg mellem en af ovenstående muligheder [indtast valgmulighedens nummer uden punktum \".\"]: ");
 
-        /*Der tjekkes om input er en korrekt valgmulighed*/
-        /*selected_option = scan_user_input();*/
+        Der tjekkes om input er en korrekt valgmulighed
+        selected_option = scan_user_input();*/
         if (selected_option != 0){
             execute_user_input(selected_option);
         }
