@@ -1,7 +1,8 @@
 
 CFLAGS = -Wall -ansi -pedantic
 NAME = -o task
-FILES = opret_opgave.c main_menu.c Start_Prompt.c print_sort.c
-
-task:
-	gcc $(CFLAGS) $(NAME) $(FILES)
+ORI = main.c
+FILES = opret_opgave.c main_menu.c start_prompt.c print_sort.c
+FILES1 = help_function.c cmp_func.c
+task: main.c
+	gcc $(CFLAGS) $(ORI) $(NAME) $(FILES) $(FILES1)
