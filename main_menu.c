@@ -5,10 +5,10 @@ void main_menu(task tasks[], int *number_of_tasks){
     int option = 0;
     do{
         option = prompt_user_options("1.  Opret opgave\n"      
-                                     "2.  Ændre opgave\n"
-                                     "3.  Ændre sortering\n"
+                                     "2.  Aendre opgave\n"
+                                     "3.  Aendre sortering\n"
                                      "4.  Afslut programmet.\n"
-                                     "Vælg mellem en af ovenstående muligheder [indtast valgmulighedens nummer uden punktum \".\"]: ",
+                                     "Vaelg mellem en af ovenstaaende muligheder [indtast valgmulighedens nummer uden punktum \".\"]: ",
                                      MAIN_MENU);
         /*
         printf("1.  Opret opgave\n"
