@@ -10,9 +10,8 @@ void clear_input(void){
 
 void print_task(task task1){
 
-    printf("%-26s%d \n%-26s%s \n%-26s%s \n%-26s%s \n%-26s%s \n%-26s%s \n%-26s%d "
+    printf("%-26s%s \n%-26s%s \n%-26s%s \n%-26s%s \n%-26s%s \n%-26s%d "
            "\n%-26s%02d.%02d %02d.%02d.%d\n",
-           "Nummer:", task1.number,
            "Titel: ", task1.title,
            "Administrerende personer: ", task1.admins,
            "Frivillige personer: ", task1.volunteers,

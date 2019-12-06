@@ -23,10 +23,10 @@ struct task{
 };
 typedef struct task task;
 
+#include "help_functions.h"
 #include "opret_opgave.h"
 #include "Start_Prompt.h"
 #include "main_menu.h"
-#include "help_functions.h"
 
 #define NUM_OF_TASK 10
 #define MAX_TASKS 100

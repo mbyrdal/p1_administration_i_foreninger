@@ -67,7 +67,7 @@ void file_managing(task *tasks, int amount_of_tasks, char *dir_name){
 
     do {
         /* Prompt brugeren for, om programmet skal åbne eller oprette en fil. */
-        option = prompt_prompt_user_options("Hvad vil du nu? \n\n"
+        option = prompt_user_options("Hvad vil du nu? \n\n"
                                               " 1) aabne en fil (Læse fra fil)\n"
                                               " 2) Oprette en ny fil (Skrive til fil)\n"
                                               " 3) Afslut program \n\n> ", 3);
