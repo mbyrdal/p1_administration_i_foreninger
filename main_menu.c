@@ -64,11 +64,3 @@ void execute_user_input(int selected_option){
         break;
     }
 }
-
-/*Funktion til at skippe input i inputbufferen, hvis der er input, der ikke blev læst*/
-void clear_input(void){
-    char skip_ch;
-    do{
-        scanf("%c", &skip_ch);
-    } while(skip_ch != '\n');
-}
