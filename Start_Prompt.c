@@ -67,10 +67,10 @@ void file_managing(task *tasks, int amount_of_tasks, char *dir_name){
 
     do {
         /* Prompt brugeren for, om programmet skal åbne eller oprette en fil. */
-        option = prompt_bruger_for_muligheder("Hvad vil du nu? \n\n"
+        option = prompt_prompt_user_options("Hvad vil du nu? \n\n"
                                               " 1) aabne en fil (Læse fra fil)\n"
                                               " 2) Oprette en ny fil (Skrive til fil)\n"
-                                              " 3) Afslut program \n\n> ");
+                                              " 3) Afslut program \n\n> ", 3);
 
         if (option == 1){
             /* Hvis brugeren vælger at åbne en eksisterende fil. */
@@ -101,24 +101,6 @@ void file_managing(task *tasks, int amount_of_tasks, char *dir_name){
         }
     } while(option != SENTINEL);
 }
-
-/* Funktion, som prompter brugeren for svar til muligheder,
- * der efterfølgende returneres (som tal).
- * Funktionen tager højde for ugyldigt input (NaN).
- */
-int prompt_bruger_for_muligheder(char *print){
-    int option, scanres;
-    do {
-        printf("%s", print);
-        scanres = scanf(" %d", &option);
-        if(scanres == 0 && option != SENTINEL) {
-            printf("Fejl: Ulaeseligt input. Skriv venligst input igen> \n");
-            scanres = scanf(" %*s");
-        }
-    } while(scanres == 0);
-    return option;
-}
-
 
 /* printer en task (struc task) til en fil
  * hvilken fil der skrives til bestemmes i fil argumentet

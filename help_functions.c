@@ -29,14 +29,15 @@ void print_task(task task1){
  * der efterfølgende returneres (som tal).
  * Funktionen tager højde for ugyldigt input (NaN).
  */
-int prompt_bruger_for_muligheder(char *print){
+int prompt_user_options(char *print, int amount_of_options){
     int option, scanres;
     do {
         printf("%s", print);
         scanres = scanf(" %d", &option);
-        if(scanres == 0 && option != SENTINEL) {
+        clear_input();
+
+        if(scanres == 0 && option > amount_of_options) {
             printf("Fejl: Ulaeseligt input. Skriv venligst input igen> \n");
-            scanres = scanf(" %*s");
         }
     } while(scanres == 0);
     return option;
