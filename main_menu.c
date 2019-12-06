@@ -41,20 +41,18 @@ int scan_user_input(void){
 }
 
 void execute_user_input(int selected_option){
+    enum options{create_task = 1, change_task, change_sort};
     switch (selected_option){
     
-    /*Opret opgave*/
-    case 1:
+    case create_task:
         
         break;
 
-    /*Ændre opgave*/
-    case 2:
+    case change_task:
         
         break;
 
-    /*Ændre sortering*/
-    case 3:
+    case change_sort:
 
         break;
     
