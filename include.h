@@ -23,7 +23,7 @@ struct task{
 typedef struct task task;
 
 #include "help_functions.h"
-#include "opret_opgave.h"
+#include "opgave_func.h"
 #include "start_prompt.h"
 #include "main_menu.h"
 #include "print_sort.h"

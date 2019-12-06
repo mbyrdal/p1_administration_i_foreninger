@@ -1,23 +1,20 @@
 #include "include.h"
 
-/* Funktion til styring af programmet hovedmenu, hvor der kan vælges blandt 4 valgmuligheder */
+/* Funktion til styring af programmet hovedmenu, hvor der kan vælges blandt flere muligheder
+ * Funktionen tager task-arrayet for at sende det videre til andre funktioner som vælges
+ * Funktionen tager number_of_tasks til at sende videre til andre funktioner, som tæller den op eller ned
+ */
+
 task *main_menu(task tasks[], int *number_of_tasks){
     int option = 0;
     do{
-        option = prompt_user_options("1.  Opret opgave\n"      
+        option = prompt_user_options("Vaelg mellem en af ovenstaaende muligheder [indtast valgmulighedens nummer uden punktum \".\"]: \n\n",
+                                     "1.  Opret opgave\n"      
                                      "2.  Aendre opgave\n"
                                      "3.  Aendre sortering\n"
-                                     "4.  Afslut programmet.\n"
-                                     "Vaelg mellem en af ovenstaaende muligheder [indtast valgmulighedens nummer uden punktum \".\"]: ",
+                                     "4.  Afslut programmet.\n\n"
+                                     "Dit valg: ",
                                      MAIN_MENU);
-        /*
-        printf("1.  Opret opgave\n"
-               "2.  Ændre opgave\n"
-               "3.  Ændre sortering\n"
-               "4.  Afslut programmet.\n"
-               "Vælg mellem en af ovenstående muligheder [indtast valgmulighedens nummer uden punktum \".\"]: ");
-
-        Der tjekkes om input er en korrekt valgmulighed */
         if (option != 0){
             execute_user_input(option, tasks, number_of_tasks);
         }
@@ -44,9 +41,7 @@ void execute_user_input(int option, task tasks[], int *number_of_tasks){
         change_sorting(tasks, *number_of_tasks);
         break;
 
-    /*Der er ikke andre muligheder end ovenstående. Fejl input er sorteret fra, så de kommer ikke i default case*/
     default:
         printf("Programmet blev afsluttet.");
-        break;
     }
 }
