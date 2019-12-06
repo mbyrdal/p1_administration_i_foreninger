@@ -1,36 +1,33 @@
 #include "include.h"
-
 #define SENTINEL 3
 
+/* Funktion som kører start prompten af programmet
+ * Tager tasks så den kan læse en fil og gøre klar til at ændre i tasks
+ * Tager number_of_tasks så den kan opdateres med hvor mange der læses i filen
+ * Outputter file_name, så den kan oprettes når programmet afsluttes
+ */
+void start_prompt(task tasks[], int *number_of_tasks, char *file_name){
+    char dir_name[100];
 
-int main(void) {
-    char dir_name[100]; /* PATH til en mappe. Maksimum længde = 100 tegn. */
-    task tasks[MAX_TASKS];
-    int amount_of_tasks = 0;
-
-    /* Prompt en bruger for input navn (PATH) til en mappe */
-    bruger_input("Skriv navn paa mappen: ", dir_name);
-
+    file_input("Skriv navn paa mappen: ", dir_name);
     create_dir(dir_name);
-    file_managing(tasks, amount_of_tasks, dir_name);
-
-    return 0;
+    file_managing(tasks, *number_of_tasks, dir_name, file_name);
 }
 
 /* Funktion, som udskriver en besked til og gemmer input fra brugeren.
  * Først printes en besked til brugeren (%s), som prompter for input,
  * hvorefter brugerens input gemmes i en pointer (%s).
  */
-void bruger_input(char *print, char *input){
+void file_input(char *print, char *input){
     printf("%s", print);
-    scanf("%s%*[^\n]", input);
+    scanf(" %s", input);
+    clear_input();
 }
 
+/* Opretter en mappe, hvis den ikke eksistere og ellers åbner, hvis den gør */
 void create_dir(char *dir_name){
-    char mk_dir[125]; /* Make-directory kommando. Maksimum længde = 125 tegn. */
+    char mk_dir[125];
 
-    /* Hvis mappen findes, så print "Mappe fundet". */
-    /* Hvis mappen ikke findes, så oprettes en mappe efter det indtastede input. */
     if (dir_exists(dir_name)){
         printf("Mappe fundet!\n");
     } else{
@@ -55,51 +52,39 @@ int dir_exists(char *dir_name){
 }
 
 /* Loop der spørger om brugeren vil åbne / oprette ny fil
- * Ved åbning af fil, læses der task fra angivne file
- * ved oprettelse af ny fil oprettes en opgave (task) i den angivne fil
+ * Ved åbning af fil, læses der tasks fra angivne fil
+ * Ellers oprettes den nye fil
  * Loop afsluttes ved indtastning af SENTINEL, som er 3
  */
-void file_managing(task *tasks, int amount_of_tasks, char *dir_name){
-    int option; /* Bruger-input omformuleret til talværdi. */
-    char temp_file_name[100]; /* Buffer/midlertidig filnavn. Maksimum længde = 100 tegn. */
-    char file_name[100]; /* Filnavn. Maksimum længde = 100 tegn. */
-    FILE *file; /* Typecast file som FILE. */
+void file_managing(task *tasks, int amount_of_tasks, char *dir_name, char *file_name){
+    int option, i;
+    char temp_file_name[100];
+    FILE *file;
 
     do {
-        /* Prompt brugeren for, om programmet skal åbne eller oprette en fil. */
         option = prompt_user_options("Hvad vil du nu? \n\n"
                                               " 1) aabne en fil (Læse fra fil)\n"
                                               " 2) Oprette en ny fil (Skrive til fil)\n"
                                               " 3) Afslut program \n\n> ", 3);
 
         if (option == 1){
-            /* Hvis brugeren vælger at åbne en eksisterende fil. */
-            bruger_input("Skriv navn paa filen: ", temp_file_name);
+            file_input("Skriv navn paa filen: ", temp_file_name);
             sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
 
             file = fopen(file_name, "r");
 
             if(file != NULL){
-                /*create_task(tasks, &amount_of_tasks);*/
-/*                file_write_task(file, tasks[amount_of_tasks - 1]);*/
-                file_read_task(file, tasks[amount_of_tasks]);
+                for (i = 0; i < amount_of_tasks; i++){
+                    file_read_task(file, tasks[i]);
+                }
             }
-
             fclose(file);
-        }else if (option == 2){
-            /* Hvis brugeren vælger at oprette en ny fil. */
-            bruger_input("Skriv det nye filnavn: ", temp_file_name);
+        } else if (option == 2){
+            file_input("Skriv det nye filnavn: ", temp_file_name);
             sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
-
-            file = fopen(file_name, "w");
-                create_task(tasks, &amount_of_tasks);
-                file_write_task(file, tasks[amount_of_tasks - 1]);
-                fclose(file);
-        }else if (option != SENTINEL){
-            /* Hvis programmet aflæser et ugyldigt input. */
-            printf("Ikke en mulighed!\n");
         }
-    } while(option != SENTINEL);
+    } while (option != SENTINEL);
+    return file_name;
 }
 
 /* printer en task (struc task) til en fil
@@ -124,13 +109,12 @@ void file_write_task(FILE *fil, task task1){
 
 }
 
-/* Scanner en fil for en task (struc task)
+/* Scanner en fil for en task (struct task)
  * hvilken fil der læses fra bestemmes i fil argumentet
  * og bliver gemt i task1 argumentet
  */
 void file_read_task(FILE *fil, task task1){
     int month, year;
-
 
     /*
      * ALLE FELTER SKAL SKRIVES TIL HVER FIL / TASK FØR DENNE VIRKER
@@ -153,7 +137,23 @@ void file_read_task(FILE *fil, task task1){
 
     task1.deadline.tm_year = year - 1900;
     task1.deadline.tm_mon = month - 1;
+}
 
-    /* Task1 printes (til debug)*/
-    print_task(task1);
+/* Opretter en fil og skriver alle tasks ind i filen
+ * Tager file_name for at oprette/skrive i filen med det ønskede navn
+ * Tager tasks og number_of_tasks til at hente information om opgaverne
+ */
+void create_file(char *file_name, task tasks[], int number_of_tasks){
+    FILE *file;
+    int i;
+
+    file = fopen(file_name, "w");
+    if (file != NULL){
+        for (i = 0; i < number_of_tasks; i++){
+            file_write_task(tasks[i]);
+        }
+        fclose(file);
+    } else{
+        printf("Kunne ikke skrive til fil\n");
+    }
 }

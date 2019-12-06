@@ -35,7 +35,7 @@ int prompt_user_options(char *print, int amount_of_options){
         scanres = scanf(" %d", &option);
         clear_input();
 
-        if(scanres == 0 && option > amount_of_options) {
+        if(scanres == 0 && option > amount_of_options && option > 0) {
             printf("Fejl: Ulaeseligt input. Skriv venligst input igen> \n");
         }
     } while(scanres == 0);

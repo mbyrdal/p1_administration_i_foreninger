@@ -1,75 +1,64 @@
 #include "include.h"
 
-/* Prototypes */
-int prompt_user_for_sort(void);
-void sort_tasks(task tasks[], int option, int number_of_tasks);
-void print_sort(task tasks[], int option, int number_of_tasks);
-
-/* Mangler input_clear
- * Printer en Menu for hvilen slags sortering brugeren vil have
- * Returnere et output af en int variable, og sender den til print_sort funktionen hvor den valgte sortering bliver udført
+/* Sorterer og printer opgaverne efter den valgte sortering
+ * Tager task-arrayet, så den kan sorteres, som input
+ * Tager number_of_tasks som input, så den kun printer oprettede opgaver
  */
-int prompt_user_for_sort(void){
-    int option;
-    printf("Hvilken slags sortering vil du have?\n (Indtast tal fra 1-5 efter følgende muligheder)\n\n"
-            "1) Kategori\n"
-            "2) Titel\n"
-            "3) Ansvarlig\n"
-            "4) Prioriteringsgrad\n"
-            "5) Deadline\n");
-    scanf(" %d", &option);
-    return option;
+void change_sorting(task tasks[], int number_of_tasks){
+    int option = prompt_user_options("Hvilken slags sortering vil du have?\n (Indtast tal fra 1-5 efter følgende muligheder)\n\n"
+                                     "1) Kategori\n"
+                                     "2) Titel\n"
+                                     "3) Ansvarlig\n"
+                                     "4) Prioriteringsgrad\n"
+                                     "5) Deadline\n",
+                                     5);
+    sort_tasks(tasks, option, number_of_tasks);
+    print_sort(tasks, option, number_of_tasks);
 }
-
-/* Indtager int variabel option, som fortæller den hvilken slags sortering den skal printe
- * Printer herefter den relevante sortering
+/* Tager sorteringsvalget som input
+ * Printer herefter den valgte sortering
  */
 void print_sort(task tasks[], int option, int number_of_tasks){
     int i;
     enum sort{category = 1, title, admins, priority, deadline};
-    
+
     switch (option){
         case category:
             printf("Sorteret for Kategori:\n");
-            for (i=0; i < number_of_tasks; i++){
+            for (i = 0; i < number_of_tasks; i++){
                 printf("%s: %d\n%s: %s\n%s: %s\n\n", "Nummer", i+1, "Kategori", tasks[i].category, "Titel", tasks[i].title);
-            }
-            break;
+            } break;
         case title:
             printf("Sorteret for Titel:\n");
             printf("%-10s %-10s\n", "Nummer:", "Titel");
-            for (i=0; i < number_of_tasks; i++){
+            for (i = 0; i < number_of_tasks; i++){
                 printf("%-10d %-s\n", i+1, tasks[i].title);
-            }
-            break;
+            } break;
         case admins:
             printf("Sorteret for Ansvarlig:\n");
-            for (i=0; i < number_of_tasks; i++){
+            for (i = 0; i < number_of_tasks; i++){
                printf("%s: %d\n%s: %s\n%s: %s\n\n", "Nummer", i+1, "Ansvarlig", tasks[i].admins, "Titel", tasks[i].title);
-            }
-            break;
+            } break;
         case priority:
             printf("Sorteret for Prioritering:\n");
             printf("%-10s %-14s %-10s\n", "Nummer:", "Prioritering:", "Titel:");
-            for (i=0; i < number_of_tasks; i++){
+            for (i = 0; i < number_of_tasks; i++){
                 printf("%-10d %-14d %-s\n", i+1, tasks[i].priority, tasks[i].title);
-            }
-            break;
+            } break;
         case deadline:
             printf("Sorteret for Deadline:\n");
             printf("%-10s %-17s %-10s\n", "Nummer:","Deadline:" ,"Titel:");
-            for (i=0; i < number_of_tasks; i++){
+            for (i = 0; i < number_of_tasks; i++){
                 printf("%-10d %02d.%02d %02d.%02d.%5d %-s\n", i+1, tasks[i].deadline.tm_hour,
                 tasks[i].deadline.tm_min, tasks[i].deadline.tm_mday, tasks[i].deadline.tm_mon + 1, tasks[i].deadline.tm_year + 1900, tasks[i].title);
-            }
-            break;
+            } break;
         default:
-            printf("Something went wrong");
+            printf("Noget gik galt!!!\n");
     }
 }
 
-/* Indtager en int variabel og udfører den valgte sortering i form af en qsort funktion
- * Og rykker rundt i arrayet så den valgte sortering ligger ordentligt
+/* Tager sorteringsvalget som input
+ * Sorterer herefter efter valgte sortering
  */
 void sort_tasks(task tasks[], int option, int number_of_tasks){
     enum sort{category = 1, title, admins, priority, deadline};
@@ -91,6 +80,6 @@ void sort_tasks(task tasks[], int option, int number_of_tasks){
             qsort(tasks, number_of_tasks, sizeof(task), compare_deadline);
             break;
         default:
-            printf("Something went wrong");
+            printf("Noget gik galt!!!\n");
     }
 }

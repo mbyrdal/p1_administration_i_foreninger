@@ -1,11 +1,17 @@
 /* Prototypes */
 
-/* Indtager int variabel option, som fortæller den hvilken slags sortering den skal printe
- * Printer herefter den relevante sortering
+/* Sorterer og printer opgaverne efter den valgte sortering
+ * Tager task-arrayet, så den kan sorteres, som input
+ * Tager number_of_tasks som input, så den kun printer oprettede opgaver
+ */
+void change_sorting(task tasks[], int number_of_tasks);
+
+/* Tager sorteringsvalget som input
+ * Printer herefter den valgte sortering
  */
 void sort_tasks(task tasks[], int option, int number_of_tasks);
 
-/* Indtager en int variabel og udfører den valgte sortering i form af en qsort funktion
- * Og rykker rundt i arrayet så den valgte sortering ligger ordentligt
+/* Tager sorteringsvalget som input
+ * Sorterer herefter efter valgte sortering
  */
 void print_sort(task tasks[], int option, int number_of_tasks);
