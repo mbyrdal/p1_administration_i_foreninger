@@ -9,7 +9,6 @@
 
 
 /* Structs */
-
 struct task{
     char category[100],
          title[100],

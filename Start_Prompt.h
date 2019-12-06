@@ -27,7 +27,7 @@ int dir_exists(char *dir_name);
  * Ellers oprettes den nye fil
  * Loop afsluttes ved indtastning af SENTINEL, som er 3
  */
-void file_managing(task tasks[], int number_of_tasks, char *dir_name);
+void file_managing(task tasks[], int number_of_tasks, char *dir_name, char *file_name);
 
 /* printer en task (struc task) til en fil
  * hvilken fil der skrives til bestemmes i fil argumentet

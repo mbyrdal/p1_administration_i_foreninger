@@ -84,7 +84,6 @@ void file_managing(task *tasks, int amount_of_tasks, char *dir_name, char *file_
             sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
         }
     } while (option != SENTINEL);
-    return file_name;
 }
 
 /* printer en task (struc task) til en fil
@@ -150,7 +149,7 @@ void create_file(char *file_name, task tasks[], int number_of_tasks){
     file = fopen(file_name, "w");
     if (file != NULL){
         for (i = 0; i < number_of_tasks; i++){
-            file_write_task(tasks[i]);
+            file_write_task(file, tasks[i]);
         }
         fclose(file);
     } else{

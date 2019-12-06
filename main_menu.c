@@ -19,7 +19,7 @@ void main_menu(task tasks[], int *number_of_tasks){
 
         Der tjekkes om input er en korrekt valgmulighed */
         if (option != 0){
-            execute_user_input(option, tasks, &number_of_tasks);
+            execute_user_input(option, tasks, number_of_tasks);
         }
     } while(option != MAIN_MENU);
 }
@@ -29,17 +29,17 @@ void main_menu(task tasks[], int *number_of_tasks){
  * intet output
  */
 void execute_user_input(int option, task tasks[], int *number_of_tasks){
-    enum options{create_task = 1, change_task, change_sort};
+    enum options{task_create = 1, task_change, task_sort};
     switch (option){
 
-    case create_task:
-        create_task(tasks, &number_of_tasks);
+    case task_create:
+        create_task(tasks, number_of_tasks);
         break;
-    case change_task:
+    case task_change:
         
         break;
 
-    case change_sort:
+    case task_sort:
         change_sorting(tasks, *number_of_tasks);
         break;
 
