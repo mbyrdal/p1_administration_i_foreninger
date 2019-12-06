@@ -6,7 +6,6 @@ void create_task(task tasks[], int *new_task){
     char answer[10];
     *new_task += 1;
 
-    tasks[i].number = i + 1;
     /* Spørg om alt det nødvendige information til at oprette en opgave */
     printf("Indtast de administrerende personer til opgaven - afslut med enter [Max 250 tegn]:\n");
     scanf(" %[^\n]", tasks[i].admins);
@@ -16,11 +15,12 @@ void create_task(task tasks[], int *new_task){
     scanf(" %[^}]%*c", tasks[i].description);
     printf("Indtast de frivillige personer til opgaven - afslut med enter [Max 250 tegn]:\n");
     scanf(" %[^\n]", tasks[i].volunteers);
-    printf("Indtast den nuværende status på opgaven - afslut med enter [Max 1000 tegn]:\n");
-    scanf(" %[^\n]", tasks[i].status_str);
+    printf("Indtast den nuværende status på opgaven - afslut med } og enter [Max 1000 tegn]:\n");
+    scanf(" %[^}]", tasks[i].status_str);
     printf("Indtast prioriteringen af opgaven - afslut med enter [fra 1 - 10]:\n");
     do {
         scanf(" %d", &tasks[i].priority);
+        clear_input();
         if (tasks[i].priority < 1 || tasks[i].priority > 10){
             printf("Tallet var ikke mellem 1 og 10, indtast prioritering igen:\n");
         }

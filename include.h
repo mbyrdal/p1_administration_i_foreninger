@@ -11,7 +11,6 @@
 /* Structs */
 
 struct task{
-    int number;
     char category[100],
          title[100],
          admins[250],
