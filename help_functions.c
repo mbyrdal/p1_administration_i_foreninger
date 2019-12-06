@@ -1,3 +1,5 @@
+#include "include.h"
+
 /*Funktion til at skippe input i inputbufferen, hvis der er input, der ikke blev læst*/
 void clear_input(void){
     char skip_ch;
