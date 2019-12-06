@@ -10,23 +10,9 @@ int compare_title(const void *ip1, const void *ip2);
 int compare_category(const void *ip1, const void *ip2);
 void print_sort(task tasks[], int option, int number_of_tasks);
 
-int main(void){
-    task tasks[MAX_TASKS];
-    int number_of_tasks = 0, option = 0;
-    int exit_info=0;
-
-    create_task(tasks, &number_of_tasks);
-    
-    while (exit_info != 1){
-    option = prompt_user_for_sort();
-    sort_tasks(tasks, option, number_of_tasks);
-    print_tasks(tasks, option, number_of_tasks);
-    printf("Vil du gå tilbage ? 0 for tilbage 1 for exit");
-    scanf(" %d", &exit_info);
-    }
-    return 0;
-}
-
+/*Mangler input_clear
+* Printer en Menu for hvilen slags sortering brugeren vil have
+* Returnere et output af en int variable, og sender den til print_sort funktionen hvor den valgte sortering bliver udført*/
 int prompt_user_for_sort(void){
     int option;
     printf("Hvilken slags sortering vil du have?\n (Indtast tal fra 1-5 efter følgende muligheder)\n\n"
@@ -39,6 +25,8 @@ int prompt_user_for_sort(void){
     return option;
 }
 
+/*Indtager int variabel option, som fortæller den hvilken slags sortering den skal printe
+* Printer herefter den relevante sortering*/
 void print_sort(task tasks[], int option, int number_of_tasks){
     int i;
     enum sort{category = 1, title, admins, priority, deadline};
@@ -83,6 +71,8 @@ void print_sort(task tasks[], int option, int number_of_tasks){
     }
 }
 
+/*Indtager en int variabel og udfører den valgte sortering i form af en qsort funktion
+* Og rykker rundt i arrayet så den valgte sortering ligger ordentligt*/
 void sort_tasks(task tasks[], int option, int number_of_tasks){
     enum sort{category = 1, title, admins, priority, deadline};
     
@@ -106,7 +96,6 @@ void sort_tasks(task tasks[], int option, int number_of_tasks){
             printf("Something went wrong");
     }
 }
-
 
 int compare_deadline(const void *ip1, const void *ip2){
     task *tm1= (task *)ip1,
