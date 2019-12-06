@@ -91,7 +91,6 @@ void sort_tasks(task tasks[], int option, int number_of_tasks){
             printf("Something went wrong");
     }
 }
-<<<<<<< HEAD
 
 int compare_deadline(const void *ip1, const void *ip2){
     task *tm1= (task *)ip1,
@@ -197,5 +196,3 @@ int compare_category(const void *ip1, const void *ip2){
         return 0;
     } 
 }
-=======
->>>>>>> 1ec4e6db4a7838c1698e5a9399746f8b9df46282
