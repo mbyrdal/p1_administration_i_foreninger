@@ -62,7 +62,6 @@ void print_sort(task tasks[], int option, int number_of_tasks){
  */
 void sort_tasks(task tasks[], int option, int number_of_tasks){
     enum sort{category = 1, title, admins, priority, deadline};
-    
     switch (option){
         case category:
             qsort(tasks, number_of_tasks, sizeof(task), compare_category);

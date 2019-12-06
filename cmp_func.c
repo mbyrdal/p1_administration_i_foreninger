@@ -42,9 +42,9 @@ int compare_priority(const void *ip1, const void *ip2){
          *prio2= (task*)ip2;
 
     if (prio1->priority < prio2->priority){ 
-        return -1;
-    } else if (prio1->priority > prio2->priority){
         return 1;
+    } else if (prio1->priority > prio2->priority){
+        return -1;
     } else{
         return 0;
     }
@@ -55,24 +55,9 @@ int compare_priority(const void *ip1, const void *ip2){
  * Returner en int, som siger om to opgaver skal byttes
  */
 int compare_admins(const void *ip1, const void *ip2){
-    int i;
     task *name1 = (task *)ip1,
          *name2 = (task *)ip2;
-    
-    for (i = 0; (name1->admins[i] =! '\n'); i++){
-        name1->admins[i] = tolower(name1->admins[i]);
-    }
-    for (i = 0; (name2->admins[i] =! '\n'); i++){
-        name2->admins[i] = tolower(name2->admins[i]);
-    }
-
-    if (strcmp(name1->admins, name2->admins) < 0){
-        return -1;
-    } else if (strcmp(name1->admins, name2->admins) > 0){
-        return 1;
-    } else{
-        return 0;
-    } 
+    return strcmp(name1->admins, name2->admins);
 }
 
 /* qsort sammenligning for title
@@ -80,24 +65,9 @@ int compare_admins(const void *ip1, const void *ip2){
  * Returner en int, som siger om to opgaver skal byttes
  */
 int compare_title(const void *ip1, const void *ip2){
-    int i;
     task *name1 = (task *)ip1,
          *name2 = (task *)ip2;
-    
-    for (i = 0; (name1->title[i] =! '\n'); i++){
-        name1->title[i] = tolower(name1->title[i]);
-    }
-    for (i = 0; (name2->title[i] =! '\n'); i++){
-        name2->title[i] = tolower(name2->title[i]);
-    }
-
-    if (strcmp(name1->title, name2->title) < 0){
-        return -1;
-    } else if (strcmp(name1->title, name2->title) > 0){
-        return 1;
-    } else{
-        return 0;
-    } 
+    return strcmp(name1->title, name2->title);
 }
 
 /* qsort sammenligning for category
@@ -105,22 +75,7 @@ int compare_title(const void *ip1, const void *ip2){
  * Returner en int, som siger om to opgaver skal byttes
  */
 int compare_category(const void *ip1, const void *ip2){
-    int i;
     task *name1 = (task *)ip1,
          *name2 = (task *)ip2;
-    
-    for (i = 0; (name1->category[i] =! '\n'); i++){
-        name1->category[i] = tolower(name1->category[i]);
-    }
-    for (i = 0; (name2->category[i] =! '\n'); i++){
-        name2->category[i] = tolower(name2->category[i]);
-    }
-
-    if (strcmp(name1->category, name2->category) < 0){
-        return -1;
-    } else if (strcmp(name1->category, name2->category) > 0){
-        return 1;
-    } else{
-        return 0;
-    } 
+    return strcmp(name1->category, name2->category);
 }

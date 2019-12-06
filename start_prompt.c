@@ -11,7 +11,7 @@ void start_prompt(task tasks[], int *number_of_tasks, char *file_name){
 
     file_input("Skriv navn paa mappen: ", dir_name);
     create_dir(dir_name);
-    file_managing(tasks, *number_of_tasks, dir_name, file_name);
+    file_managing(tasks, number_of_tasks, dir_name, file_name);
 }
 
 /* Funktion, som udskriver en besked til og gemmer input fra brugeren.
@@ -55,8 +55,8 @@ int dir_exists(char *dir_name){
  * Ved åbning af fil, læses der tasks fra angivne fil
  * Ellers oprettes den nye fil
  */
-void file_managing(task tasks[], int amount_of_tasks, char *dir_name, char *file_name){
-    int option;
+void file_managing(task tasks[], int *numer_of_tasks, char *dir_name, char *file_name){
+    int option, file_found = 0;
     char temp_file_name[100];
     FILE *file;
 
@@ -67,19 +67,20 @@ void file_managing(task tasks[], int amount_of_tasks, char *dir_name, char *file
 
     switch (option) {
         case 1:
-            file_input("Skriv navn paa filen: ", temp_file_name);
-            sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
-
-            file = fopen(file_name, "r");
-
-            if (file != NULL){
-                while (!feof(file)){
-                    file_read_task(file, &tasks[amount_of_tasks]);
+            do{
+                file_input("Skriv navn paa filen: ", temp_file_name);
+                sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
+                file = fopen(file_name, "r");
+                if (file != NULL){
+                    file_found = 1;
+                    while (!feof(file)){
+                        file_read_task(file, &tasks[(*numer_of_tasks)++]);
+                    }
+                } else{
+                    printf("Fil ikke fundet\n");
                 }
-            } else{
-                printf("Fil ikke fundet\n");
-            }
-            fclose(file);
+                fclose(file);
+            } while (!file_found);
             break;
         case 2:
             file_input("Skriv det nye filnavn: ", temp_file_name);
