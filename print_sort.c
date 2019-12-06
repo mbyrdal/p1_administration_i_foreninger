@@ -5,9 +5,10 @@ int prompt_user_for_sort(void);
 void sort_tasks(task tasks[], int option, int number_of_tasks);
 void print_sort(task tasks[], int option, int number_of_tasks);
 
-/*Mangler input_clear
-* Printer en Menu for hvilen slags sortering brugeren vil have
-* Returnere et output af en int variable, og sender den til print_sort funktionen hvor den valgte sortering bliver udført*/
+/* Mangler input_clear
+ * Printer en Menu for hvilen slags sortering brugeren vil have
+ * Returnere et output af en int variable, og sender den til print_sort funktionen hvor den valgte sortering bliver udført
+ */
 int prompt_user_for_sort(void){
     int option;
     printf("Hvilken slags sortering vil du have?\n (Indtast tal fra 1-5 efter følgende muligheder)\n\n"
@@ -20,8 +21,9 @@ int prompt_user_for_sort(void){
     return option;
 }
 
-/*Indtager int variabel option, som fortæller den hvilken slags sortering den skal printe
-* Printer herefter den relevante sortering*/
+/* Indtager int variabel option, som fortæller den hvilken slags sortering den skal printe
+ * Printer herefter den relevante sortering
+ */
 void print_sort(task tasks[], int option, int number_of_tasks){
     int i;
     enum sort{category = 1, title, admins, priority, deadline};
@@ -66,8 +68,9 @@ void print_sort(task tasks[], int option, int number_of_tasks){
     }
 }
 
-/*Indtager en int variabel og udfører den valgte sortering i form af en qsort funktion
-* Og rykker rundt i arrayet så den valgte sortering ligger ordentligt*/
+/* Indtager en int variabel og udfører den valgte sortering i form af en qsort funktion
+ * Og rykker rundt i arrayet så den valgte sortering ligger ordentligt
+ */
 void sort_tasks(task tasks[], int option, int number_of_tasks){
     enum sort{category = 1, title, admins, priority, deadline};
     
