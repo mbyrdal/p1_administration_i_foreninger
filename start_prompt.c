@@ -1,5 +1,4 @@
 #include "include.h"
-#define SENTINEL 3
 
 /* Funktion som kører start prompten af programmet
  * Tager tasks så den kan læse en fil og gøre klar til at ændre i tasks
