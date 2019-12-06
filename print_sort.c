@@ -1,6 +1,6 @@
 #include "include.h"
 
-/*Prototypes*/
+/* Prototypes */
 int prompt_user_for_sort(void);
 void sort_tasks(task tasks[], int option, int number_of_tasks);
 void print_sort(task tasks[], int option, int number_of_tasks);
