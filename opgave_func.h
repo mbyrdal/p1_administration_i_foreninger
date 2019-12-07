@@ -12,6 +12,6 @@ void create_task(task tasks[], char* categories, int *number_of_tasks, int *numb
  */
 void change_task(task *task1);
 
-int prompt_for_category(char categories[][], int *number_of_categories);
-void add_category(char categories[][], int *number_of_categories);
-void edit_category(char categories[][], int index);
+int prompt_for_category(char **categories, int *number_of_categories);
+void add_category(char **categories, int *number_of_categories);
+void edit_category(char **categories, int index);

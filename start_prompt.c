@@ -6,7 +6,7 @@
  * Tager number_of_tasks så den kan opdateres med hvor mange der læses i filen
  * Outputter file_name, så den kan oprettes når programmet afsluttes
  */
-void start_prompt(task tasks[], char categories[][], int *number_of_tasks, int *number_of_categories, char *file_name){
+void start_prompt(task tasks[], char **categories, int *number_of_tasks, int *number_of_categories, char *file_name){
     char dir_name[100];
     file_input("Skriv navn paa mappen: ", dir_name);
     create_dir(dir_name);
@@ -54,7 +54,7 @@ int dir_exists(char *dir_name){
  * Ved åbning af fil, læses der tasks fra angivne fil
  * Ellers oprettes den nye fil
  */
-void file_managing(task tasks[], char categories[][], int *numer_of_tasks, int *number_of_categories, char *dir_name, char *file_name){
+void file_managing(task tasks[], char **categories, int *numer_of_tasks, int *number_of_categories, char *dir_name, char *file_name){
     int option, file_found = 0;
     char temp_file_name[100];
     FILE *file;
@@ -148,7 +148,7 @@ void file_read_task(FILE *fil, task *task1){
  * Tager file_name for at oprette/skrive i filen med det ønskede navn
  * Tager tasks og number_of_tasks til at hente information om opgaverne
  */
-void create_file(char *file_name, task tasks[], char categories[][], int number_of_tasks, int number_of_categories){
+void create_file(char *file_name, task tasks[], char **categories, int number_of_tasks, int number_of_categories){
     FILE *file;
     int i;
 
@@ -171,7 +171,7 @@ void create_file(char *file_name, task tasks[], char categories[][], int number_
 }
 
 
-void category_read(FILE *fil, char categories[][], int *number_of_categories){
+void category_read(FILE *fil, char **categories, int *number_of_categories){
     char skip_ch;
 
     fscanf(fil, " %*[^:]%*c");
