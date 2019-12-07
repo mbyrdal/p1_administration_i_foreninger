@@ -4,7 +4,7 @@
  * Main funktion til at køre programmet
  */
 int main(void){
-    int number_of_tasks = 0;
+    int number_of_tasks = 0, number_of_categories = 0;
     char file_name[100];
     task tasks[MAX_TASKS];
 

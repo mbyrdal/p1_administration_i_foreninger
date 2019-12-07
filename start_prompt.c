@@ -72,7 +72,7 @@ void file_managing(task tasks[], int *numer_of_tasks, char *dir_name, char *file
                 file = fopen(file_name, "r");
                 if (file != NULL){
                     file_found = 1;
-                    category_read(file)
+                    category_read(file, number_of_categories);
                     while (!feof(file)){
                         file_read_task(file, &tasks[(*numer_of_tasks)++]);
                     }
@@ -157,7 +157,7 @@ void create_file(char *file_name, task tasks[], int number_of_tasks){
         fprintf(file_name, "%Kategori: ");
 
         for(i = 0; i < number_of_categories; i++){
-            sprintf(category_str, "%s%s", category_str, tasks[i].category)
+            sprintf(category_str, "%s%s", category_str, tasks[i].category);
         }
         fprintf(file_name, "\n");
 
@@ -167,5 +167,17 @@ void create_file(char *file_name, task tasks[], int number_of_tasks){
         fclose(file);
     } else{
         printf("Kunne ikke skrive til fil\n");
+    }
+}
+
+
+char **category_read(FILE *fil, int *number_of_categories){
+    int count_categories = 0;
+    char skip_ch;
+    while (getchar(skip_ch) != '\n'){
+        if (skip_ch == '{'){
+            count_categories++;
+            fscanf(fil, [^}], )
+        }
     }
 }
