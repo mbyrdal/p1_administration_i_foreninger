@@ -26,8 +26,8 @@ typedef struct task task;
 #include "opgave_func.h"
 #include "start_prompt.h"
 #include "main_menu.h"
-#include "print_sort.h"
 #include "cmp_func.h"
+#include "print_sort.h"
 
 #define MAX_TASKS 100
 #define MAIN_MENU 4
