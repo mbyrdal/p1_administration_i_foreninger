@@ -7,7 +7,8 @@ int main(void){
     int number_of_tasks = 0, number_of_categories = 0;
     char file_name[100];
     task tasks[MAX_TASKS];
-    char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY];
+    /*char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY];*/
+    char **categories = calloc(MAX_NUMBER_OF_CATEGORIES, sizeof(char) * MAX_LENGTH_OF_CATEGORY);
 
 
     start_prompt(tasks, categories, &number_of_categories, &number_of_tasks, file_name);
