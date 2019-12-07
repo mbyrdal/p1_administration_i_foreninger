@@ -18,7 +18,7 @@ void change_sorting(task tasks[], int number_of_tasks){
 /* Tager sorteringsvalget som input
  * Printer herefter den valgte sortering
  */
-void print_sort(task tasks[], int option, int number_of_tasks){
+void print_sort(task tasks[], char categories[][], int option, int number_of_tasks, int number_of_categories){
     int i;
     enum sort{category = 1, title, admins, priority, deadline};
 
@@ -26,7 +26,7 @@ void print_sort(task tasks[], int option, int number_of_tasks){
         case category:
             printf("Sorteret for Kategori:\n");
             for (i = 0; i < number_of_tasks; i++){
-                printf("%s: %d\n%s: %s\n%s: %s\n\n", "Nummer", i+1, "Kategori", tasks[i].category, "Titel", tasks[i].title);
+                printf("%s: %d\n%s: %s\n%s: %s\n\n", "Nummer", i+1, "Kategori", categories[tasks[i].category_index], "Titel", tasks[i].title);
             } break;
         case title:
             printf("Sorteret for Titel:\n");
@@ -61,6 +61,8 @@ void print_sort(task tasks[], int option, int number_of_tasks){
  * Sorterer herefter efter valgte sortering
  */
 void sort_tasks(task tasks[], int option, int number_of_tasks){
+    char temp_category[][]
+    
     enum sort{category = 1, title, admins, priority, deadline};
     switch (option){
         case category:

@@ -6,11 +6,11 @@
  * Tager number_of_tasks så den kan opdateres med hvor mange der læses i filen
  * Outputter file_name, så den kan oprettes når programmet afsluttes
  */
-void start_prompt(task tasks[], int *number_of_tasks, char *file_name){
+void start_prompt(task tasks[], char categories[][], int *number_of_tasks, int *number_of_categories, char *file_name){
     char dir_name[100];
     file_input("Skriv navn paa mappen: ", dir_name);
     create_dir(dir_name);
-    file_managing(tasks, number_of_tasks, dir_name, file_name);
+    file_managing(tasks, categories, number_of_tasks, number_of_categories, dir_name, file_name);
 }
 
 /* Funktion, som udskriver en besked til og gemmer input fra brugeren.
@@ -54,7 +54,7 @@ int dir_exists(char *dir_name){
  * Ved åbning af fil, læses der tasks fra angivne fil
  * Ellers oprettes den nye fil
  */
-void file_managing(task tasks[], int *numer_of_tasks, char *dir_name, char *file_name){
+void file_managing(task tasks[], char categories[][], int *numer_of_tasks, int *number_of_categories, char *dir_name, char *file_name){
     int option, file_found = 0;
     char temp_file_name[100];
     FILE *file;
@@ -72,7 +72,7 @@ void file_managing(task tasks[], int *numer_of_tasks, char *dir_name, char *file
                 file = fopen(file_name, "r");
                 if (file != NULL){
                     file_found = 1;
-                    category_read(file, number_of_categories);
+                    category_read(file, categories, number_of_categories);
                     while (!feof(file)){
                         file_read_task(file, &tasks[(*numer_of_tasks)++]);
                     }
@@ -97,7 +97,8 @@ void file_managing(task tasks[], int *numer_of_tasks, char *dir_name, char *file
  */
 void file_write_task(FILE *fil, task task1){
 
-    /* fprintf(fil,"Kategori: %s\n", task1.category); */
+
+    fprintf(fil,"Kategori: %d\n", task1.category_index);
     fprintf(fil,"Admins: %s\n", task1.admins);
     fprintf(fil,"Titel: %s\n", task1.title);
     fprintf(fil,"Beskrivelse: {%s}\n", task1.description);
@@ -125,7 +126,7 @@ void file_read_task(FILE *fil, task *task1){
      * (hvis et int felt står tom bliver deadline underlig)
      * KATEGORI MANGLER
      */
-    /* fscanf(fil," %*[^:]%*c %[^\n]", task1.category); */
+    fscanf(fil," %*[^:]%*c %d", &task1->category_index);
     fscanf(fil," %*[^:]%*c %[^\n]", task1->admins);
     fscanf(fil," %*[^:]%*c %[^\n]", task1->title);
     fscanf(fil," %*[^:]%*c { %[^}]", task1->description);
@@ -147,17 +148,16 @@ void file_read_task(FILE *fil, task *task1){
  * Tager file_name for at oprette/skrive i filen med det ønskede navn
  * Tager tasks og number_of_tasks til at hente information om opgaverne
  */
-void create_file(char *file_name, task tasks[], int number_of_tasks){
+void create_file(char *file_name, task tasks[], char categories[][], int number_of_tasks, int number_of_categories){
     FILE *file;
     int i;
-    char category_str[100];
 
     file = fopen(file_name, "w");
     if (file != NULL){
-        fprintf(file_name, "%Kategori: ");
 
+        fprintf(file_name, "Kategori: ");
         for(i = 0; i < number_of_categories; i++){
-            sprintf(category_str, "%s%s", category_str, tasks[i].category);
+            fprintf(fil, "{%s} ", categories[i]);
         }
         fprintf(file_name, "\n");
 
@@ -171,13 +171,15 @@ void create_file(char *file_name, task tasks[], int number_of_tasks){
 }
 
 
-char **category_read(FILE *fil, int *number_of_categories){
-    int count_categories = 0;
+void category_read(FILE *fil, char categories[][], int *number_of_categories){
     char skip_ch;
+
+    fscanf(fil, " %*[^:]%*c");
+
     while (getchar(skip_ch) != '\n'){
         if (skip_ch == '{'){
-            count_categories++;
-            fscanf(fil, [^}], )
+            fscanf(fil, "[^}]%*c", categories[*number_of_categories]);
+            *number_of_categories += 1;
         }
     }
 }

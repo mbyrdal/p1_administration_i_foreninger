@@ -15,3 +15,5 @@ void sort_tasks(task tasks[], int option, int number_of_tasks);
  * Sorterer herefter efter valgte sortering
  */
 void print_sort(task tasks[], int option, int number_of_tasks);
+
+void print_sort(task tasks[], char categories[][], int option, int number_of_tasks, int number_of_categories);

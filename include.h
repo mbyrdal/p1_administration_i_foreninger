@@ -10,13 +10,13 @@
 
 /* Structs */
 struct task{
-    char category[100],
-         title[100],
+    char title[100],
          admins[250],
          volunteers[250],
          description[1000],
          status_str[1000];
-    int priority;
+    int category_index,
+        priority;
 
     struct tm deadline;
 };
@@ -31,3 +31,5 @@ typedef struct task task;
 
 #define MAX_TASKS 100
 #define MAIN_MENU 4
+#define MAX_NUMBER_OF_CATEGORIES 50
+#define MAX_LENGTH_OF_CATEGORY 100
