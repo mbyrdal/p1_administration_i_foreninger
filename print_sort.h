@@ -4,7 +4,8 @@
  * Tager task-arrayet, så den kan sorteres, som input
  * Tager number_of_tasks som input, så den kun printer oprettede opgaver
  */
-void change_sorting(task tasks[], int number_of_tasks);
+void change_sorting(task tasks[], char **categories, int number_of_tasks, int number_of_categories);
+
 
 /* Tager sorteringsvalget som input
  * Printer herefter den valgte sortering

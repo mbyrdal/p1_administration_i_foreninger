@@ -7,6 +7,7 @@
 
 task *main_menu(task tasks[], char **categories, int *number_of_tasks, int *number_of_categories){
     int option = 0;
+    
     do{
         option = prompt_user_options("Vaelg mellem en af ovenstaaende muligheder [indtast valgmulighedens nummer uden punktum \".\"]: \n\n"
                                      "1.  Opret opgave\n"
@@ -29,7 +30,6 @@ task *main_menu(task tasks[], char **categories, int *number_of_tasks, int *numb
 void execute_user_input(int option, task tasks[], char **categories, int *number_of_tasks, int *number_of_categories){
     enum options{task_create = 1, task_change, task_sort};
     switch (option){
-
         case task_create:
             create_task(tasks, categories, number_of_tasks, number_of_categories);
             break;
@@ -38,7 +38,7 @@ void execute_user_input(int option, task tasks[], char **categories, int *number
             break;
 
         case task_sort:
-            change_sorting(tasks, *number_of_tasks);
+            change_sorting(tasks, categories, *number_of_tasks, *number_of_categories);
             break;
 
         default:

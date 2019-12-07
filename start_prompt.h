@@ -46,3 +46,4 @@ void file_read_task(FILE *fil, task *task1);
  * Tager tasks og number_of_tasks til at hente information om opgaverne
  */
  void create_file(char *file_name, task tasks[], char **categories, int number_of_tasks, int number_of_categories);
+ void category_read(FILE *fil, char **categories, int *number_of_categories);

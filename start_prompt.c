@@ -11,6 +11,7 @@ void start_prompt(task tasks[], char **categories, int *number_of_tasks, int *nu
     file_input("Skriv navn paa mappen: ", dir_name);
     create_dir(dir_name);
     file_managing(tasks, categories, number_of_tasks, number_of_categories, dir_name, file_name);
+    printf("num-start_prompt = %d\n", *number_of_categories);
 }
 
 /* Funktion, som udskriver en besked til og gemmer input fra brugeren.
@@ -60,7 +61,7 @@ void file_managing(task tasks[], char **categories, int *numer_of_tasks, int *nu
     FILE *file;
 
     option = prompt_user_options("Hvad vil du nu? \n\n"
-                                 "1. aabne en fil (Læse fra fil)\n"
+                                 "1. aabne en fil (Laese fra fil)\n"
                                  "2. Oprette en ny fil (Skrive til fil)\n\n> ",
                                  2);
 
@@ -89,6 +90,7 @@ void file_managing(task tasks[], char **categories, int *numer_of_tasks, int *nu
         default:
             printf("Noget er galt!!!!\n");
     }
+    printf("num-file_managing = %d\n", *number_of_categories);
 }
 
 /* printer en task (struc task) til en fil
@@ -155,11 +157,11 @@ void create_file(char *file_name, task tasks[], char **categories, int number_of
     file = fopen(file_name, "w");
     if (file != NULL){
 
-        fprintf(file_name, "Kategori: ");
+        fprintf(file, "Kategori: ");
         for(i = 0; i < number_of_categories; i++){
-            fprintf(file_name, "{%s} ", categories[i]);
+            fprintf(file, "{%s} ", categories[i]);
         }
-        fprintf(file_name, "\n");
+        fprintf(file, "\n");
 
         for (i = 0; i < number_of_tasks; i++){
             file_write_task(file, tasks[i]);
@@ -176,10 +178,12 @@ void category_read(FILE *fil, char **categories, int *number_of_categories){
 
     fscanf(fil, " %*[^:]%*c");
 
-    while (skip_ch = getchar() != '\n'){
+    do {
+        skip_ch = getchar();
         if (skip_ch == '{'){
-            fscanf(fil, "[^}]%*c", categories[*number_of_categories]);
+            fscanf(fil, "%[^}]%*c", categories[*number_of_categories]);
             *number_of_categories += 1;
         }
-    }
+    } while (skip_ch != '\n');
+    fscanf(fil, "%*[^a-zA-Z]\n");
 }
