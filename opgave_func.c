@@ -65,10 +65,10 @@ void create_task(task tasks[], char* categories, int *number_of_tasks, int *numb
 /* Funktion til at ændre en valgt opgave
  * Funktionen tager adressen til en opgave for at ændre værdierne
  */
-void change_task(task *task1){
+void change_task(task *task1, char categories[][], int number_of_categories){
     enum option {Title = 1, Category, Admins, Volunteers, Description, Status, Priority, Deadline};
     int month, year;
-    int option = prompt_user_options("Hvad vil du gerne ændre? [indtast valgmulighedens nummer uden punktum \".\"]: \n\n",
+    int option = prompt_user_options("Hvad vil du gerne ændre? [indtast valgmulighedens nummer uden punktum \".\"]: \n\n"
                                      "1.  Titel\n"
                                      "2.  Kategori\n"
                                      "3.  Administrerende personer\n"
@@ -140,19 +140,14 @@ int prompt_for_category(char categories[][], int *number_of_categories){
 
     option = prompt_user_options("> ", i);
 
-    enum options{create_category = i - 2, change_category};
-
-    switch (option){
-        case create_category:
-            add_category(categories, number_of_categories);
-            break;
-        case change_category:
-            printf("Hvilken kategori vil du aendre: \n");
-            selected_category = prompt_user_options("> ", number_of_categories);
-            edit_category(categories, selected_category - 1);
-            break;
-        default:
-            return option;
+    if (option == i -2){
+        add_category(categories, number_of_categories);
+    } else if (option == i - 1){
+        printf("Hvilken kategori vil du aendre: \n");
+        selected_category = prompt_user_options("> ", number_of_categories);
+        edit_category(categories, selected_category - 1);
+    } else{
+        return option;
     }
 }
 

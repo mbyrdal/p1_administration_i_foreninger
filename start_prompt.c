@@ -157,7 +157,7 @@ void create_file(char *file_name, task tasks[], char categories[][], int number_
 
         fprintf(file_name, "Kategori: ");
         for(i = 0; i < number_of_categories; i++){
-            fprintf(fil, "{%s} ", categories[i]);
+            fprintf(file_name, "{%s} ", categories[i]);
         }
         fprintf(file_name, "\n");
 
@@ -176,7 +176,7 @@ void category_read(FILE *fil, char categories[][], int *number_of_categories){
 
     fscanf(fil, " %*[^:]%*c");
 
-    while (getchar(skip_ch) != '\n'){
+    while (skip_ch = getchar() != '\n'){
         if (skip_ch == '{'){
             fscanf(fil, "[^}]%*c", categories[*number_of_categories]);
             *number_of_categories += 1;

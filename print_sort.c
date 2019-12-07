@@ -61,7 +61,6 @@ void print_sort(task tasks[], char categories[][], int option, int number_of_tas
  * Sorterer herefter efter valgte sortering
  */
 void sort_tasks(task tasks[], int option, int number_of_tasks){
-    char temp_category[][]
     
     enum sort{category = 1, title, admins, priority, deadline};
     switch (option){

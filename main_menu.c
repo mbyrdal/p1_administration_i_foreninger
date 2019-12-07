@@ -8,7 +8,7 @@
 task *main_menu(task tasks[], char categories[][], int *number_of_tasks, int *number_of_categories){
     int option = 0;
     do{
-        option = prompt_user_options("Vaelg mellem en af ovenstaaende muligheder [indtast valgmulighedens nummer uden punktum \".\"]: \n\n",
+        option = prompt_user_options("Vaelg mellem en af ovenstaaende muligheder [indtast valgmulighedens nummer uden punktum \".\"]: \n\n"
                                      "1.  Opret opgave\n"
                                      "2.  Aendre opgave\n"
                                      "3.  Aendre sortering\n"
