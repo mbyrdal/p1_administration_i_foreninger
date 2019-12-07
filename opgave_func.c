@@ -5,9 +5,10 @@
  * Funktion tager number_of_tasks til at tælle antallet af opgaver op
  */
 void create_task(task tasks[], int *number_of_tasks){
-    int month, year, i = *number_of_tasks;
+    int month, year, i = *number_of_tasks, n;
     char answer[10];
     *number_of_tasks += 1;
+
 
     /* Spørg om kategori */
     printf("Indtast de administrerende personer til opgaven - afslut med enter [Max 250 tegn]:\n");
@@ -59,14 +60,14 @@ void create_task(task tasks[], int *number_of_tasks){
     }
 }
 
-/* Funktion til at ændre en valgt opgave 
+/* Funktion til at ændre en valgt opgave
  * Funktionen tager adressen til en opgave for at ændre værdierne
  */
 void change_task(task *task1){
     enum option {Title = 1, Category, Admins, Volunteers, Description, Status, Priority, Deadline};
     int month, year;
     int option = prompt_user_options("Hvad vil du gerne ændre? [indtast valgmulighedens nummer uden punktum \".\"]: \n\n",
-                                     "1.  Titel\n"      
+                                     "1.  Titel\n"
                                      "2.  Kategori\n"
                                      "3.  Administrerende personer\n"
                                      "4.  Frivillige personer\n"
@@ -76,7 +77,7 @@ void change_task(task *task1){
                                      "8.  Deadline\n\n"
                                      "Dit valg: ",
                                      8);
-    
+
     switch (option){
         case Title:
             printf("Indtast titlen til opgaven - afslut med enter [Max 100 tegn]:\n");
@@ -122,4 +123,12 @@ void change_task(task *task1){
             task1->deadline.tm_mon  = month - 1;
             task1->deadline.tm_year = year  - 1900;
     }
+}
+
+char *promp_for_category(){
+    printf("Vælg kategori:\n");
+    for (n = 0; n < number_of_categories; n++){
+        printf("%d) %s\n", n, category[n]);
+    }
+    prompt_user_options("> ", )
 }
