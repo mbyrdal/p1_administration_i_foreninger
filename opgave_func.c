@@ -11,10 +11,10 @@ void create_task(task tasks[], int *number_of_tasks){
 
 
     /* Spørg om kategori */
-    printf("Indtast de administrerende personer til opgaven - afslut med enter [Max 250 tegn]:\n");
-    scanf(" %[^\n]", tasks[i].admins);
     printf("Indtast titlen til opgaven - afslut med enter [Max 100 tegn]:\n");
     scanf(" %[^\n]", tasks[i].title);
+    printf("Indtast de administrerende personer til opgaven - afslut med enter [Max 250 tegn]:\n");
+    scanf(" %[^\n]", tasks[i].admins);
     printf("Beskriv opgaven - afslut med } og enter [Max 1000 tegn]:\n");
     scanf(" %[^}]%*c", tasks[i].description);
     printf("Indtast de frivillige personer til opgaven - afslut med enter [Max 250 tegn]:\n");
@@ -116,10 +116,10 @@ void change_task(task *task1){
                     &year);
 
             } while (task1->deadline.tm_hour < 0 || task1->deadline.tm_hour > 23 ||
-                    task1->deadline.tm_min  < 0  || task1->deadline.tm_min  > 59 ||
-                    task1->deadline.tm_mday < 1  || task1->deadline.tm_mday > 31 ||
-                    month < 1 || month  > 12 ||
-                    year  < 0 || year   > 2100);
+                     task1->deadline.tm_min  < 0 || task1->deadline.tm_min  > 59 ||
+                     task1->deadline.tm_mday < 1 || task1->deadline.tm_mday > 31 ||
+                     month < 1 || month  > 12 ||
+                     year  < 0 || year   > 2100);
             task1->deadline.tm_mon  = month - 1;
             task1->deadline.tm_year = year  - 1900;
     }
@@ -130,5 +130,5 @@ char *promp_for_category(){
     for (n = 0; n < number_of_categories; n++){
         printf("%d) %s\n", n, category[n]);
     }
-    prompt_user_options("> ", )
+    prompt_user_options("> ", );
 }

@@ -72,6 +72,7 @@ void file_managing(task tasks[], int *numer_of_tasks, char *dir_name, char *file
                 file = fopen(file_name, "r");
                 if (file != NULL){
                     file_found = 1;
+                    category_read(file)
                     while (!feof(file)){
                         file_read_task(file, &tasks[(*numer_of_tasks)++]);
                     }
@@ -149,9 +150,17 @@ void file_read_task(FILE *fil, task *task1){
 void create_file(char *file_name, task tasks[], int number_of_tasks){
     FILE *file;
     int i;
+    char category_str[100];
 
     file = fopen(file_name, "w");
     if (file != NULL){
+        fprintf(file_name, "%Kategori: ");
+
+        for(i = 0; i < number_of_categories; i++){
+            sprintf(category_str, "%s%s", category_str, tasks[i].category)
+        }
+        fprintf(file_name, "\n");
+
         for (i = 0; i < number_of_tasks; i++){
             file_write_task(file, tasks[i]);
         }
