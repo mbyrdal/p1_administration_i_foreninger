@@ -4,7 +4,7 @@
  * Funktion tager tasks-arrayet til at oprette den nye opgave i
  * Funktion tager number_of_tasks til at tælle antallet af opgaver op
  */
-void create_task(task tasks[], char* categories, int *number_of_tasks, int *number_of_categories){
+void create_task(task tasks[], char* categories, int *number_of_tasks, int *number_of_categories);
 
 
 /* Funktion til at ændre en valgt opgave
