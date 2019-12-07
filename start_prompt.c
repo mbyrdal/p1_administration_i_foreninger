@@ -8,7 +8,6 @@
  */
 void start_prompt(task tasks[], int *number_of_tasks, char *file_name){
     char dir_name[100];
-
     file_input("Skriv navn paa mappen: ", dir_name);
     create_dir(dir_name);
     file_managing(tasks, number_of_tasks, dir_name, file_name);
