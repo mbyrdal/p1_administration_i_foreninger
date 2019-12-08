@@ -72,7 +72,7 @@ int compare_title(const void *ip1, const void *ip2){
 
 /* qsort sammenligning for category
  * Tager 2 pointer til 2 elementer, som kan sammenlignes fra et array
- * Returner en int, som siger om to opgaver skal byttes
+ * Returner en int, som siger om to opgaver skal byttes.
  */
 
 /*
