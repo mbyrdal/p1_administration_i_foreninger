@@ -14,7 +14,7 @@ task *main_menu(task tasks[], char **categories, int *number_of_tasks, int *numb
                                      "2.  Aendre opgave\n"
                                      "3.  Aendre sortering\n"
                                      "4.  Afslut programmet.\n\n"
-                                     "Dit valg: ",
+                                     "> ",
                                      MAIN_MENU);
         if (option != 0){
             execute_user_input(option, tasks, categories, number_of_tasks, number_of_categories);
