@@ -11,7 +11,7 @@ void create_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LEN
 
 
     /* Spørg om kategori */
-    prompt_for_category(categories, number_of_categories);
+    prompt_for_category(tasks, categories, *number_of_tasks, number_of_categories , i);
 
     printf("Indtast titlen til opgaven - afslut med enter [Max 100 tegn]:\n");
     scanf(" %[^\n]", tasks[i].title);
@@ -65,7 +65,7 @@ void create_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LEN
 /* Funktion til at ændre en valgt opgave
  * Funktionen tager adressen til en opgave for at ændre værdierne
  */
-void change_task(task *task1, char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int number_of_categories){
+void change_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int number_of_tasks, int number_of_categories, int index){
     enum option {Title = 1, Category, Admins, Volunteers, Description, Status, Priority, Deadline};
     int month, year;
     int option = prompt_user_options("Hvad vil du gerne ændre? [indtast valgmulighedens nummer uden punktum \".\"]: \n\n"
@@ -83,52 +83,52 @@ void change_task(task *task1, char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENG
     switch (option){
         case Title:
             printf("Indtast titlen til opgaven - afslut med enter [Max 100 tegn]:\n");
-            scanf(" %[^\n]", task1->title);
+            scanf(" %[^\n]", tasks[index].title);
         case Category:
             /* Spørg for kategori */
-            prompt_for_category(categories, &number_of_categories);
+            prompt_for_category(tasks, categories, number_of_tasks, number_of_categories, index);
         case Admins:
             printf("Indtast de administrerende personer til opgaven - afslut med enter [Max 250 tegn]:\n");
-            scanf(" %[^\n]", task1->admins);
+            scanf(" %[^\n]", tasks[index].admins);
         case Volunteers:
             printf("Indtast de frivillige personer til opgaven - afslut med enter [Max 250 tegn]:\n");
-            scanf(" %[^\n]", task1->volunteers);
+            scanf(" %[^\n]", tasks[index].volunteers);
         case Description:
             printf("Beskriv opgaven - afslut med } og enter [Max 1000 tegn]:\n");
-            scanf(" %[^}]%*c", task1->description);
+            scanf(" %[^}]%*c", tasks[index].description);
         case Status:
             printf("Indtast den nuværende status på opgaven - afslut med } og enter [Max 1000 tegn]:\n");
-            scanf(" %[^}]%*c", task1->status_str);
+            scanf(" %[^}]%*c", tasks[index].status_str);
         case Priority:
             printf("Indtast prioriteringen af opgaven - afslut med enter [fra 1 - 10]:\n");
             do {
-                scanf(" %d", &task1->priority);
+                scanf(" %d", &tasks[index].priority);
                 clear_input();
-                if (task1->priority < 1 || task1->priority > 10){
+                if (tasks[index].priority < 1 || tasks[index].priority > 10){
                     printf("Tallet var ikke mellem 1 og 10, indtast prioritering igen:\n");
                 }
-            } while (task1->priority < 1 || task1->priority > 10);
+            } while (tasks[index].priority < 1 || tasks[index].priority > 10);
         case Deadline:
             printf("Indtast deadline på formen timer.minutter dato.måned.år - afslut med enter [fx 17.00 09.12.2019]:\n");
             do {
                 scanf(" %d.%d %d.%d.%d",
-                    &task1->deadline.tm_hour,
-                    &task1->deadline.tm_min,
-                    &task1->deadline.tm_mday,
+                    &tasks[index].deadline.tm_hour,
+                    &tasks[index].deadline.tm_min,
+                    &tasks[index].deadline.tm_mday,
                     &month,
                     &year);
 
-            } while (task1->deadline.tm_hour < 0 || task1->deadline.tm_hour > 23 ||
-                     task1->deadline.tm_min  < 0 || task1->deadline.tm_min  > 59 ||
-                     task1->deadline.tm_mday < 1 || task1->deadline.tm_mday > 31 ||
+            } while (tasks[index].deadline.tm_hour < 0 || tasks[index].deadline.tm_hour > 23 ||
+                     tasks[index].deadline.tm_min  < 0 || tasks[index].deadline.tm_min  > 59 ||
+                     tasks[index].deadline.tm_mday < 1 || tasks[index].deadline.tm_mday > 31 ||
                      month < 1 || month  > 12 ||
                      year  < 0 || year   > 2100);
-            task1->deadline.tm_mon  = month - 1;
-            task1->deadline.tm_year = year  - 1900;
+            tasks[index].deadline.tm_mon  = month - 1;
+            tasks[index].deadline.tm_year = year  - 1900;
     }
 }
 
-int prompt_for_category(char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_categories){
+void prompt_for_category(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int number_of_tasks, int *number_of_categories, int index){
     int i, option, selected_category;
 
     do {
@@ -142,20 +142,17 @@ int prompt_for_category(char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_
 
         option = prompt_user_options("> ", i);
 
-        if (option == i - 1/*2*/){
+        if (option == i - 1){
             add_category(categories, number_of_categories);
             printf("%s\n", categories[*number_of_categories - 1]);
-        } else if (option == i/* - 1*/){
+        } else if (option == i){
             printf("Hvilken kategori vil du aendre: \n");
             selected_category = prompt_user_options("> ", *number_of_categories);
-            edit_category(categories, selected_category - 1);
+            edit_category(tasks, categories, selected_category - 1, number_of_tasks);
         } else{
-            return option;
+            strcpy(tasks[index].category, categories[option]);
         }
-    } while (1/*option < 0 && option >= i - 2*/);
-
-    /*burde aldrig ske*/
-    return 0;
+    } while (option < 0 && option > i);
 }
 
 void add_category(char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_categories){
@@ -165,9 +162,17 @@ void add_category(char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGO
     *number_of_categories += 1;
 }
 
-void edit_category(char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int index){
+void edit_category(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int index, int number_of_tasks){
+    int i;
+    char temp_category[MAX_LENGTH_OF_CATEGORY];
+    strcpy(temp_category, categories[index]);
     /*loop gennem alle kategorier med samme som skal ændre og ændre det */
     printf("Hvad skal kategorien '%s' aendres til?\n"
            "> ", categories[index]);
     scanf("%s", categories[index]);
+    for (i = 0; i < number_of_tasks; i++){
+        if (strcmp(temp_category, tasks[i].category) != 0){
+            strcpy(tasks[i].category, categories[index]);
+        }
+    }
 }

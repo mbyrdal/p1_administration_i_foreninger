@@ -101,7 +101,7 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
 void file_write_task(FILE *fil, task task1){
 
 
-    fprintf(fil,"Kategori: %d\n", task1.category_index);
+    fprintf(fil,"Kategori: %s\n", task1.category);
     fprintf(fil,"Admins: %s\n", task1.admins);
     fprintf(fil,"Titel: %s\n", task1.title);
     fprintf(fil,"Beskrivelse: {%s}\n", task1.description);
@@ -129,7 +129,7 @@ void file_read_task(FILE *fil, task *task1){
      * (hvis et int felt står tom bliver deadline underlig)
      * KATEGORI MANGLER
      */
-    fscanf(fil," %*[^:]%*c %d", &task1->category_index);
+    fscanf(fil," %*[^:]%*c %[^\n]", &task1->category);
     fscanf(fil," %*[^:]%*c %[^\n]", task1->admins);
     fscanf(fil," %*[^:]%*c %[^\n]", task1->title);
     fscanf(fil," %*[^:]%*c { %[^}]", task1->description);

@@ -7,16 +7,20 @@
 #include <ctype.h>
 #include <dirent.h>
 
+#define MAX_TASKS 100
+#define MAIN_MENU 4
+#define MAX_NUMBER_OF_CATEGORIES 50
+#define MAX_LENGTH_OF_CATEGORY 100
 
 /* Structs */
 struct task{
-    char title[100],
+    char category[MAX_LENGTH_OF_CATEGORY],
+         title[100],
          admins[250],
          volunteers[250],
          description[1000],
          status_str[1000];
-    int category_index,
-        priority;
+    int priority;
 
     struct tm deadline;
 };
@@ -29,7 +33,3 @@ typedef struct task task;
 #include "cmp_func.h"
 #include "print_sort.h"
 
-#define MAX_TASKS 100
-#define MAIN_MENU 4
-#define MAX_NUMBER_OF_CATEGORIES 50
-#define MAX_LENGTH_OF_CATEGORY 100
