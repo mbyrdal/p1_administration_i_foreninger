@@ -4,7 +4,7 @@
  * Funktion tager tasks-arrayet til at oprette den nye opgave i
  * Funktion tager number_of_tasks til at tælle antallet af opgaver op
  */
-void create_task(task tasks[], char **categories, int *number_of_tasks, int *number_of_categories){
+void create_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_tasks, int *number_of_categories){
     int month, year, i = *number_of_tasks;
     char answer[10];
     *number_of_tasks += 1;
@@ -65,7 +65,7 @@ void create_task(task tasks[], char **categories, int *number_of_tasks, int *num
 /* Funktion til at ændre en valgt opgave
  * Funktionen tager adressen til en opgave for at ændre værdierne
  */
-void change_task(task *task1, char **categories, int number_of_categories){
+void change_task(task *task1, char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int number_of_categories){
     enum option {Title = 1, Category, Admins, Volunteers, Description, Status, Priority, Deadline};
     int month, year;
     int option = prompt_user_options("Hvad vil du gerne ændre? [indtast valgmulighedens nummer uden punktum \".\"]: \n\n"
@@ -128,7 +128,7 @@ void change_task(task *task1, char **categories, int number_of_categories){
     }
 }
 
-int prompt_for_category(char **categories, int *number_of_categories){
+int prompt_for_category(char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_categories){
     int i, option, selected_category;
 
     do {
@@ -143,7 +143,7 @@ int prompt_for_category(char **categories, int *number_of_categories){
         option = prompt_user_options("> ", i);
 
         if (option == i - 1/*2*/){
-            categories = add_category(categories, number_of_categories);
+            add_category(categories, number_of_categories);
             printf("%s\n", categories[*number_of_categories - 1]);
         } else if (option == i/* - 1*/){
             printf("Hvilken kategori vil du aendre: \n");
@@ -158,18 +158,14 @@ int prompt_for_category(char **categories, int *number_of_categories){
     return 0;
 }
 
-char **add_category(char **categories, int *number_of_categories){
-    char temp_string[100];
+void add_category(char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_categories){
     printf("Hvad skal den nye kategori hedde?\n"
            "> ");
-    scanf(" %s", /*categories[*number_of_categories]*/temp_string);
-    categories[*number_of_categories] = temp_string;
+    scanf(" %s", categories[*number_of_categories]);
     *number_of_categories += 1;
-
-    return categories;
 }
 
-void edit_category(char **categories, int index){
+void edit_category(char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int index){
     /*loop gennem alle kategorier med samme som skal ændre og ændre det */
     printf("Hvad skal kategorien '%s' aendres til?\n"
            "> ", categories[index]);

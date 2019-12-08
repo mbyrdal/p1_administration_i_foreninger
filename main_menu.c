@@ -5,7 +5,7 @@
  * Funktionen tager number_of_tasks til at sende videre til andre funktioner, som tæller den op eller ned
  */
 
-task *main_menu(task tasks[], char **categories, int *number_of_tasks, int *number_of_categories){
+task *main_menu(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_tasks, int *number_of_categories){
     int option = 0;
     
     do{
@@ -27,7 +27,7 @@ task *main_menu(task tasks[], char **categories, int *number_of_tasks, int *numb
  * Tager valget som input samt med task-array og antal opgaver
  * intet output
  */
-void execute_user_input(int option, task tasks[], char **categories, int *number_of_tasks, int *number_of_categories){
+void execute_user_input(int option, task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_tasks, int *number_of_categories){
     enum options{task_create = 1, task_change, task_sort};
     switch (option){
         case task_create:
