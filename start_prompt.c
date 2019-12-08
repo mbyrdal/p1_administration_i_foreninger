@@ -11,8 +11,6 @@ void start_prompt(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LE
     file_input("Skriv navn paa mappen: ", dir_name);
     create_dir(dir_name);
     file_managing(tasks, categories, number_of_tasks, number_of_categories, dir_name, file_name);
-    printf("start_prompt %d\n", *number_of_categories);
-
 }
 
 /* Funktion, som udskriver en besked til og gemmer input fra brugeren.
@@ -178,7 +176,6 @@ void create_file(char *file_name, task tasks[], char categories[MAX_NUMBER_OF_CA
 
 void category_read(FILE *fil, char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_categories){
     char skip_ch;
-    int i;
 
     fscanf(fil, " %*[^:]%*c");
 
@@ -189,9 +186,7 @@ void category_read(FILE *fil, char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENG
             *number_of_categories += 1;
         }
     } while (skip_ch != '\n');
-    for (i = 0; i < *number_of_categories; i++){
-        printf("num %d: %s\n", i, categories[i]);
-    }
+
     /* takes the last '\n'*/
     fscanf(fil, "%*[^a-zA-Z]");
 
