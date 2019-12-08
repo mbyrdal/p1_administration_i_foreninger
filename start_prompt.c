@@ -108,7 +108,7 @@ void file_write_task(FILE *fil, task task1){
     fprintf(fil,"Titel: %s\n", task1.title);
     fprintf(fil,"Beskrivelse: {%s}\n", task1.description);
     fprintf(fil,"Frivillige: %s\n", task1.volunteers);
-    fprintf(fil,"Status: %s\n", task1.status_str);
+    fprintf(fil,"Status: {%s}\n", task1.status_str);
     fprintf(fil,"Prioritet: %d\n", task1.priority);
     fprintf(fil,"Deadline: %d.%d %d.%d.%d\n\n",
          task1.deadline.tm_hour,
@@ -136,7 +136,7 @@ void file_read_task(FILE *fil, task *task1){
     fscanf(fil," %*[^:]%*c %[^\n]", task1->title);
     fscanf(fil," %*[^:]%*c { %[^}]", task1->description);
     fscanf(fil," %*[^:]%*c %[^\n]", task1->volunteers);
-    fscanf(fil," %*[^:]%*c %[^\n]", task1->status_str);
+    fscanf(fil," %*[^:]%*c { %[^}]", task1->status_str);
     fscanf(fil," %*[^:]%*c %d", &task1->priority);
     fscanf(fil," %*[^:]%*c %d.%d %d.%d.%d %*c",
          &task1->deadline.tm_hour,

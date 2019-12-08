@@ -48,6 +48,6 @@ void execute_user_input(int option, task tasks[], char categories[MAX_NUMBER_OF_
             break;
 
         default:
-            printf("Programmet blev afsluttet.");
+            printf("Programmet blev afsluttet.\n");
     }
 }
