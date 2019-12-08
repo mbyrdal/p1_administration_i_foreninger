@@ -37,7 +37,7 @@ void execute_user_input(int option, task tasks[], char categories[MAX_NUMBER_OF_
             create_task(tasks, categories, number_of_tasks, number_of_categories);
             break;
         case task_change:
-            change_task_index = prompt_user_options("Hvilken opgave vil du ændre? "
+            change_task_index = prompt_user_options("Hvilken opgave vil du aendre? "
                                 "(Indtast opgave nummer)\n"
                                 "> ", *number_of_tasks);
             change_task(tasks, categories, *number_of_tasks, number_of_categories, change_task_index - 1);
