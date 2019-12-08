@@ -157,7 +157,7 @@ void create_file(char *file_name, task tasks[], char **categories, int number_of
     file = fopen(file_name, "w");
     if (file != NULL){
 
-        fprintf(file, "Kategori: ");
+        fprintf(file, "Kategorier: ");
         for(i = 0; i < number_of_categories; i++){
             fprintf(file, "{%s} ", categories[i]);
         }
