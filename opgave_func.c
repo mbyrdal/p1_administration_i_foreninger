@@ -51,10 +51,10 @@ void create_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LEN
     printf("\nOpgave %d vil blive oprettet med foelgende information:\n", i);
     print_task(tasks[i]);
 
-    printf("Vil du aendre noget i opgaven? [Ja/Nej]:\n");
     do {
+        printf("Vil du aendre noget i opgaven? [Ja/Nej]:\n");
         scanf(" %s", answer);
-        if (strcmp(answer, "ja") || strcmp(answer, "Ja") || strcmp(answer, "JA")){
+        if (!(strcmp(answer, "ja") && strcmp(answer, "Ja") && strcmp(answer, "JA"))){
             change_task(tasks, categories, *number_of_tasks, number_of_categories, i);
         }
     } while (strcmp(answer, "nej") && strcmp(answer, "Nej") && strcmp(answer, "NEJ"));
@@ -177,7 +177,7 @@ void edit_category(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
            "> ", categories[index]);
     scanf("%s", categories[index]);
     for (i = 0; i < number_of_tasks; i++){
-        if (strcmp(temp_category, tasks[i].category) != 0){
+        if (strcmp(temp_category, tasks[i].category) == 0){
             strcpy(tasks[i].category, categories[index]);
         }
     }
