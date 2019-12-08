@@ -76,6 +76,7 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
                     category_read(file, categories, number_of_categories);
                     while (!feof(file)){
                         file_read_task(file, &tasks[(*numer_of_tasks)++]);
+                        fscanf(file, "%*[^a-zA-Z]");
                     }
                 } else{
                     printf("Fil ikke fundet\n");
@@ -161,7 +162,7 @@ void create_file(char *file_name, task tasks[], char categories[MAX_NUMBER_OF_CA
         for(i = 0; i < number_of_categories; i++){
             fprintf(file, "{%s} ", categories[i]);
         }
-        fprintf(file, "\n");
+        fprintf(file, "\n\n");
 
         for (i = 0; i < number_of_tasks; i++){
             file_write_task(file, tasks[i]);
@@ -181,12 +182,11 @@ void category_read(FILE *fil, char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENG
     do {
         skip_ch = fgetc(fil);
         if (skip_ch == '{'){
-            printf("1\n");
             fscanf(fil, " %[^}]%*c", categories[*number_of_categories]);
-            printf("2\n");
             *number_of_categories += 1;
         }
     } while (skip_ch != '\n');
     /* takes the last '\n'*/
-    skip_ch = fgetc(fil);
+    fscanf(fil, "%*[^a-zA-Z]");
+
 }
