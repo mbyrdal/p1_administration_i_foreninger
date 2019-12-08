@@ -11,7 +11,6 @@ void start_prompt(task tasks[], char **categories, int *number_of_tasks, int *nu
     file_input("Skriv navn paa mappen: ", dir_name);
     create_dir(dir_name);
     file_managing(tasks, categories, number_of_tasks, number_of_categories, dir_name, file_name);
-    printf("num-start_prompt = %d\n", *number_of_categories);
 }
 
 /* Funktion, som udskriver en besked til og gemmer input fra brugeren.
@@ -68,6 +67,7 @@ void file_managing(task tasks[], char **categories, int *numer_of_tasks, int *nu
     switch (option) {
         case 1:
             do{
+                /* 2 newline*/
                 file_input("Skriv navn paa filen: ", temp_file_name);
                 sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
                 file = fopen(file_name, "r");
@@ -84,13 +84,13 @@ void file_managing(task tasks[], char **categories, int *numer_of_tasks, int *nu
             } while (!file_found);
             break;
         case 2:
+            /* 1 newline*/
             file_input("Skriv det nye filnavn: ", temp_file_name);
             sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
             break;
         default:
             printf("Noget er galt!!!!\n");
     }
-    printf("num-file_managing = %d\n", *number_of_categories);
 }
 
 /* printer en task (struc task) til en fil
@@ -173,17 +173,20 @@ void create_file(char *file_name, task tasks[], char **categories, int number_of
 }
 
 
-void category_read(FILE *fil, char **categories, int *number_of_categories){
+char **category_read(FILE *fil, int *number_of_categories){
     char skip_ch;
 
     fscanf(fil, " %*[^:]%*c");
 
     do {
-        skip_ch = getchar();
+        skip_ch = fgetc(fil);
         if (skip_ch == '{'){
-            fscanf(fil, "%[^}]%*c", categories[*number_of_categories]);
+            printf("1\n");
+            fscanf(fil, " %[^}]%*c", categories[*number_of_categories]);
+            printf("2\n");
             *number_of_categories += 1;
         }
     } while (skip_ch != '\n');
-    fscanf(fil, "%*[^a-zA-Z]\n");
+    /* takes the last '\n'*/
+    skip_ch = fgetc(fil);
 }

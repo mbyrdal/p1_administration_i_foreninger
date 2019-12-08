@@ -11,7 +11,6 @@ void create_task(task tasks[], char **categories, int *number_of_tasks, int *num
 
 
     /* Spørg om kategori */
-    printf("num = %d\n", *number_of_categories);
     prompt_for_category(categories, number_of_categories);
 
     printf("Indtast titlen til opgaven - afslut med enter [Max 100 tegn]:\n");
@@ -134,21 +133,19 @@ int prompt_for_category(char **categories, int *number_of_categories){
 
     do {
         printf("Vaelg kategori:\n");
-        printf("num = %d\n", *number_of_categories);
         for (i = 0; i < *number_of_categories; i++){
-            /*if (categories[i] != NULL){*/
                 printf("%d) %s\n", i + 1, categories[i]);
-            /*}*/
         }
 
-        printf("%d) Opret kategori\n", i++);
-        printf("%d) Aendre kategori\n", i++);
+        printf("%d) Opret kategori\n", ++i);
+        printf("%d) Aendre kategori\n", ++i);
 
         option = prompt_user_options("> ", i);
 
-        if (option == i - 2){
-            add_category(categories, number_of_categories);
-        } else if (option == i - 1){
+        if (option == i - 1/*2*/){
+            categories = add_category(categories, number_of_categories);
+            printf("%s\n", categories[*number_of_categories - 1]);
+        } else if (option == i/* - 1*/){
             printf("Hvilken kategori vil du aendre: \n");
             selected_category = prompt_user_options("> ", *number_of_categories);
             edit_category(categories, selected_category - 1);
@@ -161,15 +158,15 @@ int prompt_for_category(char **categories, int *number_of_categories){
     return 0;
 }
 
-void add_category(char **categories, int *number_of_categories){
-    /*char temp_string[100];*/
+char **add_category(char **categories, int *number_of_categories){
+    char temp_string[100];
     printf("Hvad skal den nye kategori hedde?\n"
            "> ");
-    scanf(" %s", categories[*number_of_categories]/*temp_string*/);
-    /*printf("number_of_categories = %d\n", *number_of_categories);*/
-    /*strcpy(categories[*number_of_categories], temp_string);*/
-    printf("%s\n", categories[*number_of_categories]);
+    scanf(" %s", /*categories[*number_of_categories]*/temp_string);
+    categories[*number_of_categories] = temp_string;
     *number_of_categories += 1;
+
+    return categories;
 }
 
 void edit_category(char **categories, int index){
