@@ -162,7 +162,7 @@ int prompt_for_category(char **categories, int *number_of_categories){
 }
 
 void add_category(char **categories, int *number_of_categories){
-    char temp_string[100];
+    /*char temp_string[100];*/
     printf("Hvad skal den nye kategori hedde?\n"
            "> ");
     scanf(" %s", categories[*number_of_categories]/*temp_string*/);
