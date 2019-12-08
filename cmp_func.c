@@ -75,9 +75,8 @@ int compare_title(const void *ip1, const void *ip2){
  * Returner en int, som siger om to opgaver skal byttes.
  */
 
-/*
 int compare_category(const void *ip1, const void *ip2){
     task *name1 = (task *)ip1,
          *name2 = (task *)ip2;
     return strcmp(name1->category, name2->category);
-}*/
+}

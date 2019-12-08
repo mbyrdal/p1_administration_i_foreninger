@@ -10,7 +10,8 @@ void change_sorting(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_
                                      "2) Titel\n"
                                      "3) Ansvarlig\n"
                                      "4) Prioriteringsgrad\n"
-                                     "5) Deadline\n",
+                                     "5) Deadline\n"
+                                     "> ",
                                      5);
     sort_tasks(tasks, option, number_of_tasks);
     print_sort(tasks, categories, option, number_of_tasks, number_of_categories);
@@ -64,9 +65,9 @@ void sort_tasks(task tasks[], int option, int number_of_tasks){
 
     enum sort{category = 1, title, admins, priority, deadline};
     switch (option){
-        /*case category:
+        case category:
             qsort(tasks, number_of_tasks, sizeof(task), compare_category);
-            break;*/
+            break;
         case title:
             qsort(tasks, number_of_tasks, sizeof(task), compare_title);
             break;
