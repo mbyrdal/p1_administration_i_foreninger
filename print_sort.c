@@ -26,7 +26,7 @@ void print_sort(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENG
         case category:
             printf("Sorteret for Kategori:\n");
             for (i = 0; i < number_of_tasks; i++){
-                printf("%s: %d\n%s: %s\n%s: %s\n\n", "Nummer", i+1, "Kategori", categories[tasks[i].category_index], "Titel", tasks[i].title);
+                printf("%s: %d\n%s: %s\n%s: %s\n\n", "Nummer", i+1, "Kategori", tasks[i].category, "Titel", tasks[i].title);
             } break;
         case title:
             printf("Sorteret for Titel:\n");

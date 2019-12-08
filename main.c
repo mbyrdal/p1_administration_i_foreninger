@@ -11,6 +11,8 @@ int main(void){
     char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY];
 
     start_prompt(tasks, categories, &number_of_categories, &number_of_tasks, file_name);
+    printf("num of category %d\n", number_of_categories);
+
     main_menu(tasks, categories, &number_of_tasks, &number_of_categories);
     create_file(file_name, tasks, categories, number_of_tasks, number_of_categories);
     return 0;

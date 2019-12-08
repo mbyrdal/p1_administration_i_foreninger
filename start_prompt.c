@@ -11,6 +11,8 @@ void start_prompt(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LE
     file_input("Skriv navn paa mappen: ", dir_name);
     create_dir(dir_name);
     file_managing(tasks, categories, number_of_tasks, number_of_categories, dir_name, file_name);
+    printf("start_prompt %d\n", *number_of_categories);
+
 }
 
 /* Funktion, som udskriver en besked til og gemmer input fra brugeren.
@@ -54,7 +56,7 @@ int dir_exists(char *dir_name){
  * Ved åbning af fil, læses der tasks fra angivne fil
  * Ellers oprettes den nye fil
  */
-void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *numer_of_tasks, int *number_of_categories, char *dir_name, char *file_name){
+void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_tasks, int *number_of_categories, char *dir_name, char *file_name){
     int option, file_found = 0;
     char temp_file_name[100];
     FILE *file;
@@ -75,7 +77,7 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
                     file_found = 1;
                     category_read(file, categories, number_of_categories);
                     while (!feof(file)){
-                        file_read_task(file, &tasks[(*numer_of_tasks)++]);
+                        file_read_task(file, &tasks[(*number_of_tasks)++]);
                         fscanf(file, "%*[^a-zA-Z]");
                     }
                 } else{
@@ -129,7 +131,7 @@ void file_read_task(FILE *fil, task *task1){
      * (hvis et int felt står tom bliver deadline underlig)
      * KATEGORI MANGLER
      */
-    fscanf(fil," %*[^:]%*c %[^\n]", &task1->category);
+    fscanf(fil," %*[^:]%*c %[^\n]", task1->category);
     fscanf(fil," %*[^:]%*c %[^\n]", task1->admins);
     fscanf(fil," %*[^:]%*c %[^\n]", task1->title);
     fscanf(fil," %*[^:]%*c { %[^}]", task1->description);
@@ -176,6 +178,7 @@ void create_file(char *file_name, task tasks[], char categories[MAX_NUMBER_OF_CA
 
 void category_read(FILE *fil, char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_categories){
     char skip_ch;
+    int i;
 
     fscanf(fil, " %*[^:]%*c");
 
@@ -186,6 +189,9 @@ void category_read(FILE *fil, char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENG
             *number_of_categories += 1;
         }
     } while (skip_ch != '\n');
+    for (i = 0; i < *number_of_categories; i++){
+        printf("num %d: %s\n", i, categories[i]);
+    }
     /* takes the last '\n'*/
     fscanf(fil, "%*[^a-zA-Z]");
 
