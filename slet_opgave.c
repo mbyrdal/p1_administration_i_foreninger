@@ -18,14 +18,8 @@ void delete_task(task tasks[], int *number_of_tasks){
     for (i = 0; i < *number_of_tasks; i++){ /* Loop igennem array af tasks fra 0->number_of_tasks */
         printf("%-10d %-s\n", i+1, tasks[i].title);
     }
-
-    while (scanres == 0){ /* Så længe, at scanres ikke læser et input */
-        printf("Hvilken opgave vil du gerne slette? (Indtast opgavens nummer)\n\n> ");
-        scanres = scanf(" %d", &task_index);
-        clear_input();
-    }
-
-    task_index--; /* Der tælles ned med en, eftersom brugeren indtaster en task i+1 */
+    
+    task_index = prompt_user_options("Hvilken opgave vil du gerne slette? (Indtast opgavens nummer)\n\n>", *number_of_tasks) - 1;
     printf("Er du sikker paa, at du vil slette opgaven: %s? (Ja/Nej)\n\n> ", tasks[task_index].title);
 
     while (is_yes_or_no(answer_delete_keep)){ /* Hvis brugeren ikke har skrevet ja eller nej */
