@@ -133,8 +133,64 @@ void test1_is_yes_or_no(CuTest *tc){
     CuAssertIntEquals(tc, expected, actual);
 }
 
+void test2_is_yes_or_no(CuTest *tc){
+    int actual, expected;
+    actual = is_yes_or_no("Nej");
+    expected = 1;
+    CuAssertIntEquals(tc, expected, actual);
+}
+
+void test3_is_yes_or_no(CuTest *tc){
+    int actual, expected;
+    actual = is_yes_or_no("NEJ");
+    expected = 1;
+    CuAssertIntEquals(tc, expected, actual);
+}
+
+void test4_is_yes_or_no(CuTest *tc){
+    int actual, expected;
+    actual = is_yes_or_no("ja");
+    expected = 1;
+    CuAssertIntEquals(tc, expected, actual);
+}
+
+void test5_is_yes_or_no(CuTest *tc){
+    int actual, expected;
+    actual = is_yes_or_no("Ja");
+    expected = 1;
+    CuAssertIntEquals(tc, expected, actual);
+}
+
+void test6_is_yes_or_no(CuTest *tc){
+    int actual, expected;
+    actual = is_yes_or_no("JA");
+    expected = 1;
+    CuAssertIntEquals(tc, expected, actual);
+}
+
+void test7_is_yes_or_no(CuTest *tc){
+    int actual, expected;
+    actual = is_yes_or_no("JAS");
+    expected = 0;
+    CuAssertIntEquals(tc, expected, actual);
+}
+
+void test8_is_yes_or_no(CuTest *tc){
+    int actual, expected;
+    actual = is_yes_or_no("neje");
+    expected = 0;
+    CuAssertIntEquals(tc, expected, actual);
+}
+
 CuSuite *is_yes_or_no_get_suite(){
     CuSuite *suite = CuSuiteNew();
     SUITE_ADD_TEST(suite, test1_is_yes_or_no);
+    SUITE_ADD_TEST(suite, test2_is_yes_or_no);
+    SUITE_ADD_TEST(suite, test3_is_yes_or_no);
+    SUITE_ADD_TEST(suite, test4_is_yes_or_no);
+    SUITE_ADD_TEST(suite, test5_is_yes_or_no);
+    SUITE_ADD_TEST(suite, test6_is_yes_or_no);
+    SUITE_ADD_TEST(suite, test7_is_yes_or_no);
+    SUITE_ADD_TEST(suite, test8_is_yes_or_no);
     return suite;
 }
