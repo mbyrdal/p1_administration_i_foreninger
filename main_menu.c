@@ -21,7 +21,7 @@ void main_menu(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGT
         if (option != 0){
             execute_user_input(tasks, categories, number_of_tasks, number_of_categories, option);
         }
-    } while(option != MAIN_MENU);
+    } while (option != MAIN_MENU);
 }
 
 /* Funktion til at udføre brugerens handling.
