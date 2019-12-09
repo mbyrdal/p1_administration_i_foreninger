@@ -162,7 +162,7 @@ void create_file(char *file_name, task tasks[], char categories[MAX_NUMBER_OF_CA
     if (file != NULL){
 
         fprintf(file, "Kategorier: ");
-        for(i = 0; i < number_of_categories; i++){
+        for (i = 0; i < number_of_categories; i++){
             fprintf(file, "{%s} ", categories[i]);
         }
         fprintf(file, "\n\n");
