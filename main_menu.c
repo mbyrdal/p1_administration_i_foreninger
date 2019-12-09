@@ -76,5 +76,6 @@ void execute_user_input(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][
 
         default:
             printf("Programmet blev afsluttet.\n");
+            break;
     }
 }

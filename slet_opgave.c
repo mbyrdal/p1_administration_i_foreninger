@@ -12,7 +12,7 @@
  * Hvis brugeren svarer ja, så køres funktionen delete_task igen
  * Hvis brugeren svarer nej, så kommer brugeren ud af funktionen */
 void delete_task(task tasks[], int *number_of_tasks){
-    int i, task_index, scanres = 0;
+    int i, task_index;
     char answer_delete_keep[10];
 
     for (i = 0; i < *number_of_tasks; i++){ /* Loop igennem array af tasks fra 0->number_of_tasks */
