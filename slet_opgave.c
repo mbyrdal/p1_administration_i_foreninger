@@ -33,18 +33,6 @@ void delete_task(task tasks[], int *number_of_tasks){
     }
 
     if (!user_wrote_no(answer_delete_keep)){ /* Hvis brugeren enten skriver ja */
-        /*tasks[task_index].title = "";
-        tasks[task_index].admins = "";
-        tasks[task_index].volunteers = "";
-        tasks[task_index].description = "";
-        tasks[task_index].status_str = "";
-        tasks[task_index].priority = 0;
-        tasks[task_index].deadline.tm_min = 0;
-        tasks[task_index].deadline.tm_hour = 0;
-        tasks[task_index].deadline.tm_mday = 0;
-        tasks[task_index].deadline.tm_mon = 0;
-        tasks[task_index].deadline.tm_year = 0;
-        qsort(tasks, *number_of_tasks, sizeof(task), compare_priority);*/
         if (task_index != (*number_of_tasks - 1)){
             tasks[task_index] = tasks[*number_of_tasks - 1];
         }

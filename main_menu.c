@@ -30,7 +30,7 @@ task *main_menu(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENG
  * intet output
  */
 void execute_user_input(int option, task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_tasks, int *number_of_categories){
-    int i, change_task_index, category_delete_index;
+    int i, change_task_index, category_delete_index, view_task_index;
 
     enum options{task_create = 1, task_change, task_sort, task_delete, category_delete};
 
@@ -47,6 +47,12 @@ void execute_user_input(int option, task tasks[], char categories[MAX_NUMBER_OF_
 
         case task_sort:
             change_sorting(tasks, categories, *number_of_tasks, *number_of_categories);
+
+            printf("Hvilken opgave vil du gerne se (%d for gå tilbage til menu)?\n", number_of_tasks + 1);
+            view_task_index = prompt_user_options("> ", *number_of_tasks + 1) - 1;
+            if (view_task_index < *number_of_tasks){
+                print_task(task[view_task_index]);
+            }
             break;
 
         case task_delete:
