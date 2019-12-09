@@ -66,7 +66,7 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
                                  "2. Oprette en ny fil (Skrive til fil)\n\n> ",
                                  2);
 
-    switch (option) {
+    switch (option){
         case 1:
             do{
                 /* 2 newline*/
