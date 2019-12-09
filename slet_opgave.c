@@ -15,8 +15,6 @@ void delete_task(task tasks[], int *number_of_tasks){
     int i, task_index, scanres = 0;
     char answer_delete_keep[10];
 
-
-
     for (i = 0; i < *number_of_tasks; i++){ /* Loop igennem array af tasks fra 0->number_of_tasks */
         printf("%-10d %-s\n", i+1, tasks[i].title);
     }
@@ -72,4 +70,18 @@ int user_wrote_no(char *string){
 int is_yes_or_no(char *string){
     return (strcmp(string, "ja") && strcmp(string, "Ja") && strcmp(string, "JA") &&
     strcmp(string, "nej") && strcmp(string, "Nej") && strcmp(string, "NEJ"));
+}
+
+void delete_category(task tasks[], int *number_of_tasks, char category[]){
+    int i;
+    for (i = 0; i < *number_of_tasks; i++){
+        if (strcmp(category, tasks[i].category) == 0 && i < *number_of_tasks - 1){
+            tasks[i] = tasks[*number_of_tasks - 1];
+            *number_of_tasks -= 1;
+            delete_category(tasks, number_of_tasks, category);
+        }
+        else if (strcmp(category, tasks[i].category) == 0){
+            *number_of_tasks -= 1;
+        }
+    }
 }
