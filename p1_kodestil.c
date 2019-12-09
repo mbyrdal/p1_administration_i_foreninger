@@ -1,7 +1,7 @@
 /* p1 coding style
  * snake_case
  * tab / indent == 4 spaces
- * INGEN end of line comments
+ * INGEN end of line comments.
  */
 
 #include <stdio.h>

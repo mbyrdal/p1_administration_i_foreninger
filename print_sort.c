@@ -4,21 +4,22 @@
  * Tager task-arrayet, så den kan sorteres, som input
  * Tager number_of_tasks som input, så den kun printer oprettede opgaver
  */
-void change_sorting(task tasks[], int number_of_tasks){
+void change_sorting(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int number_of_tasks, int number_of_categories){
     int option = prompt_user_options("Hvilken slags sortering vil du have?\n (Indtast tal fra 1-5 efter følgende muligheder)\n\n"
                                      "1) Kategori\n"
                                      "2) Titel\n"
                                      "3) Ansvarlig\n"
                                      "4) Prioriteringsgrad\n"
-                                     "5) Deadline\n",
+                                     "5) Deadline\n"
+                                     "> ",
                                      5);
     sort_tasks(tasks, option, number_of_tasks);
-    print_sort(tasks, option, number_of_tasks);
+    print_sort(tasks, categories, option, number_of_tasks, number_of_categories);
 }
 /* Tager sorteringsvalget som input
  * Printer herefter den valgte sortering
  */
-void print_sort(task tasks[], int option, int number_of_tasks){
+void print_sort(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int option, int number_of_tasks, int number_of_categories){
     int i;
     enum sort{category = 1, title, admins, priority, deadline};
 
@@ -61,8 +62,8 @@ void print_sort(task tasks[], int option, int number_of_tasks){
  * Sorterer herefter efter valgte sortering
  */
 void sort_tasks(task tasks[], int option, int number_of_tasks){
+
     enum sort{category = 1, title, admins, priority, deadline};
-    
     switch (option){
         case category:
             qsort(tasks, number_of_tasks, sizeof(task), compare_category);

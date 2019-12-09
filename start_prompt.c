@@ -6,12 +6,11 @@
  * Tager number_of_tasks så den kan opdateres med hvor mange der læses i filen
  * Outputter file_name, så den kan oprettes når programmet afsluttes
  */
-void start_prompt(task tasks[], int *number_of_tasks, char *file_name){
+void start_prompt(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_tasks, int *number_of_categories, char *file_name){
     char dir_name[100];
-
     file_input("Skriv navn paa mappen: ", dir_name);
     create_dir(dir_name);
-    file_managing(tasks, *number_of_tasks, dir_name, file_name);
+    file_managing(tasks, categories, number_of_tasks, number_of_categories, dir_name, file_name);
 }
 
 /* Funktion, som udskriver en besked til og gemmer input fra brugeren.
@@ -55,33 +54,38 @@ int dir_exists(char *dir_name){
  * Ved åbning af fil, læses der tasks fra angivne fil
  * Ellers oprettes den nye fil
  */
-void file_managing(task tasks[], int amount_of_tasks, char *dir_name, char *file_name){
-    int option;
+void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_tasks, int *number_of_categories, char *dir_name, char *file_name){
+    int option, file_found = 0;
     char temp_file_name[100];
     FILE *file;
 
     option = prompt_user_options("Hvad vil du nu? \n\n"
-                                 "1. aabne en fil (Læse fra fil)\n"
+                                 "1. aabne en fil (Laese fra fil)\n"
                                  "2. Oprette en ny fil (Skrive til fil)\n\n> ",
                                  2);
 
     switch (option) {
         case 1:
-            file_input("Skriv navn paa filen: ", temp_file_name);
-            sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
-
-            file = fopen(file_name, "r");
-
-            if (file != NULL){
-                while (!feof(file)){
-                    file_read_task(file, &tasks[amount_of_tasks]);
+            do{
+                /* 2 newline*/
+                file_input("Skriv navn paa filen: ", temp_file_name);
+                sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
+                file = fopen(file_name, "r");
+                if (file != NULL){
+                    file_found = 1;
+                    category_read(file, categories, number_of_categories);
+                    while (!feof(file)){
+                        file_read_task(file, &tasks[(*number_of_tasks)++]);
+                        fscanf(file, "%*[^a-zA-Z]");
+                    }
+                } else{
+                    printf("Fil ikke fundet\n");
                 }
-            } else{
-                printf("Fil ikke fundet\n");
-            }
-            fclose(file);
+                fclose(file);
+            } while (!file_found);
             break;
         case 2:
+            /* 1 newline*/
             file_input("Skriv det nye filnavn: ", temp_file_name);
             sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
             break;
@@ -96,12 +100,13 @@ void file_managing(task tasks[], int amount_of_tasks, char *dir_name, char *file
  */
 void file_write_task(FILE *fil, task task1){
 
-    /* fprintf(fil,"Kategori: %s\n", task1.category); */
+
+    fprintf(fil,"Kategori: %s\n", task1.category);
     fprintf(fil,"Admins: %s\n", task1.admins);
     fprintf(fil,"Titel: %s\n", task1.title);
     fprintf(fil,"Beskrivelse: {%s}\n", task1.description);
     fprintf(fil,"Frivillige: %s\n", task1.volunteers);
-    fprintf(fil,"Status: %s\n", task1.status_str);
+    fprintf(fil,"Status: {%s}\n", task1.status_str);
     fprintf(fil,"Prioritet: %d\n", task1.priority);
     fprintf(fil,"Deadline: %d.%d %d.%d.%d\n\n",
          task1.deadline.tm_hour,
@@ -124,12 +129,12 @@ void file_read_task(FILE *fil, task *task1){
      * (hvis et int felt står tom bliver deadline underlig)
      * KATEGORI MANGLER
      */
-    /* fscanf(fil," %*[^:]%*c %[^\n]", task1.category); */
+    fscanf(fil," %*[^:]%*c %[^\n]", task1->category);
     fscanf(fil," %*[^:]%*c %[^\n]", task1->admins);
     fscanf(fil," %*[^:]%*c %[^\n]", task1->title);
     fscanf(fil," %*[^:]%*c { %[^}]", task1->description);
     fscanf(fil," %*[^:]%*c %[^\n]", task1->volunteers);
-    fscanf(fil," %*[^:]%*c %[^\n]", task1->status_str);
+    fscanf(fil," %*[^:]%*c { %[^}]", task1->status_str);
     fscanf(fil," %*[^:]%*c %d", &task1->priority);
     fscanf(fil," %*[^:]%*c %d.%d %d.%d.%d %*c",
          &task1->deadline.tm_hour,
@@ -146,12 +151,19 @@ void file_read_task(FILE *fil, task *task1){
  * Tager file_name for at oprette/skrive i filen med det ønskede navn
  * Tager tasks og number_of_tasks til at hente information om opgaverne
  */
-void create_file(char *file_name, task tasks[], int number_of_tasks){
+void create_file(char *file_name, task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int number_of_tasks, int number_of_categories){
     FILE *file;
     int i;
 
     file = fopen(file_name, "w");
     if (file != NULL){
+
+        fprintf(file, "Kategorier: ");
+        for(i = 0; i < number_of_categories; i++){
+            fprintf(file, "{%s} ", categories[i]);
+        }
+        fprintf(file, "\n\n");
+
         for (i = 0; i < number_of_tasks; i++){
             file_write_task(file, tasks[i]);
         }
@@ -159,4 +171,23 @@ void create_file(char *file_name, task tasks[], int number_of_tasks){
     } else{
         printf("Kunne ikke skrive til fil\n");
     }
+}
+
+
+void category_read(FILE *fil, char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_categories){
+    char skip_ch;
+
+    fscanf(fil, " %*[^:]%*c");
+
+    do {
+        skip_ch = fgetc(fil);
+        if (skip_ch == '{'){
+            fscanf(fil, " %[^}]%*c", categories[*number_of_categories]);
+            *number_of_categories += 1;
+        }
+    } while (skip_ch != '\n');
+
+    /* takes the last '\n'*/
+    fscanf(fil, "%*[^a-zA-Z]");
+
 }
