@@ -61,8 +61,8 @@ void execute_user_input(int option, task tasks[], char categories[MAX_NUMBER_OF_
                                                         "(Indtast kategoriens nummer)\n"
                                                         "> ", *number_of_categories);
             delete_category(tasks, number_of_tasks, categories[category_delete_index - 1]);
-            if (category_delete_index != (*number_of_categories - 1)){
-                categories[category_delete_index] = categories[*number_of_categories - 1];
+            if (category_delete_index < (*number_of_categories - 1)){
+                strcpy(categories[category_delete_index], categories[*number_of_categories - 1]);
             }
             *number_of_categories -= 1;
             break;
