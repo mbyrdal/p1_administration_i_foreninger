@@ -1,6 +1,6 @@
 /* Include file for every preprocessor */
 
-/* Benyttede standard libraries 
+/* Benyttede standard libraries
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,7 +9,7 @@
 #include <ctype.h>
 #include <dirent.h>
 
-/* Symbolske konstanterne benyttet til at definere begrænsninger for programmet. 
+/* Symbolske konstanterne benyttet til at definere begrænsninger for programmet.
  */
 #define MAX_TASKS 100
 #define MAIN_MENU 6
@@ -31,6 +31,7 @@ struct task{
 };
 typedef struct task task;
 
+#include "CuTest.h"
 #include "help_functions.h"
 #include "opgave_func.h"
 #include "start_prompt.h"
@@ -38,3 +39,6 @@ typedef struct task task;
 #include "cmp_func.h"
 #include "print_sort.h"
 #include "slet_opgave.h"
+
+/*TESTS*/
+#include "all_tests.h"

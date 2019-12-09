@@ -48,6 +48,7 @@ void delete_task(task tasks[], int *number_of_tasks){
 /*Funktionen tager en string som argument og returnere en boolsk
  * returværdien beskriver om denne string er er ja/Ja/JA (return 1) eller andet (return 0)*/
 int user_wrote_no(char *string){
+    /* FEJL TESTER IKKE OM STRING ER NEJ MEN OM DEN ER JA SE TEST5*/
     return (strcmp(string, "ja") && strcmp(string, "Ja") && strcmp(string, "JA"));
 }
 
@@ -74,4 +75,66 @@ void delete_category(task tasks[], int *number_of_tasks, char category[]){
             *number_of_tasks -= 1;
         }
     }
+}
+
+
+/*/////////////////////////////////////////////////////////////////*/
+/*TEST*/
+
+void test1_user_wrote_no(CuTest *tc){
+    int actual, expected;
+    actual = user_wrote_no("Ja");
+    expected = 0;
+    CuAssertIntEquals(tc, expected, actual);
+}
+
+void test2_user_wrote_no(CuTest *tc){
+    int actual, expected;
+    actual = user_wrote_no("nej");
+    expected = 1;
+    CuAssertIntEquals(tc, expected, actual);
+}
+
+void test3_user_wrote_no(CuTest *tc){
+    int actual, expected;
+    actual = user_wrote_no("Nej");
+    expected = 1;
+    CuAssertIntEquals(tc, expected, actual);
+}
+
+void test4_user_wrote_no(CuTest *tc){
+    int actual, expected;
+    actual = user_wrote_no("NEJ");
+    expected = 1;
+    CuAssertIntEquals(tc, expected, actual);
+}
+
+void test5_user_wrote_no(CuTest *tc){
+    int actual, expected;
+    actual = user_wrote_no("neje");
+    expected = 0;
+    CuAssertIntEquals(tc, expected, actual);
+}
+
+CuSuite *user_wrote_no_get_suite(){
+    CuSuite *suite = CuSuiteNew();
+    SUITE_ADD_TEST(suite, test1_user_wrote_no);
+    SUITE_ADD_TEST(suite, test2_user_wrote_no);
+    SUITE_ADD_TEST(suite, test3_user_wrote_no);
+    SUITE_ADD_TEST(suite, test4_user_wrote_no);
+    SUITE_ADD_TEST(suite, test5_user_wrote_no);
+    return suite;
+}
+
+void test1_is_yes_or_no(CuTest *tc){
+    int actual, expected;
+    actual = is_yes_or_no("nej");
+    expected = 1;
+    CuAssertIntEquals(tc, expected, actual);
+}
+
+CuSuite *is_yes_or_no_get_suite(){
+    CuSuite *suite = CuSuiteNew();
+    SUITE_ADD_TEST(suite, test1_is_yes_or_no);
+    return suite;
 }
