@@ -1,5 +1,3 @@
-#define MAX_NUMBER_OF_CATEGORIES 50
-#define MAX_LENGTH_OF_CATEGORY 100
 /* Prototypes */
 
 /* Funktion som kører start prompten af programmet
