@@ -13,7 +13,7 @@ task *main_menu(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENG
                                      "1.  Opret opgave\n"
                                      "2.  Aendre opgave\n"
                                      "3.  Aendre sortering\n"
-                                     "4.  Slet opgave"
+                                     "4.  Slet opgave\n"
                                      "5.  Afslut programmet\n\n"
                                      "> ",
                                      MAIN_MENU);
@@ -51,7 +51,7 @@ void execute_user_input(int option, task tasks[], char categories[MAX_NUMBER_OF_
         case task_delete:
             delete_task(tasks, number_of_tasks);
             break;
-            
+
         default:
             printf("Programmet blev afsluttet.\n");
     }

@@ -8,7 +8,7 @@
 #include <dirent.h>
 
 #define MAX_TASKS 100
-#define MAIN_MENU 4
+#define MAIN_MENU 5
 #define MAX_NUMBER_OF_CATEGORIES 50
 #define MAX_LENGTH_OF_CATEGORY 100
 
