@@ -18,7 +18,7 @@ void delete_task(task tasks[], int *number_of_tasks){
     for (i = 0; i < *number_of_tasks; i++){ /* Loop igennem array af tasks fra 0->number_of_tasks */
         printf("%-10d %-s\n", i+1, tasks[i].title);
     }
-    
+
     task_index = prompt_user_options("Hvilken opgave vil du gerne slette? (Indtast opgavens nummer)\n\n>", *number_of_tasks) - 1;
     printf("Er du sikker paa, at du vil slette opgaven: %s? (Ja/Nej)\n\n> ", tasks[task_index].title);
 
@@ -45,15 +45,23 @@ void delete_task(task tasks[], int *number_of_tasks){
     }
 }
 
+/*Funktionen tager en string som argument og returnere en boolsk
+ * returværdien beskriver om denne string er er ja/Ja/JA (return 1) eller andet (return 0)*/
 int user_wrote_no(char *string){
     return (strcmp(string, "ja") && strcmp(string, "Ja") && strcmp(string, "JA"));
 }
 
+/*Funktionen tager en string som argument og returnere en boolsk
+ * returværdien beskriver om denne string er er ja/Ja/JA/nej/Nej/NEJ (return 1) eller andet (return 0)*/
 int is_yes_or_no(char *string){
     return (strcmp(string, "ja") && strcmp(string, "Ja") && strcmp(string, "JA") &&
     strcmp(string, "nej") && strcmp(string, "Nej") && strcmp(string, "NEJ"));
 }
 
+/* Funktion, som sletter en kategori og alle opgaver (tasks) med denne kategori
+ * det sidste argument (char category[]) beskrive hvilken kategori der skal slettes
+ * MANGLER Når en kategori er slettet SKAL number_of_categories TÆLLES NED
+ * Herefter promptes brugeren for, om de er sikre på,*/
 void delete_category(task tasks[], int *number_of_tasks, char category[]){
     int i;
     for (i = 0; i < *number_of_tasks; i++){
@@ -61,7 +69,6 @@ void delete_category(task tasks[], int *number_of_tasks, char category[]){
             tasks[i] = tasks[*number_of_tasks - 1];
             *number_of_tasks -= 1;
             i--;
-            /*delete_category(tasks + i, number_of_tasks, category);*/
         }
         else if (strcmp(category, tasks[i].category) == 0){
             *number_of_tasks -= 1;
