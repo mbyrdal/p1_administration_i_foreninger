@@ -40,7 +40,7 @@ for (i = 0; i < max; i++){ /*space after for*/
     /*code*/
 }
 
-while(i++, condition){
+while (i++, condition){
     /*code*/
 }
 

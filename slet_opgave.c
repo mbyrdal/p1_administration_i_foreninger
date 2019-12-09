@@ -14,15 +14,22 @@
 void delete_task(task tasks[], int *number_of_tasks){
     int i, task_index, scanres = 0, invalid_option = 1, user_wrote_no = 0;
     char answer_delete_keep[10];
-    invalid_option = (strcmp(answer_delete_keep, "ja") && strcmp(answer_delete_keep, "Ja") && strcmp(answer_delete_keep, "JA") &&
-                                    strcmp(answer_delete_keep, "nej") && strcmp(answer_delete_keep, "Nej") && strcmp(answer_delete_keep, "NEJ"));
-    user_wrote_no = (strcmp(answer_delete_keep, "ja") && strcmp(answer_delete_keep, "Ja") && strcmp(answer_delete_keep, "JA"));
+
+
+    int user_wrote_no(char *string){
+        return (strcmp(string, "ja") && strcmp(string, "Ja") && strcmp(string, "JA"));
+    }
+
+    int is_invalid_option(char *string){
+        return (strcmp(string, "ja") && strcmp(string, "Ja") && strcmp(string, "JA") &&
+                strcmp(string, "nej") && strcmp(string, "Nej") && strcmp(string, "NEJ"));
+    }
 
     for (i = 0; i < number_of_tasks; i++){ /* Loop igennem array af tasks fra 0->number_of_tasks */
         printf("%-10d %-s\n", i+1, tasks[i].title);
     }
 
-    while(scanres == 0){ /* Så længe, at scanres ikke læser et input */
+    while (scanres == 0){ /* Så længe, at scanres ikke læser et input */
         printf("Hvilken opgave vil du gerne slette? (Indtast opgavens nummer)\n\n");
         scanres = scanf(" %d", &task_index);
         clear_input();
@@ -31,11 +38,11 @@ void delete_task(task tasks[], int *number_of_tasks){
     task_index--; /* Der tælles ned med en, eftersom brugeren indtaster en task i+1 */
     printf("Er du sikker på, at du vil slette opgaven: %s? (Ja/Nej)\n\n", tasks[task_index].title);
 
-    while(invalid_option){ /* Hvis brugeren ikke har skrevet ja eller nej */
+    while (is_invalid_option(answer_delete_keep)){ /* Hvis brugeren ikke har skrevet ja eller nej */
         scanf(" %s", answer_delete_keep);
     }
 
-    if (!user_wrote_no){ /* Hvis brugeren enten skriver ja */
+    if (!user_wrote_no(answer_delete_keep)){ /* Hvis brugeren enten skriver ja */
         tasks[task_index].title = "";
         tasks[task_index].admins = "";
         tasks[task_index].volunteers = "";
@@ -52,12 +59,12 @@ void delete_task(task tasks[], int *number_of_tasks){
     } else{ /* Hvis nej ... */
         printf("Vil du stadig slette en opgave? (Ja/Nej)\n\n");
 
-        while(invalid_option){
+        answer_delete_keep = "";
+        while (is_invalid_option(answer_delete_keep)){
             scanf(" %s", answer_delete_keep);
         }
 
-        if(!user_wrote_no){
-
+        if(!user_wrote_no(answer_delete_keep)){
             delete_task(tasks[], *number_of_tasks);
         }
     }
