@@ -47,7 +47,9 @@ void delete_task(task tasks[], int *number_of_tasks){
         tasks[task_index].deadline.tm_mon = 0;
         tasks[task_index].deadline.tm_year = 0;
         qsort(tasks, *number_of_tasks, sizeof(task), compare_priority);*/
-        tasks[task_index] = tasks[*number_of_tasks - 1];
+        if (task_index != (*number_of_tasks - 1)){
+            tasks[task_index] = tasks[*number_of_tasks - 1];
+        }
         *number_of_tasks -= 1;
     } else{ /* Hvis nej ... */
         printf("Vil du stadig slette en opgave? (Ja/Nej)\n\n> ");
