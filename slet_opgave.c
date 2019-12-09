@@ -66,7 +66,8 @@ void delete_category(task tasks[], int *number_of_tasks, char category[]){
         if (strcmp(category, tasks[i].category) == 0 && i < *number_of_tasks - 1){
             tasks[i] = tasks[*number_of_tasks - 1];
             *number_of_tasks -= 1;
-            delete_category(tasks, number_of_tasks, category);
+            i--;
+            /*delete_category(tasks + i, number_of_tasks, category);*/
         }
         else if (strcmp(category, tasks[i].category) == 0){
             *number_of_tasks -= 1;
