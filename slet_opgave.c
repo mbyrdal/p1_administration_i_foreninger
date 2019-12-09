@@ -12,9 +12,9 @@
  * Hvis brugeren svarer ja, så køres funktionen delete_task igen
  * Hvis brugeren svarer nej, så kommer brugeren ud af funktionen */
 void delete_task(task tasks[], int *number_of_tasks){
-    int i, task_index, scanres = 0, user_did_not_write_yes_or_no = 1, user_wrote_no = 0;
+    int i, task_index, scanres = 0, invalid_option = 1, user_wrote_no = 0;
     char answer_delete_keep[10];
-    user_did_not_write_yes_or_no = (strcmp(answer_delete_keep, "ja") && strcmp(answer_delete_keep, "Ja") && strcmp(answer_delete_keep, "JA") &&
+    invalid_option = (strcmp(answer_delete_keep, "ja") && strcmp(answer_delete_keep, "Ja") && strcmp(answer_delete_keep, "JA") &&
                                     strcmp(answer_delete_keep, "nej") && strcmp(answer_delete_keep, "Nej") && strcmp(answer_delete_keep, "NEJ"));
     user_wrote_no = (strcmp(answer_delete_keep, "ja") && strcmp(answer_delete_keep, "Ja") && strcmp(answer_delete_keep, "JA"));
 
@@ -29,30 +29,30 @@ void delete_task(task tasks[], int *number_of_tasks){
     }
 
     task_index--; /* Der tælles ned med en, eftersom brugeren indtaster en task i+1 */
-    printf("Er du sikker på, at du vil slette opgaven: %s? (Ja/Nej)\n\n", tasks[task_index]->title);
+    printf("Er du sikker på, at du vil slette opgaven: %s? (Ja/Nej)\n\n", tasks[task_index].title);
 
-    while(user_did_not_write_yes_or_no){ /* Hvis brugeren ikke har skrevet ja eller nej */
+    while(invalid_option){ /* Hvis brugeren ikke har skrevet ja eller nej */
         scanf(" %s", answer_delete_keep);
     }
 
     if (!user_wrote_no){ /* Hvis brugeren enten skriver ja */
-        tasks[task_index]->title = "";
-        tasks[task_index]->admins = "";
-        tasks[task_index]->volunteers = "";
-        tasks[task_index]->description = "";
-        tasks[task_index]->status_str = "";
-        tasks[task_index]->priority = 0;
-        tasks[task_index]->deadline.tm_min = 0;
-        tasks[task_index]->deadline.tm_hour = 0;
-        tasks[task_index]->deadline.tm_mday = 0;
-        tasks[task_index]->deadline.tm_mon = 0;
-        tasks[task_index]->deadline.tm_year = 0;
+        tasks[task_index].title = "";
+        tasks[task_index].admins = "";
+        tasks[task_index].volunteers = "";
+        tasks[task_index].description = "";
+        tasks[task_index].status_str = "";
+        tasks[task_index].priority = 0;
+        tasks[task_index].deadline.tm_min = 0;
+        tasks[task_index].deadline.tm_hour = 0;
+        tasks[task_index].deadline.tm_mday = 0;
+        tasks[task_index].deadline.tm_mon = 0;
+        tasks[task_index].deadline.tm_year = 0;
         qsort(tasks, number_of_tasks, sizeof(task), compare_priority);
-        *number_of_tasks--;
+        *number_of_tasks -= 1;
     } else{ /* Hvis nej ... */
         printf("Vil du stadig slette en opgave? (Ja/Nej)\n\n");
 
-        while(user_did_not_write_yes_or_no){
+        while(invalid_option){
             scanf(" %s", answer_delete_keep);
         }
 
