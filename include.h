@@ -7,10 +7,14 @@
 #include <ctype.h>
 #include <dirent.h>
 
+#define MAX_TASKS 100
+#define MAIN_MENU 6
+#define MAX_NUMBER_OF_CATEGORIES 50
+#define MAX_LENGTH_OF_CATEGORY 100
 
 /* Structs */
 struct task{
-    char category[100],
+    char category[MAX_LENGTH_OF_CATEGORY],
          title[100],
          admins[250],
          volunteers[250],
@@ -23,11 +27,9 @@ struct task{
 typedef struct task task;
 
 #include "help_functions.h"
-#include "opret_opgave.h"
+#include "opgave_func.h"
 #include "start_prompt.h"
 #include "main_menu.h"
-#include "print_sort.h"
 #include "cmp_func.h"
-
-#define MAX_TASKS 100
-#define MAIN_MENU 4
+#include "print_sort.h"
+#include "slet_opgave.h"

@@ -5,7 +5,7 @@
  * Tager number_of_tasks så den kan opdateres med hvor mange der læses i filen
  * Outputter file_name, så den kan oprettes når programmet afsluttes
  */
-void start_prompt(task tasks[], int *number_of_tasks, char *file_name);
+ void start_prompt(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_tasks, int *number_of_categories, char *file_name);
 
 /* Funktion, som udskriver en besked til og gemmer input fra brugeren.
  * Først printes en besked til brugeren (%s), som prompter for input,
@@ -27,7 +27,7 @@ int dir_exists(char *dir_name);
  * Ellers oprettes den nye fil
  * Loop afsluttes ved indtastning af SENTINEL, som er 3
  */
-void file_managing(task tasks[], int *number_of_tasks, char *dir_name, char *file_name);
+ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *numer_of_tasks, int *number_of_categories, char *dir_name, char *file_name);
 
 /* printer en task (struc task) til en fil
  * hvilken fil der skrives til bestemmes i fil argumentet
@@ -45,4 +45,5 @@ void file_read_task(FILE *fil, task *task1);
  * Tager file_name for at oprette/skrive i filen med det ønskede navn
  * Tager tasks og number_of_tasks til at hente information om opgaverne
  */
-void create_file(char *file_name, task tasks[], int number_of_tasks);
+ void create_file(char *file_name, task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int number_of_tasks, int number_of_categories);
+ void category_read(FILE *fil, char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_categories);
