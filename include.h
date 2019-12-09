@@ -32,4 +32,4 @@ typedef struct task task;
 #include "main_menu.h"
 #include "cmp_func.h"
 #include "print_sort.h"
-
+#include "slet_opgave.h"
