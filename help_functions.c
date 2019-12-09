@@ -20,8 +20,8 @@ void print_task(task task1){
            "Prioritering: ", task1.priority,
            "Deadline: ",
            task1.deadline.tm_hour, task1.deadline.tm_min,
-           task1.deadline.tm_mday, task1.deadline.tm_mon + 1,
-           task1.deadline.tm_year + 1900);
+           task1.deadline.tm_mday, task1.deadline.tm_mon,
+           task1.deadline.tm_year);
 }
 
 /* Funktion, som prompter brugeren for svar til muligheder,

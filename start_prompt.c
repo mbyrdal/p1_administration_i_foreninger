@@ -115,8 +115,8 @@ void file_write_task(FILE *fil, task task1){
          task1.deadline.tm_hour,
          task1.deadline.tm_min,
          task1.deadline.tm_mday,
-         task1.deadline.tm_mon + 1,
-         task1.deadline.tm_year + 1900);
+         task1.deadline.tm_mon,
+         task1.deadline.tm_year);
 
 }
 
@@ -143,11 +143,8 @@ void file_read_task(FILE *fil, task *task1){
          &task1->deadline.tm_hour,
          &task1->deadline.tm_min,
          &task1->deadline.tm_mday,
-         &month,
-         &year);
-
-    task1->deadline.tm_year = year - 1900;
-    task1->deadline.tm_mon = month - 1;
+         &task1->deadline.tm_mon,
+         &task1->deadline.tm_year);
 }
 
 /* Opretter en fil og skriver alle tasks ind i filen
@@ -192,5 +189,4 @@ void category_read(FILE *fil, char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENG
 
     /* takes the last '\n'*/
     fscanf(fil, "%*[^a-zA-Z]");
-
 }

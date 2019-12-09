@@ -9,10 +9,7 @@ void create_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LEN
     char answer[10];
     *number_of_tasks += 1;
 
-
-    /* Spørg om kategori */
     prompt_for_category(tasks, categories, *number_of_tasks, number_of_categories , i);
-
     printf("Indtast titlen til opgaven - afslut med enter [Max 100 tegn]:\n");
     scanf(" %[^\n]", tasks[i].title);
     printf("Indtast de administrerende personer til opgaven - afslut med enter [Max 250 tegn]:\n");
@@ -34,19 +31,16 @@ void create_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LEN
     printf("Indtast deadline paa formen timer.minutter dato.maaned.aar - afslut med enter [fx 17.00 09.12.2019]:\n");
     do {
         scanf(" %d.%d %d.%d.%d",
-             &tasks[i].deadline.tm_hour,
-             &tasks[i].deadline.tm_min,
-             &tasks[i].deadline.tm_mday,
-             &month,
-             &year);
-
-    } while (tasks[i].deadline.tm_hour < 0 || tasks[i].deadline.tm_hour > 23 ||
-             tasks[i].deadline.tm_min  < 0 || tasks[i].deadline.tm_min  > 59 ||
-             tasks[i].deadline.tm_mday < 1 || tasks[i].deadline.tm_mday > 31 ||
-             month < 1 || month  > 12 ||
-             year  < 0 || year   > 2100);
-    tasks[i].deadline.tm_mon  = month - 1;
-    tasks[i].deadline.tm_year = year  - 1900;
+            &tasks[index].deadline.tm_hour,
+            &tasks[index].deadline.tm_min,
+            &tasks[index].deadline.tm_mday,
+            &tasks[index].deadline.tm_mon,
+            &tasks[index].deadline.tm_year);
+    } while (tasks[index].deadline.tm_hour < 0 || tasks[index].deadline.tm_hour > 23 ||
+             tasks[index].deadline.tm_min  < 0 || tasks[index].deadline.tm_min  > 59 ||
+             tasks[index].deadline.tm_mday < 1 || tasks[index].deadline.tm_mday > 31 ||
+             tasks[index].deadline.tm_mon  < 1 || tasks[index].deadline.tm_mon  > 12 ||
+             tasks[index].deadline.tm_year < 0 || tasks[index].deadline.tm_year > 2100);
 
     printf("\nOpgave %d vil blive oprettet med foelgende information:\n", i);
     print_task(tasks[i]);
@@ -120,16 +114,14 @@ void change_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LEN
                     &tasks[index].deadline.tm_hour,
                     &tasks[index].deadline.tm_min,
                     &tasks[index].deadline.tm_mday,
-                    &month,
-                    &year);
+                    &tasks[index].deadline.tm_mon,
+                    &tasks[index].deadline.tm_year);
 
             } while (tasks[index].deadline.tm_hour < 0 || tasks[index].deadline.tm_hour > 23 ||
                      tasks[index].deadline.tm_min  < 0 || tasks[index].deadline.tm_min  > 59 ||
                      tasks[index].deadline.tm_mday < 1 || tasks[index].deadline.tm_mday > 31 ||
-                     month < 1 || month  > 12 ||
-                     year  < 0 || year   > 2100);
-            tasks[index].deadline.tm_mon  = month - 1;
-            tasks[index].deadline.tm_year = year  - 1900;
+                     tasks[index].deadline.tm_mon  < 1 || tasks[index].deadline.tm_mon  > 12 ||
+                     tasks[index].deadline.tm_year < 0 || tasks[index].deadline.tm_year > 2100);
             break;
     }
 }
