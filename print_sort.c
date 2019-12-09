@@ -1,10 +1,10 @@
 #include "include.h"
 
-/* Sorterer og printer opgaverne efter den valgte sortering
- * Tager task-arrayet, så den kan sorteres, som input
- * Tager number_of_tasks som input, så den kun printer oprettede opgaver
+/* Funktion til sortering og printning opgaverne efter den valgte sortering.
+ * Funktionen tager tasks-arrayet som input, så det kan sorteres.
+ * Tager number_of_tasks som input, så den kun printer oprettede opgaver.
  */
-void change_sorting(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int number_of_tasks, int number_of_categories){
+void change_sorting(task tasks[], int number_of_tasks){
     int option = prompt_user_options("Hvilken slags sortering vil du have?\n (Indtast tal fra 1-5 efter følgende muligheder)\n\n"
                                      "1) Kategori\n"
                                      "2) Titel\n"
@@ -13,13 +13,45 @@ void change_sorting(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_
                                      "5) Deadline\n"
                                      "> ",
                                      5);
-    sort_tasks(tasks, option, number_of_tasks);
-    print_sort(tasks, categories, option, number_of_tasks, number_of_categories);
+    sort_tasks(tasks, number_of_tasks, option);
+    print_sort(tasks, number_of_tasks, option);
 }
-/* Tager sorteringsvalget som input
- * Printer herefter den valgte sortering
+
+/* Funktion til at sortere tasks-arrayet efter valgt sortering.
+ * Funktionen tager tasks-arrayet som input, da det skal sorteres.
+ * Funktionen tager number_of_tasks som input, da qsort() skal kende antallet af elementer i arrayet.
+ * Funktionen tager option som input, da dette skal benyttes til at bestemme sorteringen.
  */
-void print_sort(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int option, int number_of_tasks, int number_of_categories){
+void sort_tasks(task tasks[], int number_of_tasks, int option){
+
+    enum sort{category = 1, title, admins, priority, deadline};
+    switch (option){
+        case category:
+            qsort(tasks, number_of_tasks, sizeof(task), compare_category);
+            break;
+        case title:
+            qsort(tasks, number_of_tasks, sizeof(task), compare_title);
+            break;
+        case admins:
+            qsort(tasks, number_of_tasks, sizeof(task), compare_admins);
+            break;
+        case priority:
+            qsort(tasks, number_of_tasks, sizeof(task), compare_priority);
+            break;
+        case deadline:
+            qsort(tasks, number_of_tasks, sizeof(task), compare_deadline);
+            break;
+        default:
+            printf("Noget gik galt!!!\n");
+    }
+}
+
+/* Funktion til at printe alle opgaver efter en valgt sortering.
+ * Funktionen tager tasks-arrayet som input, da den skal alle opgaver.
+ * Funktionen tager number_of_tasks som input, da den kun skal printe det antal gange.
+ * Funktione tager option som input, da den valgte sortering påvirker, hvordan opgaverne vises.
+ */
+void print_sort(task tasks[], int number_of_tasks, int option){
     int i;
     enum sort{category = 1, title, admins, priority, deadline};
 
@@ -53,33 +85,6 @@ void print_sort(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENG
                 printf("%-10d %02d.%02d %02d.%02d.%5d %-s\n", i+1, tasks[i].deadline.tm_hour,
                 tasks[i].deadline.tm_min, tasks[i].deadline.tm_mday, tasks[i].deadline.tm_mon + 1, tasks[i].deadline.tm_year + 1900, tasks[i].title);
             } break;
-        default:
-            printf("Noget gik galt!!!\n");
-    }
-}
-
-/* Tager sorteringsvalget som input
- * Sorterer herefter efter valgte sortering
- */
-void sort_tasks(task tasks[], int option, int number_of_tasks){
-
-    enum sort{category = 1, title, admins, priority, deadline};
-    switch (option){
-        case category:
-            qsort(tasks, number_of_tasks, sizeof(task), compare_category);
-            break;
-        case title:
-            qsort(tasks, number_of_tasks, sizeof(task), compare_title);
-            break;
-        case admins:
-            qsort(tasks, number_of_tasks, sizeof(task), compare_admins);
-            break;
-        case priority:
-            qsort(tasks, number_of_tasks, sizeof(task), compare_priority);
-            break;
-        case deadline:
-            qsort(tasks, number_of_tasks, sizeof(task), compare_deadline);
-            break;
         default:
             printf("Noget gik galt!!!\n");
     }
