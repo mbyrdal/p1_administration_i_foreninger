@@ -43,6 +43,7 @@ void sort_tasks(task tasks[], int number_of_tasks, int option){
             break;
         default:
             printf("Noget gik galt!!!\n");
+            break;
     }
 }
 
