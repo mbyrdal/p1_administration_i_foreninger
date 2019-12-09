@@ -13,7 +13,8 @@ task *main_menu(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENG
                                      "1.  Opret opgave\n"
                                      "2.  Aendre opgave\n"
                                      "3.  Aendre sortering\n"
-                                     "4.  Afslut programmet.\n\n"
+                                     "4.  Slet opgave"
+                                     "5.  Afslut programmet\n\n"
                                      "> ",
                                      MAIN_MENU);
         if (option != 0){
@@ -30,7 +31,7 @@ task *main_menu(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENG
 void execute_user_input(int option, task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_tasks, int *number_of_categories){
     int change_task_index;
 
-    enum options{task_create = 1, task_change, task_sort};
+    enum options{task_create = 1, task_change, task_sort, task_delete};
 
     switch (option){
         case task_create:
@@ -47,6 +48,10 @@ void execute_user_input(int option, task tasks[], char categories[MAX_NUMBER_OF_
             change_sorting(tasks, categories, *number_of_tasks, *number_of_categories);
             break;
 
+        case task_delete:
+            delete_task(tasks, number_of_tasks);
+            break;
+            
         default:
             printf("Programmet blev afsluttet.\n");
     }
