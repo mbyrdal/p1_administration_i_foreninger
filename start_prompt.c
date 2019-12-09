@@ -8,7 +8,7 @@
  */
 void start_prompt(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_tasks, int *number_of_categories, char *file_name){
     char dir_name[100];
-    char temp[10];
+
     file_input("Skriv navn paa mappen: ", dir_name);
     create_dir(dir_name);
     file_managing(tasks, categories, number_of_tasks, number_of_categories, dir_name, file_name);
@@ -58,6 +58,7 @@ int dir_exists(char *dir_name){
 void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_tasks, int *number_of_categories, char *dir_name, char *file_name){
     int option, file_found = 0;
     char temp_file_name[100];
+    char temp[] = "nej";
     FILE *file;
 
     option = prompt_user_options("Hvad vil du nu? \n\n"
@@ -81,10 +82,10 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
                     }
                 } else{
                     printf("Fil ikke fundet. Vil du oprette en ny fil med dette navn?\n> ");
-                    scanf(" %s", &temp);
+                    scanf(" %s", temp);
                 }
                 fclose(file);
-            } while (!file_found || (strcmp(temp, "ja")) && (strcmp(temp, "Ja")) && (strcmp(temp, "JA")));
+            } while (!file_found && (strcmp(temp, "ja") && strcmp(temp, "Ja") && strcmp(temp, "JA")));
             break;
         case 2:
             /* 1 newline*/
