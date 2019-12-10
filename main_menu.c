@@ -40,10 +40,14 @@ void execute_user_input(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][
             create_task(tasks, categories, number_of_tasks, number_of_categories);
             break;
         case task_change:
-            change_task_index = prompt_user_options("Hvilken opgave vil du aendre? "
-                                "(Indtast opgave nummer)\n"
-                                "> ", *number_of_tasks);
+            if (number_of_tasks > 0){
+                change_task_index = prompt_user_options("Hvilken opgave vil du aendre? "
+                                                        "(Indtast opgave nummer)\n"
+                                                        "> ", *number_of_tasks);
             change_task(tasks, categories, *number_of_tasks, number_of_categories, change_task_index);
+            } else {
+                printf("Kan ikke aendre naar der ingen opgaver er!\n");
+            }
             break;
 
         case task_sort:
