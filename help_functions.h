@@ -13,6 +13,6 @@ void print_task(task task1);
 
 /* Funktion, som prompter brugeren for svar til muligheder,
  * der efterfølgende returneres (som heltal).
- * Funktionen tager højde for ugyldigt input (NaN).
+ * Funktionen tager højde for ugyldigt input.
  */
 int prompt_user_options(char *print, int amount_of_options);
