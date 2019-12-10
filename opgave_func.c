@@ -48,7 +48,7 @@ void create_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LEN
     print_task(tasks[i]);
 
     do {
-        printf("Vil du aendre noget i opgaven? [Ja/Nej]:\n");
+        printf("\nVil du aendre noget i opgaven? [Ja/Nej]:\n");
         scanf(" %4s", answer);
         clear_input();
         if (!(strcmp(answer, "ja") && strcmp(answer, "Ja") && strcmp(answer, "JA"))){
@@ -66,7 +66,7 @@ void create_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LEN
  */
 void change_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int number_of_tasks, int *number_of_categories, int index){
     enum option {Title = 1, Category, Admins, Volunteers, Description, Status, Priority, Deadline};
-    int option = prompt_user_options("Hvad vil du gerne aendre? [indtast valgmulighedens nummer uden punktum \".\"]: \n\n"
+    int option = prompt_user_options("\nHvad vil du gerne aendre? [indtast valgmulighedens nummer uden punktum \".\"]: \n\n"
                                      "1.  Titel\n"
                                      "2.  Kategori\n"
                                      "3.  Administrerende personer\n"
@@ -149,7 +149,7 @@ void prompt_for_category(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES]
     int i, option, selected_category;
 
     do {
-        printf("Vaelg kategori:\n");
+        printf("\nVaelg kategori:\n");
         for (i = 0; i < *number_of_categories; i++){
                 printf("%d.  %s\n", i + 1, categories[i]);
         }
@@ -161,7 +161,6 @@ void prompt_for_category(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES]
 
         if (option == i - 1){
             add_category(categories, number_of_categories);
-            printf("%s\n", categories[*number_of_categories - 1]);
         } else if (option == i){
             printf("Hvilken kategori vil du aendre: \n");
             selected_category = prompt_user_options("> ", *number_of_categories);

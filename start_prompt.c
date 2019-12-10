@@ -85,7 +85,7 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
         case 1:
             do{
                 /* 2 newline*/
-                file_input("Skriv navn paa filen:\n> ", temp_file_name);
+                file_input("\nSkriv navn paa filen:\n> ", temp_file_name);
                 sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
                 file = fopen(file_name, "r");
                 if (file != NULL){
@@ -96,7 +96,7 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
                         fscanf(file, "%*[^a-zA-Z]");
                     }
                 } else{
-                    printf("Fil ikke fundet. Vil du oprette en ny fil med dette navn? [ja/nej]\n> ");
+                    printf("\nFil ikke fundet. Vil du oprette en ny fil med dette navn? [ja/nej]\n> ");
                     scanf(" %s", temp);
                 }
                 fclose(file);
@@ -105,7 +105,7 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
 
         case 2:
             /* 1 newline*/
-            file_input("Skriv det nye filnavn:\n> ", temp_file_name);
+            file_input("\nSkriv det nye filnavn:\n> ", temp_file_name);
             sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
             break;
             
