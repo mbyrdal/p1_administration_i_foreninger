@@ -74,8 +74,8 @@ void change_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LEN
                                      "5.  Beskrivelsen\n"
                                      "6.  Status\n"
                                      "7.  Prioritet\n"
-                                     "8.  Deadline\n\n"
-                                     "Dit valg: ",
+                                     "8.  Deadline\n"
+                                     "> ",
                                      8);
 
     switch (option){
@@ -154,8 +154,8 @@ void prompt_for_category(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES]
                 printf("%d) %s\n", i + 1, categories[i]);
         }
 
-        printf("%d) Opret kategori\n", ++i);
-        printf("%d) Aendre kategori\n", ++i);
+        printf("%d.  Opret kategori\n", ++i);
+        printf("%d.  Aendre kategori\n", ++i);
 
         option = prompt_user_options("> ", i);
 

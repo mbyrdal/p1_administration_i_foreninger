@@ -12,7 +12,7 @@ void start_prompt(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LE
     char dir_name[100];
 
     while (!dir_exists(dir_name)) {
-        file_input("Skriv navn paa mappen du vil aabne: ", dir_name);
+        file_input("Skriv navn paa mappen du vil aabne\n> ", dir_name);
         create_dir(dir_name);
     }
     file_managing(tasks, categories, number_of_tasks, number_of_categories, dir_name, file_name);
@@ -77,15 +77,15 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
     FILE *file;
 
     option = prompt_user_options("Hvad vil du nu? \n\n"
-                                 "1. Aabne en fil (Laese fra fil)\n"
-                                 "2. Oprette en ny fil (Skrive til fil)\n\n> ",
+                                 "1.  Aabne en fil (Laese fra fil)\n"
+                                 "2.  Oprette en ny fil (Skrive til fil)\n> ",
                                  2);
 
     switch (option){
         case 1:
             do{
                 /* 2 newline*/
-                file_input("Skriv navn paa filen: ", temp_file_name);
+                file_input("Skriv navn paa filen\n> ", temp_file_name);
                 sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
                 file = fopen(file_name, "r");
                 if (file != NULL){
@@ -102,13 +102,16 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
                 fclose(file);
             } while (!file_found && (strcmp(temp, "ja") && strcmp(temp, "Ja") && strcmp(temp, "JA")));
             break;
+
         case 2:
             /* 1 newline*/
-            file_input("Skriv det nye filnavn: ", temp_file_name);
+            file_input("Skriv det nye filnavn\n> ", temp_file_name);
             sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
             break;
+            
         default:
             printf("Noget er galt!!!!\n");
+            break;
     }
 }
 

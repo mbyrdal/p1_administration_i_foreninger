@@ -19,8 +19,8 @@ void delete_task(task tasks[], int *number_of_tasks){
         printf("%-10d %-s\n", i+1, tasks[i].title);
     }
 
-    task_index = prompt_user_options("Hvilken opgave vil du gerne slette? (Indtast opgavens nummer)\n\n>", *number_of_tasks) - 1;
-    printf("Er du sikker paa, at du vil slette opgaven: %s? (Ja/Nej)\n\n> ", tasks[task_index].title);
+    task_index = prompt_user_options("Hvilken opgave vil du gerne slette? (Indtast opgavens nummer)\n>", *number_of_tasks) - 1;
+    printf("Er du sikker paa, at du vil slette opgaven: %s? (Ja/Nej)\n> ", tasks[task_index].title);
 
     while (is_yes_or_no(answer_delete_keep)){ /* Hvis brugeren ikke har skrevet ja eller nej */
         scanf(" %s", answer_delete_keep);
@@ -32,7 +32,7 @@ void delete_task(task tasks[], int *number_of_tasks){
         }
         *number_of_tasks -= 1;
     } else{ /* Hvis nej ... */
-        printf("Vil du stadig slette en opgave? (Ja/Nej)\n\n> ");
+        printf("Vil du stadig slette en opgave? (Ja/Nej)\n> ");
 
         strcpy(answer_delete_keep, "");
         while (is_yes_or_no(answer_delete_keep)){

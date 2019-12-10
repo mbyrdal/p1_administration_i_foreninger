@@ -15,7 +15,7 @@ void main_menu(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGT
                                      "3.  Vis opgaver / Aendre sortering\n"
                                      "4.  Slet opgave\n"
                                      "5.  Slet kategori\n"
-                                     "6.  Afslut programmet\n\n"
+                                     "6.  Afslut programmet\n"
                                      "> ",
                                      MAIN_MENU);
         execute_user_input(tasks, categories, number_of_tasks, number_of_categories, option);
@@ -36,7 +36,8 @@ void execute_user_input(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][
     switch (option){
         case task_create:
             create_task(tasks, categories, number_of_tasks, number_of_categories);
-            break;
+            break;   
+
         case task_change:
             if (*number_of_tasks > 0){
                 change_task_index = prompt_user_options("Hvilken opgave vil du aendre? "
@@ -84,7 +85,7 @@ void execute_user_input(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][
                 printf("Kan ikke slette en kategori naar der ingen er!\n");
             }
             break;
-
+            
         default:
             printf("Programmet blev afsluttet.\n");
             break;
