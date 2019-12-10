@@ -1,4 +1,4 @@
-/* p1 coding style 
+/* p1 coding style
  * snake_case
  * tab / indent == 4 spaces
  * INGEN end of line comments.
