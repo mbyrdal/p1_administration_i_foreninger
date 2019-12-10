@@ -26,7 +26,7 @@ void delete_task(task tasks[], int *number_of_tasks){
         clear_input();
     }
     /* Hvis brugeren skriver j (ja) */
-    if (strcmp_lower(answer_delete_keep), "j")){
+    if (strcmp_lower(answer_delete_keep, "j")){
         if (task_index != (*number_of_tasks - 1)){
             tasks[task_index] = tasks[*number_of_tasks - 1];
         }
@@ -39,7 +39,7 @@ void delete_task(task tasks[], int *number_of_tasks){
             scanf(" %1s", answer_delete_keep);
             clear_input();
         }
-        if (strcmp_lower(answer_delete_keep), "j"){
+        if (strcmp_lower(answer_delete_keep, "j")){
             delete_task(tasks, number_of_tasks);
         }
     }
