@@ -40,7 +40,7 @@ void execute_user_input(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][
             create_task(tasks, categories, number_of_tasks, number_of_categories);
             break;
         case task_change:
-            if (number_of_tasks > 0){
+            if (*number_of_tasks > 0){
                 change_task_index = prompt_user_options("Hvilken opgave vil du aendre? "
                                                         "(Indtast opgave nummer)\n"
                                                         "> ", *number_of_tasks);
