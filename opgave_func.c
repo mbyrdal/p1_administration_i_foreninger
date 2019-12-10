@@ -151,7 +151,7 @@ void prompt_for_category(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES]
     do {
         printf("Vaelg kategori:\n");
         for (i = 0; i < *number_of_categories; i++){
-                printf("%d) %s\n", i + 1, categories[i]);
+                printf("%d.  %s\n", i + 1, categories[i]);
         }
 
         printf("%d.  Opret kategori\n", ++i);
