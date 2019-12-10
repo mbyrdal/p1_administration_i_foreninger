@@ -11,8 +11,10 @@
 void start_prompt(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_tasks, int *number_of_categories, char *file_name){
     char dir_name[100];
 
-    file_input("Skriv navn paa mappen: ", dir_name);
-    create_dir(dir_name);
+    while (!dir_exists(dir_name)) {
+    file_input("Skriv navn paa mappen du vil aabne: ", dir_name);
+        create_dir(dir_name);
+    }
     file_managing(tasks, categories, number_of_tasks, number_of_categories, dir_name, file_name);
 }
 
@@ -26,19 +28,24 @@ void file_input(char *print, char *input){
     clear_input();
 }
 
-/* Funktion, som opretter en mappe, hvis den ikke eksisterer og ellers åbnes, hvis at mappen eksisterer. 
+/* Funktion, som opretter en mappe, hvis den ikke eksisterer og ellers åbnes, hvis at mappen eksisterer.
  * Funktionen tager dir_name som input for at tjekke, om den givne mappe eksisterer og ellers oprette en mappe med dette navn.
  */
 void create_dir(char *dir_name){
-    char mk_dir[125];
+    char mk_dir[125], option[4];
 
     if (dir_exists(dir_name)){
         printf("Mappe fundet!\n");
     } else{
-        sprintf(mk_dir, "mkdir %s", dir_name);
-        printf("Mappe oprettet!\n");
-        system(mk_dir);
+        printf("Mappe findes ikke, vi du oprette en ny med dette navn? [ja/nej]\n> ");
+        scanf(" %4s", option);
+        clear_input();
+        if(strcmp(option, "ja") == 0 || strcmp(option, "Ja") == 0 || strcmp(option, "JA") == 0){
+            sprintf(mk_dir, "mkdir %s", dir_name);
+            printf("Mappe oprettet!\n");
+            system(mk_dir);
         }
+    }
 }
 
 /* Funktion, som gør brug af boolsk logik til at afgøre, om et directory (mappe) eksisterer.
