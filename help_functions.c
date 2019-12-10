@@ -36,10 +36,10 @@ void print_task(task task1){
  */
 int prompt_user_options(char *print, int amount_of_options){
     int option, scanres;
-    do {
+    do{
         printf("%s", print);
         scanres = scanf(" %d", &option);
         clear_input();
-    } while(scanres == 0 || option > amount_of_options || option < 0);
+    } while (scanres == 0 || option > amount_of_options || option < 0);
     return option;
 }
