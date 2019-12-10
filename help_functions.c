@@ -63,7 +63,7 @@ int strcmp_lower(char *string, char *cmp_string){
 
 
 /*/////////////////////////////////////////////////////////////////*/
-/*TEST*/
+/* TEST */
 
 void test1_strcmp_lower(CuTest *tc){
     int actual, expected;

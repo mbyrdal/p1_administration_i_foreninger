@@ -7,6 +7,7 @@ void run_all_tests(void){
     CuSuite *suite = CuSuiteNew();
 
     CuSuiteAddSuite(suite, (CuSuite *) strcmp_lower_get_suite());
+    CuSuiteAddSuite(suite, (CuSuite *) delete_category_get_suite());
     CuSuiteRun(suite);
     CuSuiteSummary(suite, output);
     CuSuiteDetails(suite, output);
