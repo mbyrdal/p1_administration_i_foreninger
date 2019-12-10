@@ -96,7 +96,7 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
                         fscanf(file, "%*[^a-zA-Z]");
                     }
                 } else{
-                    printf("Fil ikke fundet. Vil du oprette en ny fil med dette navn?\n> ");
+                    printf("Fil ikke fundet. Vil du oprette en ny fil med dette navn? [ja/nej]\n> ");
                     scanf(" %s", temp);
                 }
                 fclose(file);
