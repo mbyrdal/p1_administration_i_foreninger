@@ -8,7 +8,7 @@
  */
 void create_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_tasks, int *number_of_categories){
     int i = *number_of_tasks;
-    char answer[10];
+    char answer[4];
     *number_of_tasks += 1;
 
     prompt_for_category(tasks, categories, *number_of_tasks, number_of_categories , i);
@@ -49,7 +49,8 @@ void create_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LEN
 
     do {
         printf("Vil du aendre noget i opgaven? [Ja/Nej]:\n");
-        scanf(" %s", answer);
+        scanf(" %4s", answer);
+        clear_input();
         if (!(strcmp(answer, "ja") && strcmp(answer, "Ja") && strcmp(answer, "JA"))){
             change_task(tasks, categories, *number_of_tasks, number_of_categories, i);
         }
