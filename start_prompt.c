@@ -12,7 +12,7 @@ void start_prompt(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LE
     char dir_name[100];
 
     while (!dir_exists(dir_name)) {
-    file_input("Skriv navn paa mappen du vil aabne: ", dir_name);
+        file_input("Skriv navn paa mappen du vil aabne: ", dir_name);
         create_dir(dir_name);
     }
     file_managing(tasks, categories, number_of_tasks, number_of_categories, dir_name, file_name);
