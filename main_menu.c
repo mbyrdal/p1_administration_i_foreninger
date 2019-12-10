@@ -18,9 +18,7 @@ void main_menu(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGT
                                      "6.  Afslut programmet\n\n"
                                      "> ",
                                      MAIN_MENU);
-        if (option != 0){
-            execute_user_input(tasks, categories, number_of_tasks, number_of_categories, option);
-        }
+        execute_user_input(tasks, categories, number_of_tasks, number_of_categories, option);
     } while (option != MAIN_MENU);
 }
 
