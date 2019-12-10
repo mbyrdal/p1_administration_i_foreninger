@@ -51,10 +51,10 @@ void create_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LEN
         printf("\nVil du aendre noget i opgaven? [Ja/Nej]:\n");
         scanf(" %4s", answer);
         clear_input();
-        if (!(strcmp(answer, "ja") && strcmp(answer, "Ja") && strcmp(answer, "JA"))){
+        if (strcmp_lower(answer, "ja")){
             change_task(tasks, categories, *number_of_tasks, number_of_categories, i);
         }
-    } while (strcmp(answer, "nej") && strcmp(answer, "Nej") && strcmp(answer, "NEJ"));
+    } while (strcmp_lower(answer, "nej"));
 }
 
 /* Funktion til at ændre en valgt opgave.

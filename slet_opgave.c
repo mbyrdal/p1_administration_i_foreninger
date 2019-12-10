@@ -45,20 +45,6 @@ void delete_task(task tasks[], int *number_of_tasks){
     }
 }
 
-/*Funktionen tager en string som argument og returnere en boolsk
- * returværdien beskriver om denne string er er ja/Ja/JA (return 1) eller andet (return 0)*/
-int user_wrote_no(char *string){
-    /* FEJL TESTER IKKE OM STRING ER NEJ MEN OM DEN ER JA SE TEST5*/
-    return (strcmp(string, "ja") && strcmp(string, "Ja") && strcmp(string, "JA"));
-}
-
-/*Funktionen tager en string som argument og returnere en boolsk
- * returværdien beskriver om denne string er er ja/Ja/JA/nej/Nej/NEJ (return 1) eller andet (return 0)*/
-int is_yes_or_no(char *string){
-    return (strcmp(string, "ja") && strcmp(string, "Ja") && strcmp(string, "JA") &&
-    strcmp(string, "nej") && strcmp(string, "Nej") && strcmp(string, "NEJ"));
-}
-
 /* Funktion, som sletter en kategori og alle opgaver (tasks) med denne kategori
  * det sidste argument (char category[]) beskrive hvilken kategori der skal slettes
  * MANGLER Når en kategori er slettet SKAL number_of_categories TÆLLES NED

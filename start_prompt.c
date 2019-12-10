@@ -40,7 +40,7 @@ void create_dir(char *dir_name){
         printf("Mappe findes ikke, vi du oprette en ny med dette navn? [ja/nej]\n> ");
         scanf(" %4s", option);
         clear_input();
-        if(strcmp(option, "ja") == 0 || strcmp(option, "Ja") == 0 || strcmp(option, "JA") == 0){
+        if(strcmp_lower(option, "ja")){
             sprintf(mk_dir, "mkdir %s", dir_name);
             printf("Mappe oprettet!\n");
             system(mk_dir);
@@ -100,7 +100,7 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
                     scanf(" %s", temp);
                 }
                 fclose(file);
-            } while (!file_found && (strcmp(temp, "ja") && strcmp(temp, "Ja") && strcmp(temp, "JA")));
+            } while (!file_found && !strcmp_lower(temp, "ja"));
             break;
 
         case 2:
@@ -108,7 +108,7 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
             file_input("\nSkriv det nye filnavn:\n> ", temp_file_name);
             sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
             break;
-            
+
         default:
             printf("Noget er galt!!!!\n");
             break;
