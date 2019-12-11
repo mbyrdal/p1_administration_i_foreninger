@@ -32,7 +32,7 @@ void delete_task(task tasks[], int *number_of_tasks){
         }
         *number_of_tasks -= 1;
     /* Hvis brugeren skriver n (nej) */
-} else if (check_answer(answer) == -1){
+    } else if (check_answer(answer) == -1){
         do{
             printf("Vil du stadig slette en opgave? (j/n)\n> ");
             scanf(" %c", &answer);
@@ -42,6 +42,7 @@ void delete_task(task tasks[], int *number_of_tasks){
             delete_task(tasks, number_of_tasks);
         }
     }
+}
 
 /* Funktion, som sletter en kategori og alle opgaver (tasks) med denne kategori.
  * Funktionen tager tasks-arrayet som input, da den skal lede efter en bestemt kategori, der skal slettes.

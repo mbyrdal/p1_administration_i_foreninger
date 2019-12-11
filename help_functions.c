@@ -94,7 +94,7 @@ void test5_check_answer(CuTest *tc){
 
 void test6_check_answer(CuTest *tc){
     int actual, expected;
-    actual = check_answer('å');
+    actual = check_answer('A');
     expected = 0;
     CuAssertIntEquals(tc, expected, actual);
 }
