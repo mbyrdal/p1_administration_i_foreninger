@@ -43,8 +43,8 @@ void execute_user_input(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][
                 change_task_index = prompt_user_options("Hvilken opgave vil du aendre? "
                                                         "(Indtast opgave nummer)\n"
                                                         "> ", *number_of_tasks) - 1;
-            change_task(tasks, categories, *number_of_tasks, number_of_categories, change_task_index);
-            } else {
+                change_task(tasks, categories, *number_of_tasks, number_of_categories, change_task_index);
+            } else{
                 printf("Kan ikke aendre naar der ingen opgaver er!\n");
             }
             break;
@@ -61,32 +61,30 @@ void execute_user_input(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][
             } else{
                 printf("Kan ikke vise opgaverne naar der ingen opgaver er!\n");
             }
-
             break;
 
         case task_delete:
             if (*number_of_tasks > 0){
                 delete_task(tasks, number_of_tasks);
-            } else {
+            } else{
                 printf("Kan ikke slette naar der ingen opgaver er!\n");
-            }
-                
+            }   
             break;
 
         case category_delete:
             if (*number_of_categories > 0){
-                            for (i = 0; i < *number_of_categories; i++){
-                printf("%d) %s\n", i + 1, categories[i]);
-            }
-            category_delete_index = prompt_user_options("Hvilken kategori med dens opgaver vil du slette? "
-                                                        "(Indtast kategoriens nummer)\n"
-                                                        "> ", *number_of_categories) - 1;
-            delete_category(tasks, number_of_tasks, categories[category_delete_index]);
-            if (category_delete_index < (*number_of_categories - 1)){
-                strcpy(categories[category_delete_index], categories[*number_of_categories - 1]);
-            }
-            *number_of_categories -= 1;
-            } else {
+                for (i = 0; i < *number_of_categories; i++){
+                    printf("%d) %s\n", i + 1, categories[i]);
+                }
+                category_delete_index = prompt_user_options("Hvilken kategori med dens opgaver vil du slette? "
+                                                            "(Indtast kategoriens nummer)\n"
+                                                            "> ", *number_of_categories) - 1;
+                delete_category(tasks, number_of_tasks, categories[category_delete_index]);
+                if (category_delete_index < (*number_of_categories - 1)){
+                    strcpy(categories[category_delete_index], categories[*number_of_categories - 1]);
+                }
+                *number_of_categories -= 1;
+            } else{
                 printf("Kan ikke slette en kategori naar der ingen er!\n");
             }
             break;
