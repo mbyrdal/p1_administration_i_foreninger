@@ -92,8 +92,8 @@ void print_sort(task tasks[], int number_of_tasks, int option){
             printf("Sorteret for Deadline:\n");
             printf("%-10s %-17s %-10s\n", "Nummer:","Deadline:" ,"Titel:");
             for (i = 0; i < number_of_tasks; i++){
-                printf("%-10d %02d.%02d %02d.%02d.%5d %-s\n", i+1, tasks[i].deadline.tm_hour,
-                tasks[i].deadline.tm_min, tasks[i].deadline.tm_mday, tasks[i].deadline.tm_mon + 1, tasks[i].deadline.tm_year + 1900, tasks[i].title);
+                printf("%-10d %02d.%02d %02d.%02d.%-5d %-s\n", i+1, tasks[i].deadline.tm_hour,
+                tasks[i].deadline.tm_min, tasks[i].deadline.tm_mday, tasks[i].deadline.tm_mon, tasks[i].deadline.tm_year, tasks[i].title);
             } break;
 
         default:
