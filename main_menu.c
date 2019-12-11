@@ -50,13 +50,18 @@ void execute_user_input(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][
             break;
 
         case task_sort:
-            change_sorting(tasks, *number_of_tasks);
+            if (*number_of_tasks > 0){
+                change_sorting(tasks, *number_of_tasks);
 
-            printf("Hvilken opgave vil du gerne se? ('%d' for at gaa tilbage til menu)\n", *number_of_tasks + 1);
-            view_task_index = prompt_user_options("> ", *number_of_tasks + 1) - 1;
-            if (view_task_index < *number_of_tasks){
-                print_task(tasks[view_task_index]);
+                printf("Hvilken opgave vil du gerne se? ('%d' for at gaa tilbage til menu)\n", *number_of_tasks + 1);
+                view_task_index = prompt_user_options("> ", *number_of_tasks + 1) - 1;
+                if (view_task_index < *number_of_tasks){
+                    print_task(tasks[view_task_index]);
+                }
+            } else{
+                printf("Kan ikke vise opgaverne naar der ingen opgaver er!\n");
             }
+
             break;
 
         case task_delete:
