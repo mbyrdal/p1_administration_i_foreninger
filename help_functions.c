@@ -44,23 +44,15 @@ int prompt_user_options(char *print, int amount_of_options){
     return option;
 }
 
-int strcmp_lower(char *string, char *cmp_string){
-    int i,
-        string_len = strlen(string);
-
-    if (string_len != strlen(cmp_string)){
+int check_answer(char answer){
+    if (tolower(answer) == 'j'){
+        return 1;
+    } else if (tolower(answer) == 'n'){
+        return -1;
+    } else{
         return 0;
     }
-
-    for (i = 0; i < string_len; i++){
-        if (tolower(string[i]) != tolower(cmp_string[i])){
-            return 0;
-        }
-    }
-    return 1;
 }
-
-
 
 /*/////////////////////////////////////////////////////////////////*/
 /* TEST */

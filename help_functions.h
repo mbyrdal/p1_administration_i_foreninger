@@ -17,7 +17,7 @@ void print_task(task task1);
  */
 int prompt_user_options(char *print, int amount_of_options);
 
-int strcmp_lower(char *string, char *cmp_string);
+int check_answer(char answer);
 
 /* TEST */
 
