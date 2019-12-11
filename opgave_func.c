@@ -77,9 +77,9 @@ void change_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LEN
                                      "6.  Status\n"
                                      "7.  Prioritet\n"
                                      "8.  Deadline\n"
-                                     "9.  Afslut aendringer"
+                                     "9.  Afslut aendringer\n"
                                      "> ",
-                                     8);
+                                     9);
 
         switch (option){
             case Title:
