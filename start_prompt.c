@@ -32,15 +32,15 @@ void file_input(char *print, char *input){
  * Funktionen tager dir_name som input for at tjekke, om den givne mappe eksisterer og ellers oprette en mappe med dette navn.
  */
 void create_dir(char *dir_name){
-    char mk_dir[125], option[4];
+    char mk_dir[125], option;
 
     if (dir_exists(dir_name)){
         printf("Mappe fundet!\n");
     } else{
         printf("Mappe findes ikke, vi du oprette en ny med dette navn? [ja/nej]\n> ");
-        scanf(" %4s", option);
+        scanf(" %c", option);
         clear_input();
-        if(strcmp_lower(option, "ja")){
+        if(check_answer(option)){
             sprintf(mk_dir, "mkdir %s", dir_name);
             printf("Mappe oprettet!\n");
             system(mk_dir);
@@ -73,7 +73,7 @@ int dir_exists(char *dir_name){
 void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_tasks, int *number_of_categories, char *dir_name, char *file_name){
     int option, file_found = 0;
     char temp_file_name[100];
-    char temp[] = "nej";
+    char temp_answer;
     FILE *file;
     enum file_managing{file_open = 1, file_create = 2};
 
@@ -97,11 +97,11 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
                         fscanf(file, "%*[^a-zA-Z]");
                     }
                 } else{
-                    printf("\nFil ikke fundet. Vil du oprette en ny fil med dette navn? [ja/nej]\n> ");
-                    scanf(" %s", temp);
+                    printf("\nFil ikke fundet. Vil du oprette en ny fil med dette navn? [j/n]\n> ");
+                    scanf(" %c", temp_answer);
                 }
                 fclose(file);
-            } while (!file_found && !strcmp_lower(temp, "ja"));
+            } while (!file_found && check_answer(temp_answer) == 1);
             break;
 
         case file_create:

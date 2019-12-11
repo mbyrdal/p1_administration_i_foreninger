@@ -8,7 +8,7 @@
  */
 void create_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_tasks, int *number_of_categories){
     int i = *number_of_tasks;
-    char answer[4];
+    char answer;
     *number_of_tasks += 1;
 
     prompt_for_category(tasks, categories, *number_of_tasks, number_of_categories , i);
@@ -49,12 +49,12 @@ void create_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LEN
 
     do {
         printf("\nVil du aendre noget i opgaven? [Ja/Nej]:\n");
-        scanf(" %4s", answer);
+        scanf(" %c", answer);
         clear_input();
-        if (strcmp_lower(answer, "ja")){
+        if (check_answer(answer) == 1){
             change_task(tasks, categories, *number_of_tasks, number_of_categories, i);
         }
-    } while (!strcmp_lower(answer, "nej"));
+    } while (check_answer(answer) != -1);
 }
 
 /* Funktion til at ændre en valgt opgave.
