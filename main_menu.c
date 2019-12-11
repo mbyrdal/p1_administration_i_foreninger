@@ -6,7 +6,7 @@
  * Intet output.
  */
 void main_menu(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_tasks, int *number_of_categories){
-    int option = 0;
+    int option;
 
     do{
         option = prompt_user_options("\nVaelg mellem en af ovenstaaende muligheder [indtast valgmulighedens nummer uden punktum \".\"]: \n\n"
