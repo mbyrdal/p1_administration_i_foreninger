@@ -38,7 +38,7 @@ void create_dir(char *dir_name){
         printf("Mappe fundet!\n");
     } else{
         printf("Mappe findes ikke, vi du oprette en ny med dette navn? [ja/nej]\n> ");
-        scanf(" %c", option);
+        scanf(" %c", &option);
         clear_input();
         if(check_answer(option)){
             sprintf(mk_dir, "mkdir %s", dir_name);
@@ -98,7 +98,7 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
                     }
                 } else{
                     printf("\nFil ikke fundet. Vil du oprette en ny fil med dette navn? [j/n]\n> ");
-                    scanf(" %c", temp_answer);
+                    scanf(" %c", &temp_answer);
                 }
                 fclose(file);
             } while (!file_found && check_answer(temp_answer) == 1);

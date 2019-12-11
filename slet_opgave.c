@@ -13,7 +13,7 @@
  * Hvis brugeren svarer nej, så kommer brugeren ud af funktionen */
 void delete_task(task tasks[], int *number_of_tasks){
     int i, task_index;
-    char answer;
+    char answer = '\0';
 
     for (i = 0; i < *number_of_tasks; i++){ /* Loop igennem array af tasks fra 0->number_of_tasks */
         printf("%-10d %-s\n", i+1, tasks[i].title);
@@ -22,7 +22,7 @@ void delete_task(task tasks[], int *number_of_tasks){
     printf("Er du sikker paa, at du vil slette opgaven: %s? (j/n)\n> ", tasks[task_index].title);
     /* Hvis brugeren ikke har skrevet ja eller nej */
     while (check_answer(answer) == 0){
-        scanf(" %c", answer);
+        scanf(" %c", &answer);
         clear_input();
     }
     /* Hvis brugeren skriver j (ja) */
@@ -33,12 +33,11 @@ void delete_task(task tasks[], int *number_of_tasks){
         *number_of_tasks -= 1;
     /* Hvis brugeren skriver n (nej) */
 } else if (check_answer(answer) == -1){
-        printf("Vil du stadig slette en opgave? (j/n)\n> ");
-        strcpy(answer, "");
-        while (check_answer(answer) == 0){
-            scanf(" %c", answer);
+        do{
+            printf("Vil du stadig slette en opgave? (j/n)\n> ");
+            scanf(" %c", &answer);
             clear_input();
-        }
+        } while (check_answer(answer) == 0);
         if (check_answer(answer) == 1){
             delete_task(tasks, number_of_tasks);
         }
