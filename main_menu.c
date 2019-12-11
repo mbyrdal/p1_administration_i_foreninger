@@ -40,6 +40,11 @@ void execute_user_input(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][
 
         case task_change:
             if (*number_of_tasks > 0){
+                
+                printf("\n%-10s %-10s\n", "Nummer:", "Titel:");
+                for (i = 0; i < *number_of_tasks; i++){
+                    printf("%-10d %-s\n", i+1, tasks[i].title);
+                }
                 change_task_index = prompt_user_options("Hvilken opgave vil du aendre? "
                                                         "(Indtast opgave nummer)\n"
                                                         "> ", *number_of_tasks) - 1;
