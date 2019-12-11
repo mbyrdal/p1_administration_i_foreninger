@@ -109,6 +109,22 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
             /* 1 newline*/
             file_input("\nSkriv det nye filnavn:\n> ", temp_file_name);
             sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
+            file = fopen(file_name, "r");
+            if (file != NULL){
+                do{
+                    printf("Filen \"%s\" findes allerede! Vil du overskrive denne fil? [j/n]\n> ", temp_file_name);
+                    scanf(" %c", &temp_answer);
+                    clear_input();
+                } while (check_answer(temp_answer) == 0);
+                if (temp_answer == 'j'){
+                    printf("Filen overskrives.");
+                } else{
+                    file_managing(tasks, categories, number_of_tasks, number_of_categories, dir_name, file_name);
+                }
+                
+            } else{
+                printf("Fil oprettet.");
+            }
             break;
 
         default:
