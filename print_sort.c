@@ -5,7 +5,7 @@
  * Tager number_of_tasks som input, så den kun printer oprettede opgaver.
  */
 void change_sorting(task tasks[], int number_of_tasks){
-    int option = prompt_user_options("Hvilken slags sortering vil du have?\n (Indtast tal fra 1-5 efter følgende muligheder)\n\n"
+    int option = prompt_user_options("Hvilken slags sortering vil du have?\n (Indtast tal fra 1-5 efter foelgende muligheder)\n\n"
                                      "1.  Kategori\n"
                                      "2.  Titel\n"
                                      "3.  Ansvarlig\n"
