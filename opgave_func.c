@@ -166,7 +166,7 @@ void prompt_for_category(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES]
         if (option == i - 1){
             add_category(categories, number_of_categories);
         } else if (option == i){
-            printf("Hvilken kategori vil du aendre: \n");
+            printf("Hvilken kategori vil du aendre (Indtast nummer paa kategori):\n");
             selected_category = prompt_user_options("> ", *number_of_categories);
             edit_category(tasks, categories, selected_category - 1, number_of_tasks);
         } else{
