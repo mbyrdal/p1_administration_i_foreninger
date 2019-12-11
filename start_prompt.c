@@ -75,6 +75,7 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
     char temp_file_name[100];
     char temp[] = "nej";
     FILE *file;
+    enum file_managing{file_open = 1, file_create = 2};
 
     option = prompt_user_options("Hvad vil du nu? \n\n"
                                  "1.  Aabne en fil (Laese fra fil)\n"
@@ -82,7 +83,7 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
                                  2);
 
     switch (option){
-        case 1:
+        case file_open:
             do{
                 /* 2 newline*/
                 file_input("\nSkriv navn paa filen:\n> ", temp_file_name);
@@ -103,7 +104,7 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
             } while (!file_found && !strcmp_lower(temp, "ja"));
             break;
 
-        case 2:
+        case file_create:
             /* 1 newline*/
             file_input("\nSkriv det nye filnavn:\n> ", temp_file_name);
             sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
