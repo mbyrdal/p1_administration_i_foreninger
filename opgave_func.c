@@ -66,8 +66,9 @@ void create_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LEN
  */
 void change_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int number_of_tasks, int *number_of_categories, int index){
     enum option {Title = 1, Category, Admins, Volunteers, Description, Status, Priority, Deadline};
+    int option;
     do {
-        int option = prompt_user_options("\nHvad vil du gerne aendre? [indtast valgmulighedens nummer uden punktum \".\"]: \n\n"
+        option = prompt_user_options("\nHvad vil du gerne aendre? [indtast valgmulighedens nummer uden punktum \".\"]: \n\n"
                                      "1.  Titel\n"
                                      "2.  Kategori\n"
                                      "3.  Administrerende personer\n"
