@@ -99,6 +99,7 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
                 } else{
                     printf("\nFil ikke fundet. Vil du oprette en ny fil med dette navn? [j/n]\n> ");
                     scanf(" %c", &temp_answer);
+                    clear_input();
                 }
                 fclose(file);
             } while (!file_found && check_answer(temp_answer) != 1);
