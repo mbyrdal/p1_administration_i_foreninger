@@ -58,7 +58,7 @@ void delete_category(task tasks[], int *number_of_tasks, char category[]){
 /*/////////////////////////////////////*/
 /* TEST */
 
-void test1_delete_task(CuTest *tc){
+void test1_delete_category(CuTest *tc){
     task tasks[2];
     int number_of_tasks = 2;
 
@@ -94,7 +94,7 @@ void test1_delete_task(CuTest *tc){
     CuAssertStrEquals(tc, tasks[0].category, "category2");
 }
 
-void test2_delete_task(CuTest *tc){
+void test2_delete_category(CuTest *tc){
     task tasks[5];
     int number_of_tasks = 5;
 
@@ -172,7 +172,7 @@ void test2_delete_task(CuTest *tc){
 
 CuSuite *delete_category_get_suite(){
     CuSuite *suite = CuSuiteNew();
-    SUITE_ADD_TEST(suite, test1_delete_task);
-    SUITE_ADD_TEST(suite, test2_delete_task);
+    SUITE_ADD_TEST(suite, test1_delete_category);
+    SUITE_ADD_TEST(suite, test2_delete_category);
     return suite;
 }
