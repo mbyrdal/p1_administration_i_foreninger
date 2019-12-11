@@ -21,4 +21,4 @@ int check_answer(char answer);
 
 /* TEST */
 
-CuSuite *strcmp_lower_get_suite();
+CuSuite *check_answer_get_suite();
