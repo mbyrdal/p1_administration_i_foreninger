@@ -1,37 +1,29 @@
 #include "include.h"
 
-/* Funktion, som sletter en opgave (task) efter behov
- * Først printes alle opgaverne i en fil under kategori
- * Der promptes for et opgaveindex, som skal slettes
- * Herefter promptes brugeren for, om de er sikre på,
-   at de vil slette opgaven på det bestemte index
- * Hvis brugeren svarer ja, så nulstilles en opgave
-   og antallet af opgaver i filen tælles ned med 1 (number_of_tasks--)
- * Hvis brugeren derimod svarer nej, så promptes der for,
-   om brugeren stadigvæk vil slette en opgave
- * Hvis brugeren svarer ja, så køres funktionen delete_task igen
- * Hvis brugeren svarer nej, så kommer brugeren ud af funktionen */
+
+/* Funktionen sletter en opgave efter brugerens valg.
+ * Funktionen tager tasks-arrayet som input, da en opgave skal slettes, og alle opgaver skal printes.
+ * Funktionen tager number_of_tasks som input, da det skal tælles ned, hvis en opgave slettes.
+ * Derudover skal number_of_tasks bruges til at printe alle opgaver.
+ */
 void delete_task(task tasks[], int *number_of_tasks){
     int i, task_index;
     char answer = '0';
 
-    for (i = 0; i < *number_of_tasks; i++){ /* Loop igennem array af tasks fra 0->number_of_tasks */
+    for (i = 0; i < *number_of_tasks; i++){
         printf("%-10d %-s\n", i+1, tasks[i].title);
     }
     task_index = prompt_user_options("Hvilken opgave vil du gerne slette? (Indtast opgavens nummer)\n>", *number_of_tasks) - 1;
     printf("Er du sikker paa, at du vil slette opgaven: %s? (j/n)\n> ", tasks[task_index].title);
-    /* Hvis brugeren ikke har skrevet ja eller nej */
     while (check_answer(answer) == 0){
         scanf(" %c", &answer);
         clear_input();
     }
-    /* Hvis brugeren skriver j (ja) */
     if (check_answer(answer) == 1){
         if (task_index != (*number_of_tasks - 1)){
             tasks[task_index] = tasks[*number_of_tasks - 1];
         }
         *number_of_tasks -= 1;
-    /* Hvis brugeren skriver n (nej) */
     } else if (check_answer(answer) == -1){
         printf("Vil du stadig slette en opgave? (j/n)\n> ");
         while (check_answer(answer) == 0){
