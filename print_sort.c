@@ -63,33 +63,33 @@ void print_sort(task tasks[], int number_of_tasks, int option){
 
     switch (option){
         case category:
-            printf("Sorteret for Kategori:\n");
+            printf("\nSorteret for Kategori:\n");
             for (i = 0; i < number_of_tasks; i++){
                 printf("%s: %d\n%s: %s\n%s: %s\n\n", "Nummer", i+1, "Kategori", tasks[i].category, "Titel", tasks[i].title);
             } break;
 
         case title:
-            printf("Sorteret for Titel:\n");
+            printf("\nSorteret for Titel:\n");
             printf("%-10s %-10s\n", "Nummer:", "Titel");
             for (i = 0; i < number_of_tasks; i++){
                 printf("%-10d %-s\n", i+1, tasks[i].title);
             } break;
 
         case admins:
-            printf("Sorteret for Ansvarlig:\n");
+            printf("\nSorteret for Ansvarlig:\n");
             for (i = 0; i < number_of_tasks; i++){
                printf("%s: %d\n%s: %s\n%s: %s\n\n", "Nummer", i+1, "Ansvarlig", tasks[i].admins, "Titel", tasks[i].title);
             } break;
 
         case priority:
-            printf("Sorteret for Prioritering:\n");
+            printf("\nSorteret for Prioritering:\n");
             printf("%-10s %-14s %-10s\n", "Nummer:", "Prioritering:", "Titel:");
             for (i = 0; i < number_of_tasks; i++){
                 printf("%-10d %-14d %-s\n", i+1, tasks[i].priority, tasks[i].title);
             } break;
 
         case deadline:
-            printf("Sorteret for Deadline:\n");
+            printf("\nSorteret for Deadline:\n");
             printf("%-10s %-17s %-10s\n", "Nummer:","Deadline:" ,"Titel:");
             for (i = 0; i < number_of_tasks; i++){
                 printf("%-10d %02d.%02d %02d.%02d.%5d %-s\n", i+1, tasks[i].deadline.tm_hour,
