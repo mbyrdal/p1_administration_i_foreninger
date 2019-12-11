@@ -50,7 +50,7 @@ void execute_user_input(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][
                                                         "> ", *number_of_tasks) - 1;
                 change_task(tasks, categories, *number_of_tasks, number_of_categories, change_task_index);
             } else{
-                printf("Kan ikke aendre naar der ingen opgaver er!\n");
+                printf("\nKan ikke aendre naar der ingen opgaver er!\n");
             }
             break;
 
@@ -64,7 +64,7 @@ void execute_user_input(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][
                     print_task(tasks[view_task_index]);
                 }
             } else{
-                printf("Kan ikke vise opgaverne naar der ingen opgaver er!\n");
+                printf("\nKan ikke vise opgaverne naar der ingen opgaver er!\n");
             }
             break;
 
@@ -72,7 +72,7 @@ void execute_user_input(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][
             if (*number_of_tasks > 0){
                 delete_task(tasks, number_of_tasks);
             } else{
-                printf("Kan ikke slette naar der ingen opgaver er!\n");
+                printf("\nKan ikke slette naar der ingen opgaver er!\n");
             }   
             break;
 
@@ -90,7 +90,7 @@ void execute_user_input(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][
                 }
                 *number_of_categories -= 1;
             } else{
-                printf("Kan ikke slette en kategori naar der ingen er!\n");
+                printf("\nKan ikke slette en kategori naar der ingen er!\n");
             }
             break;
             

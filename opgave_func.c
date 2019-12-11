@@ -178,7 +178,7 @@ void prompt_for_category(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES]
 void add_category(char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_categories){
     printf("Hvad skal den nye kategori hedde?\n"
            "> ");
-    scanf(" %s", categories[*number_of_categories]);
+    scanf(" %[^\n]%*c", categories[*number_of_categories]);
     *number_of_categories += 1;
 }
 
@@ -194,7 +194,7 @@ void edit_category(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
     strcpy(temp_category, categories[index]);
     printf("Hvad skal kategorien '%s' aendres til?\n"
            "> ", categories[index]);
-    scanf("%s", categories[index]);
+    scanf(" %[^\n]%*c", categories[index]);
     for (i = 0; i < number_of_tasks; i++){
         if (strcmp(temp_category, tasks[i].category) == 0){
             strcpy(tasks[i].category, categories[index]);
