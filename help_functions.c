@@ -57,47 +57,47 @@ int check_answer(char answer){
 /*/////////////////////////////////////////////////////////////////*/
 /* TEST */
 
-void test1_strcmp_lower(CuTest *tc){
+void test1_check_answer(CuTest *tc){
     int actual, expected;
-    actual = strcmp_lower("STRING", "string");
+    actual = check_answer("STRING", "string");
     expected = 1;
     CuAssertIntEquals(tc, expected, actual);
 }
 
-void test2_strcmp_lower(CuTest *tc){
+void test2_check_answer(CuTest *tc){
     int actual, expected;
-    actual = strcmp_lower("StRiNg", "sTrInG");
+    actual = check_answer("StRiNg", "sTrInG");
     expected = 1;
     CuAssertIntEquals(tc, expected, actual);
 }
 
-void test3_strcmp_lower(CuTest *tc){
+void test3_check_answer(CuTest *tc){
     int actual, expected;
-    actual = strcmp_lower("String1", "String2");
+    actual = check_answer("String1", "String2");
     expected = 0;
     CuAssertIntEquals(tc, expected, actual);
 }
 
-void test4_strcmp_lower(CuTest *tc){
+void test4_check_answer(CuTest *tc){
     int actual, expected;
-    actual = strcmp_lower("String", "String2");
+    actual = check_answer("String", "String2");
     expected = 0;
     CuAssertIntEquals(tc, expected, actual);
 }
 
-void test5_strcmp_lower(CuTest *tc){
+void test5_check_answer(CuTest *tc){
     int actual, expected;
-    actual = strcmp_lower("qwertyui", "asdfg");
+    actual = check_answer("qwertyui", "asdfg");
     expected = 0;
     CuAssertIntEquals(tc, expected, actual);
 }
 
-CuSuite *strcmp_lower_get_suite(){
+CuSuite *check_answer_get_suite(){
     CuSuite *suite = CuSuiteNew();
-    SUITE_ADD_TEST(suite, test1_strcmp_lower);
-    SUITE_ADD_TEST(suite, test2_strcmp_lower);
-    SUITE_ADD_TEST(suite, test3_strcmp_lower);
-    SUITE_ADD_TEST(suite, test4_strcmp_lower);
-    SUITE_ADD_TEST(suite, test5_strcmp_lower);
+    SUITE_ADD_TEST(suite, test1_check_answer);
+    SUITE_ADD_TEST(suite, test2_check_answer);
+    SUITE_ADD_TEST(suite, test3_check_answer);
+    SUITE_ADD_TEST(suite, test4_check_answer);
+    SUITE_ADD_TEST(suite, test5_check_answer);
     return suite;
 }

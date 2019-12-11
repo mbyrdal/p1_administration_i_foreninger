@@ -49,7 +49,7 @@ void create_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LEN
 
     do {
         printf("\nVil du aendre noget i opgaven? [Ja/Nej]:\n");
-        scanf(" %c", answer);
+        scanf(" %c", &answer);
         clear_input();
         if (check_answer(answer) == 1){
             change_task(tasks, categories, *number_of_tasks, number_of_categories, i);
