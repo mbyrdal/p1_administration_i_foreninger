@@ -10,8 +10,9 @@ void delete_task(task tasks[], int *number_of_tasks){
     int i, task_index;
     char answer = '0';
 
+    printf("\n%-10s %-10s\n", "Nummer:\n", "Titel");
     for (i = 0; i < *number_of_tasks; i++){
-        printf("%-10d %-s\n", i+1, tasks[i].title);
+        printf("%-10d. %-s\n", i+1, tasks[i].title);
     }
     task_index = prompt_user_options("Hvilken opgave vil du gerne slette? (Indtast opgavens nummer)\n>", *number_of_tasks) - 1;
     printf("Er du sikker paa, at du vil slette opgaven: %s? (j/n)\n> ", tasks[task_index].title);
