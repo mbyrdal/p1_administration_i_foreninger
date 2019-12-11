@@ -54,7 +54,7 @@ void create_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LEN
         if (strcmp_lower(answer, "ja")){
             change_task(tasks, categories, *number_of_tasks, number_of_categories, i);
         }
-    } while (strcmp_lower(answer, "nej"));
+    } while (!strcmp_lower(answer, "nej"));
 }
 
 /* Funktion til at ændre en valgt opgave.
