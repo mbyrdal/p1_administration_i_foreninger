@@ -57,55 +57,27 @@ int check_answer(char answer){
 /*/////////////////////////////////////////////////////////////////*/
 /* TEST */
 
-void test1_check_answer(CuTest *tc){
+void test_check_answer(CuTest *tc){
     int actual, expected;
-    actual = check_answer('j');
-    expected = 1;
-    CuAssertIntEquals(tc, expected, actual);
-}
+    char test_char;
 
-void test2_check_answer(CuTest *tc){
-    int actual, expected;
-    actual = check_answer('J');
-    expected = 1;
-    CuAssertIntEquals(tc, expected, actual);
-}
+    for (test_char = 0; test_char >= 0; test_char++){
+        actual = check_answer(test_char);
 
-void test3_check_answer(CuTest *tc){
-    int actual, expected;
-    actual = check_answer('n');
-    expected = -1;
-    CuAssertIntEquals(tc, expected, actual);
-}
+        if (test_char == 'j' || test_char == 'J'){
+            expected = 1;
+        } else if (test_char == 'n' || test_char == 'N'){
+            expected = -1;
+        } else {
+            expected = 0;
+        }
 
-void test4_check_answer(CuTest *tc){
-    int actual, expected;
-    actual = check_answer('N');
-    expected = -1;
-    CuAssertIntEquals(tc, expected, actual);
-}
-
-void test5_check_answer(CuTest *tc){
-    int actual, expected;
-    actual = check_answer('a');
-    expected = 0;
-    CuAssertIntEquals(tc, expected, actual);
-}
-
-void test6_check_answer(CuTest *tc){
-    int actual, expected;
-    actual = check_answer('A');
-    expected = 0;
-    CuAssertIntEquals(tc, expected, actual);
+        CuAssertIntEquals(tc, expected, actual);
+    }
 }
 
 CuSuite *check_answer_get_suite(){
     CuSuite *suite = CuSuiteNew();
-    SUITE_ADD_TEST(suite, test1_check_answer);
-    SUITE_ADD_TEST(suite, test2_check_answer);
-    SUITE_ADD_TEST(suite, test3_check_answer);
-    SUITE_ADD_TEST(suite, test4_check_answer);
-    SUITE_ADD_TEST(suite, test5_check_answer);
-    SUITE_ADD_TEST(suite, test6_check_answer);
+    SUITE_ADD_TEST(suite, test_check_answer);
     return suite;
 }
