@@ -1,16 +1,17 @@
 /* Prototypes */
 
-/* Funktionen sletter en opgave efter brugerens valg.
- * Funktionen tager tasks-arrayet som input, da en opgave skal slettes, og alle opgaver skal printes.
- * Funktionen tager number_of_tasks som input, da det skal tælles ned, hvis en opgave slettes.
- * Derudover skal number_of_tasks bruges til at printe alle opgaver.
+/* Funktionen printer alle opgaver og sletter derefter en opgave efter brugerens valg.
+ * tasks[]: Input parameter. En opgave fra arrayet skal slettes.
+ * number_of_tasks: Input parameter. Skal tælles ned, hvis en opgave slettes.
+ * Returnerer ikke noget.
  */
 void delete_task(task tasks[], int *number_of_tasks);
 
 /* Funktion, som sletter en kategori og alle opgaver (tasks) med denne kategori.
- * Funktionen tager tasks-arrayet som input, da den skal lede efter en bestemt kategori, der skal slettes.
- * Funktionen tager number_of_tasks som input, da det skal tælles ned, hvis en opgave slettes.
- * Funktionen tager category[] som input, og det er den kategori, der skal slettes.
+ * tasks[]: Input parameter. Opgaver med en bestemt kategori slettes.
+ * number_of_tasks: Input parameter. Skal tælles ned, hvis en opgave slettes.
+ * category[]: Input parameter. Kategorien der skal slettes.
+ * Returnerer ikke noget.
  */
 void delete_category(task tasks[], int *number_of_tasks, char category[]);
 

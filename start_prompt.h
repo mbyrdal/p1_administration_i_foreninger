@@ -1,65 +1,73 @@
 /* Prototypes */
 
-/* Funktion som kører start prompten af programmet.
- * Funktionen tager tasks-arrayet som input, så den kan læse en fil og gøre klar til at ændre i tasks-arrayet.
- * Funktionen tager categories-arrayet som input, der sendes videre til funktionen file_managing().
- * Funktionen tager number_of_tasks som input, der sendes videre til funktionen file_managing.
- * Funktionen tager number_of_categories som input, der sendes videre til funktionen file_managing.
- * Outputter file_name, så den kan oprettes når programmet afsluttes.
+/* Funktion, som kører start prompten af programmet.
+ * tasks[]: Input parameter. Arrayet sendes videre til funktionen file_managing().
+ * categories[][]: Input parameter. Arrayet sendes videre til funktionen file_managing().
+ * number_of_tasks: Input parameter. Parameteren sendes videre til funktionen file_managing().
+ * number_of_categories: Input parameter. Parameteren sendes videre til funktionen file_managing().
+ * file_name: Input parameter. Parameteren sendes videre til funktionen file_managing().
+ * Returnerer ikke noget.
  */
  void start_prompt(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_tasks, int *number_of_categories, char *file_name);
 
 /* Funktion, som udskriver en besked til og gemmer input fra brugeren.
- * Først printes en besked til brugeren (%s), som prompter for input,
- * hvorefter brugerens input gemmes i en pointer (%s).
+ * print: Input parameter. Denne string printes af funktionen.
+ * input: Input parameter. Brugerens input gemmes i denne variabel.
+ * Returnerer ikke noget.
  */
 void file_input(char *print, char *input);
 
 /* Funktion, som opretter en mappe, hvis den ikke eksisterer og ellers åbnes, hvis at mappen eksisterer. 
- * Funktionen tager dir_name som input for at tjekke, om den givne mappe eksisterer og ellers oprette en mappe med dette navn.
+ * dir_name: Input parameter. Der tjekkes om en given mappe eksisterer. Hvis ikke oprettes denne mappe, hvis brugeren ønsker det.
+ * Returnerer ikke noget.
  */
 void create_dir(char *dir_name);
 
 /* Funktion, som gør brug af boolsk logik til at afgøre, om et directory (mappe) eksisterer.
- * Funktionen tager dir_name (mappens navn) som input, hvis mappen eksisterer returneres 1, ellers 0.
+ * dir_name: Input parameter. Der tjekkes om denne mappe eksister.
+ * Returnerer 1 hvis mappen findes. Ellers returneres 0.
  */
 int dir_exists(char *dir_name);
 
-/* Funktion der spørger brugeren, om der skal åbnes eller oprettes en fil.
- * Ved åbning af fil, læses der tasks fra angivne fil, ellers oprettes den nye fil.
- * Funktionen tager tasks-arrayet som input og sender det videre til funktionen file_read_task().
- * Funktionen tager categories-arrayet som input og sender det videre til funktionen category_read().
- * Funktionen tager number_of_tasks som input og sender det videre til funktionen file_read_task() og tæller number_of_tasks én op.
- * Funktionen tager number_of_categories som input og sender det videre til funktionen category_read().
- * Funktionen tager dir_name som input for at tilgå mappen, hvor .txt filen ligger.
- * Funktionen tager file_name som input, da dette skal opdateres filen, der bruges som input af programmet.
+/* Funktion, der spørger brugeren, om der skal åbnes eller oprettes en fil.
+ * tasks[]: Input parameter. Arrayet sendes videre til funktionen file_read_task() eller til sig selv, hvis den kaldes rekursivt.
+ * categories[]: Input parameter. Arrayet sendes videre til funktionen category_read().
+ * number_of_tasks: Input parameter. Parameteren sendes videre til funktionen file_read_task() og tæller number_of_tasks én op.
+ * number_of_categories: Input parameter. Parameteren sendes videre funktionen category_read().
+ * dir_name: Input parameter. Bruges til at tilgå mappen, hvor filen der skal læses fra ligger.
+ * file_name: Input/output parameter. Denne parameter opdateres med stien til input filen fra der hvor programmet ligger lokalt.
+ * Returnerer ikke noget.
  */
  void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *numer_of_tasks, int *number_of_categories, char *dir_name, char *file_name);
 
 /* Funktion der skriver én opgave til en fil.
- * Funktionen tager fil som input, da det er denne fil der skrives til.
- * Funktionen tager én task som input, da denne task skrives til filen.
+ * fil: Input parameter. Filen der skrives til.
+ * tasks1: Input parameter. Opgaven der skal skrives til filen.
+ * Returnerer ikke noget.
  */
 void file_write_task(FILE *fil, task task1);
 
 /* Funktionen scanner en fil for en opgave.
- * Funktionen tager fil som input, da den bestemmer hvilken fil, der læses fra.
- * Funktionen tager task1 som pointer, da task1 så opdateres.
+ * fil: Input parameter. Filen der læses fra.
+ * task1: Input/output parameter. Opgaven der skrives til. 
+ * Returnerer ikke noget.
  */
 void file_read_task(FILE *fil, task *task1);
 
 /* Funnktionen opretter en fil og skriver alle opgaver og kategorier ind i filen.
- * Funktionen tager file_name som input, da det er denne fil, der skal skrives til.
- * Funktionen tager tasks-arrayet som input, da det er disse opgaver, der skal skrives til filen.
- * Funktionen tager categories-arrayet som input, da det er disse kategorier, der skal skrives til filen.
- * Funktionen tager number_of_tasks som input, da den skal vide, hvor mange opgaver, der skal skrives til filen.
- * Funktionen tager number_of_categories som input, da den skal vide, hvor mange kategorier, der skal skrives til filen.
+ * file_name: Input parameter. Filen der skal skrives til. 
+ * tasks[]: Input parameter. Opgaverne fra dette array skrives til filen.
+ * categories[][]: Input parameter. Kategorierne fra dette array skrives til filen.
+ * number_of_tasks: Input parameter. Funktionen skal vide, hvor mange opgaver, der skal skrives til filen.
+ * number_of_categories: Input parameter. Funktionen skal vide, hvor mange kategorier, der skal skrives til filen.
+ * Returnerer ikke noget.
  */
  void create_file(char *file_name, task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int number_of_tasks, int number_of_categories);
  
- /* Funktion der læser alle kategorier fra en fil og opdaterer, hvor mange kategorier der er.
- * Funktionen tager fil som input, da det er den fil, der skal læses fra.
- * Funktionen tager categories-arrayet som input, da de indlæste kategorier skal skrives til dette array.
- * Funktionen tager number_of_categories som input, da den skal tælles op for hver kategori der læses.
+/* Funktion der læser alle kategorier fra en fil og opdaterer, hvor mange kategorier der er.
+ * fil: Input parameter. Filen der skal læses fra.
+ * categories[][]: Input parameter. Indlæste kategorier skrives til dette array.
+ * number_of_categories: Input parameter. Tælles op for hver kategori der læses.
+ * Returnerer ikke noget.
  */
  void category_read(FILE *fil, char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_categories);

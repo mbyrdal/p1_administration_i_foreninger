@@ -1,9 +1,5 @@
 #include "include.h"
 
-/* Funktion til at skippe input i inputbufferen,
- * hvis der er input, der ikke blev læst.
- * Funktionen har hverken input eller output.
- */
 void clear_input(void){
     char skip_ch;
     do{
@@ -11,9 +7,6 @@ void clear_input(void){
     } while(skip_ch != '\n');
 }
 
-/* Funktion til at printe én enkelt opgave.
- * Funktionen tager én enkelt opgave som argument.
- */
 void print_task(task task1){
 
     printf("%-26s%s \n%-26s%s \n%-26s%s \n%-26s%s \n%-26s%s \n%-26s%d "
@@ -30,10 +23,6 @@ void print_task(task task1){
            task1.deadline.tm_year);
 }
 
-/* Funktion, som prompter brugeren for svar til muligheder,
- * der efterfølgende returneres (som heltal).
- * Funktionen tager højde for ugyldigt input.
- */
 int prompt_user_options(char *print, int amount_of_options){
     int option, scanres;
     do{
