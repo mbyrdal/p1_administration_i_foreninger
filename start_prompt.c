@@ -85,7 +85,6 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
     switch (option){
         case file_open:
             do{
-                /* 2 newline*/
                 file_input("\nSkriv navn paa filen:\n> ", temp_file_name);
                 sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
                 file = fopen(file_name, "r");
@@ -106,7 +105,6 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
             break;
 
         case file_create:
-            /* 1 newline*/
             file_input("\nSkriv det nye filnavn:\n> ", temp_file_name);
             sprintf(file_name, "%s/%s.txt", dir_name, temp_file_name);
             file = fopen(file_name, "r");
