@@ -30,14 +30,15 @@ void create_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LEN
             printf("Tallet var ikke mellem 1 og 10, indtast prioritering igen:\n");
         }
     } while (tasks[i].priority < 1 || tasks[i].priority > 10);
-    printf("Indtast deadline paa formen timer.minutter dato.maaned.aar - afslut med enter [fx 17.00 09.12.2019]:\n");
     do {
+        printf("Indtast deadline paa formen timer.minutter dato.maaned.aar - afslut med enter [fx 17.00 09.12.2019]:\n");
         scanf(" %d.%d %d.%d.%d",
             &tasks[i].deadline.tm_hour,
             &tasks[i].deadline.tm_min,
             &tasks[i].deadline.tm_mday,
             &tasks[i].deadline.tm_mon,
             &tasks[i].deadline.tm_year);
+            clear_input();
     } while (tasks[i].deadline.tm_hour < 0 || tasks[i].deadline.tm_hour > 23 ||
              tasks[i].deadline.tm_min  < 0 || tasks[i].deadline.tm_min  > 59 ||
              tasks[i].deadline.tm_mday < 1 || tasks[i].deadline.tm_mday > 31 ||
@@ -123,15 +124,15 @@ void change_task(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LEN
                 break;
 
             case Deadline:
-                printf("Indtast deadline paa formen timer.minutter dato.maaned.aar - afslut med enter [fx 17.00 09.12.2019]:\n");
                 do {
+                    printf("Indtast deadline paa formen timer.minutter dato.maaned.aar - afslut med enter [fx 17.00 09.12.2019]:\n");
                     scanf(" %d.%d %d.%d.%d",
                         &tasks[index].deadline.tm_hour,
                         &tasks[index].deadline.tm_min,
                         &tasks[index].deadline.tm_mday,
                         &tasks[index].deadline.tm_mon,
                         &tasks[index].deadline.tm_year);
-
+                        clear_input();
                 } while (tasks[index].deadline.tm_hour < 0 || tasks[index].deadline.tm_hour > 23 ||
                         tasks[index].deadline.tm_min  < 0 || tasks[index].deadline.tm_min  > 59 ||
                         tasks[index].deadline.tm_mday < 1 || tasks[index].deadline.tm_mday > 31 ||
