@@ -108,14 +108,14 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
 void file_write_task(FILE *fil, task task1){
 
 
-    fprintf(fil,"Kategori: %s\n", task1.category);
-    fprintf(fil,"Admins: %s\n", task1.admins);
-    fprintf(fil,"Titel: %s\n", task1.title);
-    fprintf(fil,"Beskrivelse: {%s}\n", task1.description);
-    fprintf(fil,"Frivillige: %s\n", task1.volunteers);
-    fprintf(fil,"Status: {%s}\n", task1.status_str);
-    fprintf(fil,"Prioritet: %d\n", task1.priority);
-    fprintf(fil,"Deadline: %d.%d %d.%d.%d\n\n",
+    fprintf(fil, "Kategori: %s\n", task1.category);
+    fprintf(fil, "Admins: %s\n", task1.admins);
+    fprintf(fil, "Titel: %s\n", task1.title);
+    fprintf(fil, "Beskrivelse: {%s}\n", task1.description);
+    fprintf(fil, "Frivillige: %s\n", task1.volunteers);
+    fprintf(fil, "Status: {%s}\n", task1.status_str);
+    fprintf(fil, "Prioritet: %d\n", task1.priority);
+    fprintf(fil, "Deadline: %d.%d %d.%d.%d\n\n",
          task1.deadline.tm_hour,
          task1.deadline.tm_min,
          task1.deadline.tm_mday,
