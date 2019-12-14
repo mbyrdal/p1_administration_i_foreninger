@@ -23,9 +23,13 @@ void create_dir(char *dir_name){
     if (dir_exists(dir_name)){
         printf("Mappe fundet!\n");
     } else{
+
         printf("Mappe findes ikke, vi du oprette en ny med dette navn? [j/n]\n> ");
-        scanf(" %c", &option);
-        clear_input();
+        do{
+            scanf(" %c", &option);
+            clear_input();
+        } while (check_answer(option) == 0);
+
         if(check_answer(option) == 1){
             sprintf(mk_dir, "mkdir %s", dir_name);
             printf("Mappe oprettet!\n");
@@ -70,9 +74,11 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
                         fscanf(file, "%*[^a-zA-Z]");
                     }
                 } else{
-                    printf("\nFil ikke fundet. Vil du oprette en ny fil med dette navn? [j/n]\n> ");
-                    scanf(" %c", &temp_answer);
-                    clear_input();
+                    do{
+                        printf("\nFil ikke fundet. Vil du oprette en ny fil med dette navn? [j/n]\n> ");
+                        scanf(" %c", &temp_answer);
+                        clear_input();
+                    } while (check_answer(temp_answer) == 0);
                 }
                 fclose(file);
             } while (!file_found && check_answer(temp_answer) != 1);
@@ -93,7 +99,7 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
                 } else{
                     file_managing(tasks, categories, number_of_tasks, number_of_categories, dir_name, file_name);
                 }
-                
+
             } else{
                 printf("Fil oprettet.");
             }
