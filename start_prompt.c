@@ -121,7 +121,7 @@ void file_write_task(FILE *fil, task task1){
     fprintf(fil, "Frivillige: %s\n", task1.volunteers);
     fprintf(fil, "Status: {%s}\n", task1.status_str);
     fprintf(fil, "Prioritet: %d\n", task1.priority);
-    fprintf(fil, "Deadline: %d.%d %d.%d.%d\n\n",
+    fprintf(fil, "Deadline: %02d.%02d %02d.%02d.%d\n\n",
          task1.deadline.tm_hour,
          task1.deadline.tm_min,
          task1.deadline.tm_mday,

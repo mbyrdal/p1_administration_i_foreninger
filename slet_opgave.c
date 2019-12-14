@@ -19,7 +19,7 @@ void delete_task(task tasks[], int *number_of_tasks){
             tasks[task_index] = tasks[*number_of_tasks - 1];
         }
         *number_of_tasks -= 1;
-    } else if (check_answer(answer) == -1){
+    } else{
         printf("Vil du stadig slette en opgave? (j/n)\n> ");
         while (check_answer(answer) == 0){
             scanf(" %c", &answer);
