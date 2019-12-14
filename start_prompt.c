@@ -24,8 +24,8 @@ void create_dir(char *dir_name){
         printf("Mappe fundet!\n");
     } else{
 
-        printf("Mappe findes ikke, vi du oprette en ny med dette navn? [j/n]\n> ");
         do{
+            printf("Mappe findes ikke, vi du oprette en ny med dette navn? [j/n]\n> ");
             scanf(" %c", &option);
             clear_input();
         } while (check_answer(option) == 0);
