@@ -21,10 +21,10 @@ void delete_task(task tasks[], int *number_of_tasks){
         *number_of_tasks -= 1;
     } else{
         printf("Vil du stadig slette en opgave? (j/n)\n> ");
-        while (check_answer(answer) == 0){
+        do{
             scanf(" %c", &answer);
             clear_input();
-        }
+        } while (check_answer(answer) == 0);
         if (check_answer(answer) == 1){
             delete_task(tasks, number_of_tasks);
         }
