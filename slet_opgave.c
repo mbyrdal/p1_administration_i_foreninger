@@ -30,7 +30,7 @@ void delete_task(task tasks[], int *number_of_tasks){
         }
     }
 }
-
+    
 void delete_category(task tasks[], int *number_of_tasks, char category[]){
     int i;
     for (i = 0; i < *number_of_tasks; i++){
