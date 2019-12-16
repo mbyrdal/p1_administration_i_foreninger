@@ -57,7 +57,7 @@ void test_check_answer(CuTest *tc){
             expected = 1;
         } else if (test_char == 'n' || test_char == 'N'){
             expected = -1;
-        } else {
+        } else{
             expected = 0;
         }
 
