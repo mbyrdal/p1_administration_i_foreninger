@@ -50,7 +50,7 @@ void test_check_answer(CuTest *tc){
     int actual, expected;
     char test_char;
 
-    for (test_char = 0; test_char >= 0; test_char++){
+    for (test_char = 0; test_char <= 127 && test_char >= 0; test_char++){
         actual = check_answer(test_char);
 
         if (test_char == 'j' || test_char == 'J'){
