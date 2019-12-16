@@ -55,6 +55,11 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
     FILE *file;
     enum file_managing{file_open = 1, file_create = 2};
 
+    strcpy(categories[0], "Interne / Hverdags opgaver");
+    strcpy(categories[1], "oekonomi og regnskab");
+    strcpy(categories[2], "Opgaver ifm. arrangementer");
+    strcpy(categories[3], "Marketing");
+
     option = prompt_user_options("Hvad vil du nu? \n\n"
                                  "1.  Aabne en fil (Laese fra fil)\n"
                                  "2.  Oprette en ny fil (Skrive til fil)\n> ",
@@ -79,6 +84,9 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
                         scanf(" %c", &temp_answer);
                         clear_input();
                     } while (check_answer(temp_answer) == 0);
+                    if (check_answer(temp_answer) == 1){
+                        *number_of_categories = NUMBER_OF_PREDEFINED_CATEGORIES;
+                    }
                 }
                 fclose(file);
             } while (!file_found && check_answer(temp_answer) != 1);
@@ -94,7 +102,8 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
                     scanf(" %c", &temp_answer);
                     clear_input();
                 } while (check_answer(temp_answer) == 0);
-                if (temp_answer == 'j'){
+                if (check_answer(temp_answer) == 1){
+                    *number_of_categories = NUMBER_OF_PREDEFINED_CATEGORIES;
                     printf("Filen overskrives.");
                 } else{
                     file_managing(tasks, categories, number_of_tasks, number_of_categories, dir_name, file_name);

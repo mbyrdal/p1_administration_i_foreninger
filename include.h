@@ -15,6 +15,7 @@
 #define MAIN_MENU 6
 #define MAX_NUMBER_OF_CATEGORIES 50
 #define MAX_LENGTH_OF_CATEGORY 100
+#define NUMBER_OF_PREDEFINED_CATEGORIES 4;
 
 /* Struct for én opgave
  */
