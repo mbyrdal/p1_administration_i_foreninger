@@ -13,8 +13,7 @@ void delete_task(task tasks[], int *number_of_tasks){
         printf("Er du sikker paa, at du vil slette opgaven: %s? (j/n)\n> ", tasks[task_index].title);
         scanf(" %c", &answer);
         clear_input();
-    } while (check_answer(answer) == 0){
-    }
+    } while (check_answer(answer) == 0);
     if (check_answer(answer) == 1){
         if (task_index != (*number_of_tasks - 1)){
             tasks[task_index] = tasks[*number_of_tasks - 1];
