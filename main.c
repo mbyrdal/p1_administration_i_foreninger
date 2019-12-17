@@ -1,7 +1,6 @@
 #include "include.h"
 
-/* Main funktion til at køre programmet
- */
+/* Main funktion til at køre programmet */
 int main(int argc, char *argv[]){
     int number_of_tasks = 0, number_of_categories = 0;
     char file_name[100];

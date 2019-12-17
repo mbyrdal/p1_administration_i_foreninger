@@ -1,7 +1,6 @@
 /* Include file for every preprocessor */
 
-/* Benyttede standard libraries
- */
+/* Benyttede standard libraries */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,16 +8,14 @@
 #include <ctype.h>
 #include <dirent.h>
 
-/* Symbolske konstanterne benyttet til at definere begrænsninger for programmet.
- */
+/* Symbolske konstanterne benyttet til at definere begrænsninger for programmet. */
 #define MAX_TASKS 100
 #define MAIN_MENU 6
 #define MAX_NUMBER_OF_CATEGORIES 50
 #define MAX_LENGTH_OF_CATEGORY 100
 #define NUMBER_OF_PREDEFINED_CATEGORIES 4;
 
-/* Struct for én opgave
- */
+/* Struct for én opgave */
 struct task{
     char category[MAX_LENGTH_OF_CATEGORY],
          title[100],
@@ -41,5 +38,5 @@ typedef struct task task;
 #include "print_sort.h"
 #include "slet_opgave.h"
 
-/*TESTS*/
+/* TESTS */
 #include "all_tests.h"
