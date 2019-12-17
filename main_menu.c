@@ -70,10 +70,13 @@ void execute_user_input(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][
                 for (i = 0; i < *number_of_categories; i++){
                     printf("%d) %s\n", i + 1, categories[i]);
                 }
+                printf("%d) Tilbage til hovedmenu\n", i + 1);
                 category_delete_index = prompt_user_options("Hvilken kategori med dens opgaver vil du slette? "
                                                             "(Indtast kategoriens nummer)\n"
-                                                            "> ", *number_of_categories) - 1;
-                delete_category(tasks, categories, number_of_tasks, number_of_categories, category_delete_index);
+                                                            "> ", *number_of_categories + 1) - 1;
+                if (option != *number_of_categories){
+                    delete_category(tasks, categories, number_of_tasks, number_of_categories, category_delete_index);
+                }
             } else{
                 printf("\nKan ikke slette en kategori naar der ingen er!\n");
             }
