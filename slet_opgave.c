@@ -31,17 +31,22 @@ void delete_task(task tasks[], int *number_of_tasks){
     }
 }
     
-void delete_category(task tasks[], int *number_of_tasks, char category[]){
+void delete_category(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_tasks, int *number_of_categories, int category_delete_index){
     int i;
-    for (i = 0; i < *number_of_tasks; i++){
-        if (strcmp(category, tasks[i].category) == 0 && i < *number_of_tasks - 1){
+    for (i = 0; i < *number_of_tasks - 1; i++){
+        if (strcmp(categories[category_delete_index], tasks[i].category) == 0){
             tasks[i] = tasks[*number_of_tasks - 1];
             *number_of_tasks -= 1;
             i--;
-        } else if (strcmp(category, tasks[i].category) == 0){
-            *number_of_tasks -= 1;
         }
     }
+    if (strcmp(categories[category_delete_index], tasks[i].category) == 0){
+        *number_of_tasks -= 1;
+    }
+    if (category_delete_index < (*number_of_categories - 1)){
+        strcpy(categories[category_delete_index], categories[*number_of_categories - 1]);
+    }
+    *number_of_categories -= 1;
 }
 
 /*/////////////////////////////////////*/
@@ -49,7 +54,11 @@ void delete_category(task tasks[], int *number_of_tasks, char category[]){
 
 void test1_delete_category(CuTest *tc){
     task tasks[2];
-    int number_of_tasks = 2;
+    int number_of_tasks = 2,
+        number_of_categories = 2,
+        category_delete_index = 0;
+    char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY] = {"category1", "category2"};
+
 
     strcpy(tasks[0].category,"category1");
     strcpy(tasks[0].title, "title1");
@@ -77,7 +86,7 @@ void test1_delete_category(CuTest *tc){
     tasks[1].deadline.tm_mon = 6;
     tasks[1].deadline.tm_year = 59;
 
-    delete_category(tasks, &number_of_tasks, "category1");
+    delete_category(tasks, categories, &number_of_tasks, &number_of_categories, category_delete_index);
 
     CuAssertIntEquals(tc, number_of_tasks, 1);
     CuAssertStrEquals(tc, tasks[0].category, "category2");
@@ -85,7 +94,10 @@ void test1_delete_category(CuTest *tc){
 
 void test2_delete_category(CuTest *tc){
     task tasks[5];
-    int number_of_tasks = 5;
+    int number_of_tasks = 5,
+        number_of_categories = 3,
+        category_delete_index = 0;
+    char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY] = {"category1", "category3", "category5"};
 
     strcpy(tasks[0].category, "category1");
     strcpy(tasks[0].title, "titas");
@@ -152,7 +164,7 @@ void test2_delete_category(CuTest *tc){
     tasks[4].deadline.tm_mon = 6;
     tasks[4].deadline.tm_year = 59;
 
-    delete_category(tasks, &number_of_tasks, "category1");
+    delete_category(tasks, categories, &number_of_tasks, &number_of_categories, category_delete_index);
 
     CuAssertIntEquals(tc, number_of_tasks, 2);
     CuAssertStrEquals(tc, tasks[0].category, "category5");

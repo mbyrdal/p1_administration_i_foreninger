@@ -11,9 +11,9 @@ void start_prompt(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LE
     file_managing(tasks, categories, number_of_tasks, number_of_categories, dir_name, file_name);
 }
 
-void file_input(char *print, char *input){
+void file_input(char *print, char *user_input){
     printf("%s", print);
-    scanf(" %s", input);
+    scanf(" %s", user_input);
     clear_input();
 }
 
@@ -120,17 +120,17 @@ void file_managing(task tasks[], char categories[MAX_NUMBER_OF_CATEGORIES][MAX_L
     }
 }
 
-void file_write_task(FILE *fil, task task1){
+void file_write_task(FILE *file, task task1){
 
 
-    fprintf(fil, "Kategori: %s\n", task1.category);
-    fprintf(fil, "Admins: %s\n", task1.admins);
-    fprintf(fil, "Titel: %s\n", task1.title);
-    fprintf(fil, "Beskrivelse: {%s}\n", task1.description);
-    fprintf(fil, "Frivillige: %s\n", task1.volunteers);
-    fprintf(fil, "Status: {%s}\n", task1.status_str);
-    fprintf(fil, "Prioritet: %d\n", task1.priority);
-    fprintf(fil, "Deadline: %02d.%02d %02d.%02d.%d\n\n",
+    fprintf(file, "Kategori: %s\n", task1.category);
+    fprintf(file, "Admins: %s\n", task1.admins);
+    fprintf(file, "Titel: %s\n", task1.title);
+    fprintf(file, "Beskrivelse: {%s}\n", task1.description);
+    fprintf(file, "Frivillige: %s\n", task1.volunteers);
+    fprintf(file, "Status: {%s}\n", task1.status_str);
+    fprintf(file, "Prioritet: %d\n", task1.priority);
+    fprintf(file, "Deadline: %02d.%02d %02d.%02d.%d\n\n",
          task1.deadline.tm_hour,
          task1.deadline.tm_min,
          task1.deadline.tm_mday,
@@ -139,15 +139,15 @@ void file_write_task(FILE *fil, task task1){
 
 }
 
-void file_read_task(FILE *fil, task *task1){
-    fscanf(fil," %*[^:]%*c %[^\n]", task1->category);
-    fscanf(fil," %*[^:]%*c %[^\n]", task1->admins);
-    fscanf(fil," %*[^:]%*c %[^\n]", task1->title);
-    fscanf(fil," %*[^:]%*c { %[^}]", task1->description);
-    fscanf(fil," %*[^:]%*c %[^\n]", task1->volunteers);
-    fscanf(fil," %*[^:]%*c { %[^}]", task1->status_str);
-    fscanf(fil," %*[^:]%*c %d", &task1->priority);
-    fscanf(fil," %*[^:]%*c %d.%d %d.%d.%d %*c",
+void file_read_task(FILE *file, task *task1){
+    fscanf(file," %*[^:]%*c %[^\n]", task1->category);
+    fscanf(file," %*[^:]%*c %[^\n]", task1->admins);
+    fscanf(file," %*[^:]%*c %[^\n]", task1->title);
+    fscanf(file," %*[^:]%*c { %[^}]", task1->description);
+    fscanf(file," %*[^:]%*c %[^\n]", task1->volunteers);
+    fscanf(file," %*[^:]%*c { %[^}]", task1->status_str);
+    fscanf(file," %*[^:]%*c %d", &task1->priority);
+    fscanf(file," %*[^:]%*c %d.%d %d.%d.%d %*c",
          &task1->deadline.tm_hour,
          &task1->deadline.tm_min,
          &task1->deadline.tm_mday,
@@ -177,19 +177,19 @@ void create_file(char *file_name, task tasks[], char categories[MAX_NUMBER_OF_CA
     }
 }
 
-void category_read(FILE *fil, char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_categories){
+void category_read(FILE *file, char categories[MAX_NUMBER_OF_CATEGORIES][MAX_LENGTH_OF_CATEGORY], int *number_of_categories){
     char skip_ch;
 
-    fscanf(fil, " %*[^:]%*c");
+    fscanf(file, " %*[^:]%*c");
 
     do {
-        skip_ch = fgetc(fil);
+        skip_ch = fgetc(file);
         if (skip_ch == '{'){
-            fscanf(fil, " %[^}]%*c", categories[*number_of_categories]);
+            fscanf(file, " %[^}]%*c", categories[*number_of_categories]);
             *number_of_categories += 1;
         }
     } while (skip_ch != '\n');
 
     /* takes the last '\n'*/
-    fscanf(fil, "%*[^a-zA-Z]");
+    fscanf(file, "%*[^a-zA-Z]");
 }

@@ -1,6 +1,6 @@
-/* Include file for every preprocessor */
+/* Includefil for alle preprocessor */
 
-/* Benyttede standard libraries */
+/* Benyttede biblioteker */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,7 +13,7 @@
 #define MAIN_MENU 6
 #define MAX_NUMBER_OF_CATEGORIES 50
 #define MAX_LENGTH_OF_CATEGORY 100
-#define NUMBER_OF_PREDEFINED_CATEGORIES 4;
+#define NUMBER_OF_PREDEFINED_CATEGORIES 4
 
 /* Struct for én opgave */
 struct task{
@@ -29,6 +29,7 @@ struct task{
 };
 typedef struct task task;
 
+/* Include af alle headerfiler */
 #include "CuTest.h"
 #include "help_functions.h"
 #include "opgave_func.h"
