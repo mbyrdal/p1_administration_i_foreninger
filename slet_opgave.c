@@ -9,10 +9,11 @@ void delete_task(task tasks[], int *number_of_tasks){
         printf("%-10d %-s\n", i+1, tasks[i].title);
     }
     task_index = prompt_user_options("Hvilken opgave vil du gerne slette? (Indtast opgavens nummer)\n>", *number_of_tasks) - 1;
-    printf("Er du sikker paa, at du vil slette opgaven: %s? (j/n)\n> ", tasks[task_index].title);
-    while (check_answer(answer) == 0){
+    do {
+        printf("Er du sikker paa, at du vil slette opgaven: %s? (j/n)\n> ", tasks[task_index].title);
         scanf(" %c", &answer);
         clear_input();
+    } while (check_answer(answer) == 0){
     }
     if (check_answer(answer) == 1){
         if (task_index != (*number_of_tasks - 1)){
