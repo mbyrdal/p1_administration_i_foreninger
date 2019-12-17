@@ -1,7 +1,7 @@
-/* p1 coding style
+/* p1 coding style 
  * snake_case
  * tab / indent == 4 spaces
- * INGEN end of line comments
+ * INGEN end of line comments.
  */
 
 #include <stdio.h>
@@ -40,7 +40,7 @@ for (i = 0; i < max; i++){ /*space after for*/
     /*code*/
 }
 
-while(i++, condition){
+while (i++, condition){
     /*code*/
 }
 
