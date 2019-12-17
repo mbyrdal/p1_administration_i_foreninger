@@ -89,7 +89,9 @@ void test1_delete_category(CuTest *tc){
     delete_category(tasks, categories, &number_of_tasks, &number_of_categories, category_delete_index);
 
     CuAssertIntEquals(tc, number_of_tasks, 1);
+    CuAssertIntEquals(tc, number_of_categories, 1);
     CuAssertStrEquals(tc, tasks[0].category, "category2");
+    CuAssertStrEquals(tc, categories[0], "category2");
 }
 
 void test2_delete_category(CuTest *tc){
@@ -167,8 +169,11 @@ void test2_delete_category(CuTest *tc){
     delete_category(tasks, categories, &number_of_tasks, &number_of_categories, category_delete_index);
 
     CuAssertIntEquals(tc, number_of_tasks, 2);
+    CuAssertIntEquals(tc, number_of_categories, 2);
     CuAssertStrEquals(tc, tasks[0].category, "category5");
     CuAssertStrEquals(tc, tasks[1].category, "category3");
+    CuAssertStrEquals(tc, categories[0], "category5");
+    CuAssertStrEquals(tc, categories[1], "category3");
 }
 
 CuSuite *delete_category_get_suite(){
